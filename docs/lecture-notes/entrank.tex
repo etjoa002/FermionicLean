@@ -108,16 +108,22 @@ has rank $2\#\{j:\lambda_j^2\neq1\}=2\#\{j:|\lambda_j|<1\}$. Theorem~\ref{thm:cr
 gives the bound.
 \end{proof}
 \begin{remark}\label{rem:schmidt}
-\vet{If the reduced state of $S$ is Gaussian (Theorem~\ref{thm:marginal} proves this when $S$
-consists of the first or the last modes; for a general $S$ it is not proved here), then} in the
-normal-form modes of $\Gamma_S$ (the columns of $O$) \vet{it} is a product over modes. A mode with $|\lambda_j|=1$ is in a pure state; a pure factor of the marginal of the pure
-state with covariance $\Gamma_N$ is a tensor factor of that state\revs{ (a standard fact about pure states, not proved here)}, so such a mode is uncorrelated
-with $S^c$. The modes with $|\lambda_j|<1$ are mixed, hence each is entangled with $S^c$; they are
-the \emph{entangled modes} of $S$. The corollary therefore says that a bond of $M$ virtual modes
-lets at most $M$ modes be entangled across it. Since each entangled mode can contribute a factor at most $2$ to the
-Schmidt rank of the cut, one expects the Schmidt rank to be at most $2^{M\,b(S)}$, the counterpart
-of ``Schmidt rank at most the bond dimension'' for matrix product states with bond dimension
-$2^M$; we do not prove this here.
+\revg{Corollary~\ref{cor:ent-rank} counts the normal-form modes of $\Gamma_S$ (the columns of $O$)
+with $|\lambda_j|<1$, which we call the \emph{entangled modes} of $S$: there are at most
+$M\,b(S)$ of them, so a bond of $M$ virtual modes lets at most $M$ modes be entangled across it.}
+
+\revg{The name comes from the following reading. If the reduced state of $S$ is Gaussian
+(Theorem~\ref{thm:marginal} proves this when $S$ consists of the first or the last modes; for a
+general $S$ it is not proved here), then in the normal-form modes of $\Gamma_S$ it is a product
+over modes. A mode with $|\lambda_j|=1$ is in a pure state; a pure factor of the marginal of the
+pure state with covariance $\Gamma_N$ is a tensor factor of that state (a standard fact about pure
+states, not proved here), so such a mode is uncorrelated with $S^c$. The modes with
+$|\lambda_j|<1$ are mixed, hence each is entangled with $S^c$.}
+
+\revg{Since each entangled mode can contribute a factor at most $2$ to the Schmidt rank of the cut,
+one expects the Schmidt rank to be at most $2^{M\,b(S)}$, the counterpart of ``Schmidt rank at
+most the bond dimension'' for matrix product states with bond dimension $2^M$; this is not proved
+here.}
 \end{remark}
 \begin{remark}\label{rem:kitaev-block}
 \revs{The following computation is not formalized.} For the Kitaev chain ($M=P=1$, $\Gamma_N=K_N$) a block $S$ of $k$ consecutive sites,
@@ -125,14 +131,17 @@ $1\leq k\leq N-1$, has exactly one entangled mode, with $\lambda=0$: the $k-1$ p
 $(y_i,x_{i+1})$ inside $S$ give modes with $\lambda=\pm1$, while the boundary labels
 $x_{\mathrm{first}}$ and $y_{\mathrm{last}}$ are paired with labels outside $S$, so their rows
 and columns of $\Gamma_S$ vanish and they form one mode with $\lambda=0$. The Kitaev chain does not attain
-the bound $M\,b(S)=2$. \revs{For $M=P=1$, pure on-site covariances drawn at random
-attain it, in the computations named in the Checks paragraph below ($N\leq6$), exactly when the
-block and its complement each contain at least two sites, $N\geq4$ and $2\leq k\leq N-2$. That
-this is necessary is elementary: $C_S$ has $2k$ rows and $2(N-k)$ columns, so by
-Corollary~\ref{cor:ent-rank} at most $\min(k,N-k)$ modes are entangled; that it suffices is
-observed, not proved.} The theorem
+the bound $M\,b(S)=2$.
+
+\revg{For $M=P=1$ the bound can be attained only if the block and its complement each contain at
+least two sites, that is $N\geq4$ and $2\leq k\leq N-2$: $C_S$ has $2k$ rows and $2(N-k)$
+columns, so by Corollary~\ref{cor:ent-rank} at most $\min(k,N-k)$ modes are entangled.} The theorem
 bounds a rank, not a norm: for a single site of a ring with \vet{$N\geq2$}, $b(S)=2$ and the bound
 \vet{$M\,b(S)=2M$ of Corollary~\ref{cor:ent-rank}} may exceed the site's own mode count $P$, in which case it says nothing.
+
+\revg{That the condition above also suffices is observed numerically and not proved here: for
+$M=P=1$, pure on-site covariances drawn at random attain the bound for every $N\geq4$ and
+$2\leq k\leq N-2$ in the computations named in the Checks paragraph below ($N\leq6$).}
 \end{remark}
 
 \paragraph{Checks.} {\small\sloppy\revs{The statements of Remark~\ref{rem:kitaev-block} are computed in
