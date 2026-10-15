@@ -1,0 +1,295 @@
+\section{Majorana operators on Fock space}
+\label{sec:fock}
+A \emph{configuration} of $n$ modes is a map $s:\{1,\ldots,n\}\to\{0,1\}$; $s_j$ is
+the occupation of mode $j$. Fock space is $\mathcal F_n=\C^{\{0,1\}^n}$ with the standard basis
+$\{|s\rangle\}$, and operators on it are complex matrices indexed by configurations.
+For a matrix $M$, $M^*$ is its conjugate transpose, and $1$ denotes the identity of
+whatever size the context requires. For a configuration $s$ let $s^{(j)}$ be $s$
+with the occupation of mode $j$ replaced by $s_j+1$ modulo $2$; then
+$(s^{(j)})^{(j)}=s$ and $(s^{(j)})^{(k)}=(s^{(k)})^{(j)}$. Write $\varsigma(b)=(-1)^b$
+for $b\in\{0,1\}$, so $\varsigma(s_j+1)=-\varsigma(s_j)$, and $[\,\cdot\,]$ for the number $1$ if
+the statement in the bracket holds and $0$ otherwise.
+
+\begin{definition}[Pauli matrices and the string]\label{def:pauli}
+For each mode $j$ define
+\[
+ (X_j)_{st}=[t=s^{(j)}],\qquad
+ Z_j=\operatorname{diag}\bigl(\varsigma(s_j)\bigr)_s,\qquad
+ Z_{<j}=\operatorname{diag}\Bigl(\prod_{k<j}\varsigma(s_k)\Bigr)_s .
+\]
+\end{definition}
+$X_j$ is the permutation matrix of the flip of mode $j$; $Z_j$ and $Z_{<j}$ are real
+diagonal, and $Z_{<1}=1$.
+\motiv{The matrices $X_j$ and $X_k$ of
+different modes commute (Lemma~\ref{lem:pauli}(b)), and so do the diagonal matrices
+$Z_j$ and $Z_k$; operators built from these alone would commute across modes, whereas
+Theorem~\ref{thm:car} requires $c_\alpha c_\beta=-c_\beta c_\alpha$ for labels of
+different modes. $Z_{<j}$ records the parity of the modes before $j$, and
+Lemma~\ref{lem:pauli}(e) says that $X_j$ reverses that parity exactly when $j$ lies
+before the string's mode; this is the sign rule Theorem~\ref{thm:car} uses. The
+ordering of modes is a convention; a different ordering gives operators related to
+these by a unitary conjugation, which we do not prove here.}
+
+\begin{lemma}[Commutation rules]\label{lem:pauli}
+For all modes $j,k$:
+\begin{enumerate}
+\item[(a)] $X_j^2=Z_j^2=Z_{<j}^2=1$, and $X_j,Z_j,Z_{<j}$ are real symmetric.
+\item[(b)] $(X_jX_k)_{st}=[t=(s^{(j)})^{(k)}]$; hence $X_jX_k=X_kX_j$, and
+ $(X_jX_k)_{ss}=[j=k]$.
+\item[(c)] For a diagonal matrix $D=\operatorname{diag}(d_s)$,
+ $X_jD=D'X_j$ with $D'=\operatorname{diag}(d_{s^{(j)}})$.
+\item[(d)] $X_jZ_j=-Z_jX_j$, and $X_jZ_k=Z_kX_j$ for $k\neq j$.
+\item[(e)] $X_jZ_{<k}=\eta_{jk}Z_{<k}X_j$, where $\eta_{jk}=-1$ if $j<k$ and
+ $\eta_{jk}=1$ otherwise.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\begin{enumerate}
+\item[(a)] $(X_j^2)_{st}=\sum_u[u=s^{(j)}][t=u^{(j)}]=[t=s]$; $Z_j^2$ and $Z_{<j}^2$ are
+diagonal with entries $\varsigma(\cdot)^2=1$. Symmetry of $X_j$: $t=s^{(j)}$ if and only
+if $s=t^{(j)}$.
+\item[(b)] $(X_jX_k)_{st}=\sum_u[u=s^{(j)}][t=u^{(k)}]=[t=(s^{(j)})^{(k)}]$. The two
+flips commute, and $(s^{(j)})^{(k)}=s$ exactly when $j=k$, since for $j\neq k$ the
+configuration $(s^{(j)})^{(k)}$ differs from $s$ at mode $j$.
+\item[(c)] $(X_jD)_{st}=\sum_u[u=s^{(j)}]\,d_u[u=t]=d_{s^{(j)}}[t=s^{(j)}]=(D'X_j)_{st}$.
+\item[(d)] By (c) with $d_s=\varsigma(s_j)$, $d_{s^{(j)}}=-\varsigma(s_j)$; for $k\neq j$,
+$d_s=\varsigma(s_k)$ is unchanged by flipping mode $j$.
+\item[(e)] By (c) with $d_s=\prod_{k'<k}\varsigma(s_{k'})$: flipping mode $j$ changes the
+sign of the factor $k'=j$ if $j<k$ and of no factor otherwise.
+\end{enumerate}
+\end{proof}
+
+\begin{definition}[Majorana operators]\label{def:majorana}
+With Majorana labels $x_1,\ldots,x_n,y_1,\ldots,y_n$ as in Section~\ref{sec:majorana},
+the Jordan--Wigner operators are
+\[
+ c_{x_j}=Z_{<j}X_j,\qquad c_{y_j}=\ii\,Z_{<j}X_jZ_j .
+\]
+\end{definition}
+$X_j$, $Z_j$ and $\ii X_jZ_j=\sigma^y_j$ are the Pauli matrices $\sigma^x_j,\sigma^z_j,\sigma^y_j$
+of mode $j$, so $c_{x_j}=Z_{<j}\sigma^x_j$ and $c_{y_j}=Z_{<j}\sigma^y_j$ with $Z_{<j}$ the
+Jordan--Wigner string.
+For one mode, in the basis $(|0\rangle,|1\rangle)$,
+\[
+ c_{x_1}=X_1=\begin{pmatrix}0&1\\1&0\end{pmatrix},\qquad
+ c_{y_1}=\ii X_1Z_1=\begin{pmatrix}0&-\ii\\ \ii&0\end{pmatrix}.
+\] The annihilation operator of mode $j$ is
+$a_j=\tfrac12(c_{x_j}+\ii c_{y_j})=\tfrac12Z_{<j}X_j(1-Z_j)$; since $Z_{<j}$ and $X_j$ commute
+(Lemma~\ref{lem:pauli}(e)),
+\[
+ a_j^*a_j=\tfrac14(1-Z_j)X_jZ_{<j}Z_{<j}X_j(1-Z_j)=\tfrac14(1-Z_j)^2=\tfrac12(1-Z_j)
+ =\operatorname{diag}(s_j)_s ,
+\]
+the number operator of mode $j$, and
+$\ii\,c_{x_j}c_{y_j}=\ii\cdot\ii\,Z_{<j}X_jZ_{<j}X_jZ_j=-Z_j=2a_j^*a_j-1$. For one mode
+$a_1=|0\rangle\langle1|$, and $c_{x_1}=a_1+a_1^*$, $c_{y_1}=\ii(a_1^*-a_1)$.
+
+Every Majorana operator is a \emph{signed flip}, a permutation matrix of one bit flip with signs on the entries. By Lemma~\ref{lem:pauli}(c),
+\begin{equation}\label{eq:signed-flip}
+ c_{x_j}=\operatorname{diag}(f_{x_j})\,X_j,\qquad c_{y_j}=\operatorname{diag}(f_{y_j})\,X_j,
+ \qquad
+ f_{x_j}(s)=\prod_{k<j}\varsigma(s_k),\quad
+ f_{y_j}(s)=-\ii\,\varsigma(s_j)\prod_{k<j}\varsigma(s_k),
+\end{equation}
+where for $c_{y_j}$ we move the factor $Z_j=\operatorname{diag}(\varsigma(s_j))$ through
+$X_j$, which turns it into $\operatorname{diag}(\varsigma(s_j+1))=\operatorname{diag}(-\varsigma(s_j))$.
+For labels $\alpha,\beta$ with modes
+$j,k$, Lemma~\ref{lem:pauli}(c) gives the product formula
+\begin{equation}\label{eq:product}
+ c_\alpha c_\beta=\operatorname{diag}\bigl(f_\alpha(s)\,f_\beta(s^{(j)})\bigr)\,X_jX_k .
+\end{equation}
+
+Within one mode, $\sigma^x_j$ and $\sigma^y_j$ are Pauli matrices: they square to $1$ and
+anticommute. For $j<k$ the string $Z_{<k}$ contains the factor $Z_j$, which anticommutes with
+the $X_j$ in $c_{x_j}$ and $c_{y_j}$, while every other factor of one operator commutes with
+every factor of the other; the string supplies the sign between different modes.
+
+\begin{theorem}[Canonical anticommutation relations]\label{thm:car}
+For all Majorana labels $\alpha,\beta$,
+\[
+ c_\alpha c_\beta+c_\beta c_\alpha=2\delta_{\alpha\beta}\,1,\qquad c_\alpha^*=c_\alpha .
+\]
+\end{theorem}
+\begin{proof}
+By \eqref{eq:product} and Lemma~\ref{lem:pauli}(b), the anticommutator equals
+$\operatorname{diag}(g_{\alpha\beta})\,X_jX_k$ with
+\[
+ g_{\alpha\beta}(s)=f_\alpha(s)f_\beta(s^{(j)})+f_\beta(s)f_\alpha(s^{(k)}) .
+\]
+Flipping mode $j$ multiplies $\prod_{k'<k}\varsigma(s_{k'})$ by $\eta_{jk}$ and
+$\varsigma(s_j)$ by $-1$; for $j\neq k$, $\eta_{jk}+\eta_{kj}=0$. Write
+$p_j=\prod_{k'<j}\varsigma(s_{k'})$ and $\sigma_j=\varsigma(s_j)$. Then $g_{\alpha\beta}(s)$ is:
+\begin{enumerate}
+\item[(i)] $j\neq k$, $\alpha=x_j$, $\beta=x_k$: $p_jp_k(\eta_{jk}+\eta_{kj})=0$.
+\item[(ii)] $j\neq k$, $\alpha=x_j$, $\beta=y_k$: $-\ii\,p_jp_k\sigma_k(\eta_{jk}+\eta_{kj})=0$;
+ the case $\alpha=y_j$, $\beta=x_k$ is the same with $\sigma_j$.
+\item[(iii)] $j\neq k$, $\alpha=y_j$, $\beta=y_k$: $(-\ii)^2p_jp_k\sigma_j\sigma_k(\eta_{jk}+\eta_{kj})=0$.
+\item[(iv)] $j=k$, $\{\alpha,\beta\}=\{x_j,y_j\}$: $-\ii\,p_j^2\bigl(\varsigma(s_j+1)+\sigma_j\bigr)=0$.
+\item[(v)] $\alpha=\beta=x_j$: $2p_j^2=2$; $\alpha=\beta=y_j$:
+ $2(-\ii)^2p_j^2\sigma_j\varsigma(s_j+1)=2$.
+\end{enumerate}
+For $\alpha\neq\beta$ the anticommutator is therefore $0$; for $\alpha=\beta$ it is
+$\operatorname{diag}(2)\,X_j^2=2\cdot1$ by (a).
+
+Hermiticity: by (a) and (c),
+$c_\alpha^*=X_j\operatorname{diag}(\overline{f_\alpha})
+=\operatorname{diag}\bigl(\overline{f_\alpha(s^{(j)})}\bigr)X_j$, and
+$\overline{f_\alpha(s^{(j)})}=f_\alpha(s)$: for $x_j$ the product $p_j$ does not involve
+mode $j$; for $y_j$,
+$\overline{-\ii\,\varsigma(s_j+1)p_j}=\ii\,(-\sigma_j)p_j=f_{y_j}(s)$.
+\end{proof}
+
+\subsection{Covariance of a density operator}
+\motiv{The covariance collects the second moments $\tr(\rho\,c_\alpha c_\beta)$; by
+Theorem~\ref{thm:car} their symmetric part is fixed, $\tr(\rho\,c_\alpha c_\beta)+\tr(\rho\,c_\beta c_\alpha)=2\delta_{\alpha\beta}$,
+so only the antisymmetric part carries information about $\rho$, and the factor
+$\tfrac{\ii}{2}$ makes it real. A state is Gaussian when Wick's rule (Definition~\ref{def:wick})
+determines all its higher moments from these; in closed form,
+$\tr(\rho\,c_{\alpha_1}\cdots c_{\alpha_{2k}})$ is then the Pfaffian
+of the $2k\times2k$ submatrix of $-\ii\Gamma$ on the \vet{distinct} labels $\alpha_1,\ldots,\alpha_{2k}$,
+and odd moments vanish~\cite[Sec.~2]{bravyi}.}
+
+\begin{definition}[Density operator and covariance]\label{def:density}
+A \emph{density operator} is a matrix $\rho$ on $\mathcal F_n$ with $\rho\succeq0$ and
+$\tr\rho=1$. Its \emph{Majorana covariance} is the real $2n\times2n$ matrix
+\begin{equation}\label{eq:covariance}
+ \Gamma(\rho)_{\alpha\beta}=\Re\Bigl(\tfrac{\ii}{2}\tr\bigl(\rho\,[c_\alpha,c_\beta]\bigr)\Bigr),
+ \qquad [c_\alpha,c_\beta]=c_\alpha c_\beta-c_\beta c_\alpha .
+\end{equation}
+\end{definition}
+A density operator is a \emph{pure state} when $\rho=|\psi\rangle\langle\psi|$ for a unit
+vector $\psi$; equivalently $\rho^2=\rho$, since a positive
+semidefinite matrix with $\rho^2=\rho$ and $\tr\rho=1$ has eigenvalues in $\{0,1\}$ summing
+to $1$.
+
+\begin{theorem}[Reality and antisymmetry]\label{thm:reality}
+Let $\rho=\rho^*$. Then $\tfrac{\ii}{2}\tr(\rho[c_\alpha,c_\beta])$ is real, and
+$\Gamma(\rho)^{\T}=-\Gamma(\rho)$, $\Gamma(\rho)_{\alpha\alpha}=0$, and
+$\Gamma(\rho)_{\alpha\beta}=\Re\bigl(\ii\tr(\rho\,c_\alpha c_\beta)\bigr)$ for $\alpha\neq\beta$.
+\end{theorem}
+\begin{proof}
+Put $T=\tr(\rho[c_\alpha,c_\beta])$. Since $\tr(M^*)=\overline{\tr M}$ and
+$[c_\alpha,c_\beta]^*=c_\beta c_\alpha-c_\alpha c_\beta$ by Theorem~\ref{thm:car},
+$\overline T=\tr\bigl([c_\alpha,c_\beta]^*\rho\bigr)=-\tr\bigl([c_\alpha,c_\beta]\rho\bigr)=-T$
+using $\tr(AB)=\tr(BA)$. Hence $T$ is purely imaginary and $\tfrac{\ii}{2}T$ is real.
+Antisymmetry is $[c_\beta,c_\alpha]=-[c_\alpha,c_\beta]$; the diagonal vanishes since
+$[c_\alpha,c_\alpha]=0$; for $\alpha\neq\beta$, Theorem~\ref{thm:car} gives
+$[c_\alpha,c_\beta]=2c_\alpha c_\beta$. The last three statements hold for every $\rho$.
+\end{proof}
+
+\motiv{Restricted to a single mode, the inequality of Theorem~\ref{thm:admissible} reads as follows.
+With $z$ supported on the labels $x_j,y_j$ and $z_{x_j}=\tfrac12$,
+$z_{y_j}=-\tfrac{\ii}{2}$, the operator $A=\sum_\alpha\overline{z_\alpha}c_\alpha$ is
+$a_j=\tfrac12(c_{x_j}+\ii c_{y_j})$ and
+$z^*(1+\ii\Gamma)z=\tfrac12\bigl(1+\Gamma_{x_jy_j}\bigr)=\tr(\rho\,a_j^*a_j)$, the occupation
+of mode $j$. Theorem~\ref{thm:admissible}
+is this positivity for every $A=\sum_\alpha\overline{z_\alpha}c_\alpha$ at once, and
+Theorem~\ref{thm:occupation} shows that the bound is attained.}
+
+\begin{theorem}[Admissibility]\label{thm:admissible}
+For every density operator $\rho$, the covariance $\Gamma(\rho)$ is admissible.
+\end{theorem}
+\begin{proof}
+Write $\Gamma=\Gamma(\rho)$; it is antisymmetric by Theorem~\ref{thm:reality}, so by
+Theorem~\ref{thm:hermitian-form} it suffices to show $1+\ii\Gamma\succeq0$. Fix
+$z\in\C^{2n}$ and put $A=\sum_\alpha\overline{z_\alpha}\,c_\alpha$, so
+$A^*=\sum_\alpha z_\alpha c_\alpha$. Theorem~\ref{thm:car} gives
+$c_\alpha c_\beta=\delta_{\alpha\beta}\,1+\tfrac12[c_\alpha,c_\beta]$, hence
+\[
+ A^*A=\sum_{\alpha,\beta}z_\alpha\overline{z_\beta}\,c_\alpha c_\beta
+ =\|z\|^2\,1+\tfrac12\sum_{\alpha,\beta}z_\alpha\overline{z_\beta}\,[c_\alpha,c_\beta] .
+\]
+Taking the trace against $\rho$, with $\tr\rho=1$ and
+$\tfrac12\tr(\rho[c_\alpha,c_\beta])=-\ii\,\Gamma_{\alpha\beta}$ by
+\eqref{eq:covariance} and Theorem~\ref{thm:reality},
+\[
+ \tr(\rho A^*A)=\|z\|^2-\ii\sum_{\alpha,\beta}\overline{z_\beta}\,\Gamma_{\alpha\beta}\,z_\alpha
+ =\|z\|^2-\ii\,z^*\Gamma^{\T}z=\|z\|^2+\ii\,z^*\Gamma z=z^*(1+\ii\Gamma)z .
+\]
+Finally $\tr(\rho A^*A)=\tr(A\rho A^*)\geq0$: for every vector $w$,
+$w^*(A\rho A^*)w=(A^*w)^*\rho\,(A^*w)\geq0$, so $A\rho A^*\succeq0$, and a positive
+semidefinite matrix has nonnegative diagonal entries, hence nonnegative trace.
+\end{proof}
+\revf{Conversely, every admissible matrix is the covariance of some density operator
+(Theorem~\ref{thm:realization}).}
+
+\subsection{Occupation-number states}
+For a configuration $s$ let $\rho_s=|s\rangle\langle s|$, the matrix with a single
+entry $1$ at position $(s,s)$. It is a pure state, and $\tr(\rho_sM)=M_{ss}$; for $s\equiv0$
+it is the vacuum $\rho_{\mathrm{vac}}$.
+\motiv{These are product states: each mode is definitely empty or definitely
+occupied, and Theorem~\ref{thm:occupation} shows that the covariance is a direct sum of
+the one-mode blocks $\pm\Omega_1$ of Proposition~\ref{prop:one-mode}. Every pure
+Gaussian state has covariance $O\,\D(\eta)\,O^{\T}$ with $\eta_j=\pm1$ and $O$ orthogonal, a
+rotated occupation covariance (Corollary~\ref{cor:converse}(b)).}
+
+\begin{theorem}[Covariance of occupation states]\label{thm:occupation}
+Write $\nu(b)=-\varsigma(b)=2b-1$ for the \emph{occupation sign}, $-1$ for an empty mode and $+1$
+for an occupied one, and let $\Lambda_s=\operatorname{diag}\bigl(\nu(s_j)\bigr)_{j=1}^n$. In the $(x,y)$ block
+ordering,
+\[
+ \Gamma(\rho_s)=\begin{pmatrix}0&\Lambda_s\\-\Lambda_s&0\end{pmatrix}:
+\]
+$\Gamma(\rho_s)_{x_jy_j}=\nu(s_j)=-\Gamma(\rho_s)_{y_jx_j}$, and all other entries
+vanish.
+\end{theorem}
+\begin{proof}
+By Theorem~\ref{thm:reality} the diagonal entries vanish and for $\alpha\neq\beta$ the
+entry is $(c_\alpha c_\beta)_{ss}$. By \eqref{eq:product} and Lemma~\ref{lem:pauli}(b) this is
+$f_\alpha(s)f_\beta(s^{(j)})\,[j=k]$, so all cross-mode entries vanish. For the same mode,
+$f_{x_j}(s)f_{y_j}(s^{(j)})=-\ii\,\varsigma(s_j+1)p_j^2=\ii\,\varsigma(s_j)$ and
+$f_{y_j}(s)f_{x_j}(s^{(j)})=-\ii\,\varsigma(s_j)$. Then
+$\Gamma_{x_jy_j}=\Re(\ii\cdot\ii\,\varsigma(s_j))=-\varsigma(s_j)$ and $\Gamma_{y_jx_j}=\varsigma(s_j)$.
+\end{proof}
+
+\begin{corollary}[Vacuum and purity]\label{cor:vacuum}
+The vacuum $s\equiv0$ has covariance $\Gamma(\rho_{\mathrm{vac}})=-\Omega_n$, with $\Omega_n$ the
+standard covariance \eqref{eq:standard}. Every occupation state has a pure covariance.
+\end{corollary}
+\begin{proof}
+For $s\equiv0$, $\Lambda_s=-1$. In general $\Lambda_s^2=1$, so
+$\Gamma(\rho_s)^2=\operatorname{diag}(-\Lambda_s^2,-\Lambda_s^2)=-1$; antisymmetry is
+Theorem~\ref{thm:reality}.
+\end{proof}
+We therefore work with the sign convention $\Gamma_{x_jy_j}=-1$ for an empty mode and
+$+1$ for an occupied one: $\Gamma_{x_jy_j}(\rho)=\tr(\rho\,\ii c_{x_j}c_{y_j})=\tr\bigl(\rho\,(2a_j^*a_j-1)\bigr)$
+is twice the occupation of mode $j$ minus one, and the sign of the vacuum covariance is that
+of the factor $\ii$ in $c_{y_j}=\ii(a_j^*-a_j)$.
+
+\subsection{The bond as a state of two modes}
+The bond covariance $\beta$ of Definition~\ref{def:bond} is the covariance of a
+pure state of two modes, $\tfrac1{\sqrt2}(|00\rangle+\ii|11\rangle)$. The phase $\ii$ is what
+pairs $x$ with $x$ and $y$ with $y$: for $|00\rangle+|11\rangle$ the nonzero expectations
+would be those of $c_{x_1}c_{y_2}$ and $c_{y_1}c_{x_2}$. With the Jordan--Wigner operators
+of Definition~\ref{def:majorana}:
+$c_{x_1}=X_1$, $c_{y_1}=\ii X_1Z_1$, $c_{x_2}=Z_1X_2$, $c_{y_2}=\ii Z_1X_2Z_2$.
+
+\begin{theorem}[Fock-space realization of the bond]\label{thm:bondstate}
+Let $\psi=\tfrac1{\sqrt2}\bigl(|00\rangle+\ii\,|11\rangle\bigr)$ and $\rho=|\psi\rangle\langle\psi|$.
+Then $\rho$ is a density operator and, in the labels $(x_1,x_2,y_1,y_2)$,
+\[
+ \Gamma(\rho)=\begin{pmatrix}0&1&0&0\\-1&0&0&0\\0&0&0&-1\\0&0&1&0\end{pmatrix}=\beta
+ \quad\text{for }L=\{1\},\ L'=\{2\}.
+\]
+\end{theorem}
+\begin{proof}
+$\rho\succeq0$ and $\tr\rho=\|\psi\|^2=1$. Since the $c_\alpha$ anticommute for
+$\alpha\neq\beta$, $\Gamma(\rho)_{\alpha\beta}=\Re\bigl(\ii\,\langle\psi|c_\alpha c_\beta|\psi\rangle\bigr)$
+for $\alpha\neq\beta$, and the diagonal vanishes. With $XZ=\begin{pmatrix}0&-1\\1&0\end{pmatrix}$:
+\begin{enumerate}
+\item[(a)] $c_{x_1}c_{x_2}=X_1Z_1X_2$. Since $XZ|0\rangle=|1\rangle$ and $XZ|1\rangle=-|0\rangle$,
+ $X_1Z_1X_2|00\rangle=|11\rangle$ and $X_1Z_1X_2|11\rangle=-|00\rangle$, so
+ $X_1Z_1X_2\psi=\tfrac1{\sqrt2}(|11\rangle-\ii|00\rangle)=-\ii\psi$ and
+ $\Gamma_{x_1x_2}=\Re\bigl(\ii\cdot(-\ii)\bigr)=1$.
+\item[(b)] $c_{y_1}c_{y_2}=(\ii X_1Z_1)(\ii Z_1X_2Z_2)=-X_1X_2Z_2$;
+ $X_1X_2Z_2|00\rangle=|11\rangle$, $X_1X_2Z_2|11\rangle=-|00\rangle$, so
+ $X_1X_2Z_2\psi=-\ii\psi$, $\langle\psi|c_{y_1}c_{y_2}|\psi\rangle=\ii$, and
+ $\Gamma_{y_1y_2}=\Re(\ii\cdot\ii)=-1$.
+\item[(c)] $c_{x_1}c_{y_1}=\ii Z_1$ and $c_{x_2}c_{y_2}=\ii Z_2$; $\langle\psi|Z_j|\psi\rangle=\tfrac12(1-1)=0$.
+\item[(d)] $c_{x_1}c_{y_2}=\ii X_1Z_1X_2Z_2$ and $c_{x_2}c_{y_1}=\ii Z_1X_2X_1Z_1=-\ii X_1X_2$
+ (using $Z_1X_1=-X_1Z_1$ and $Z_1^2=1$). Both $X_1Z_1X_2Z_2\psi$ and $X_1X_2\psi$ equal
+ $\tfrac1{\sqrt2}(|11\rangle+\ii|00\rangle)$, which is orthogonal to $\psi$:
+ $\langle\psi|(|11\rangle+\ii|00\rangle)=\tfrac1{\sqrt2}(-\ii+\ii)=0$.
+\end{enumerate}
+Antisymmetry gives the remaining entries.
+\end{proof}

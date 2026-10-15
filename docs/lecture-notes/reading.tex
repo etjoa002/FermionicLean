@@ -1,0 +1,88 @@
+\section*{Covariances and conventions: a reading guide}\addcontentsline{toc}{section}{Covariances
+and conventions: a reading guide}
+
+\noindent\revs{Texts on fermionic Gaussian states, for example~\cite{bravyi,ksvc,surace}, describe a
+state of $n$ modes by a matrix of second moments of size $2n\times2n$, and they differ in which
+matrix they take, in its sign, in the order of its rows and columns, and in the definition of the
+Gaussian class. These notes make one choice throughout: the real antisymmetric Majorana covariance
+$\Gamma$ in block order, with the sign for which the vacuum is $-\Omega_n$, and the Gaussian class
+defined by Wick's rule. The paragraphs below translate each choice into the others and name the
+statement where the translation is proved, or say that it is a computation on paper.}
+
+\medskip
+\noindent\revs{\textbf{The matrix.} The second moments of a density operator $\rho$ form the
+two-point matrix $\G(\rho)_{ab}=\tr(\rho\,c_ac_b)=\delta_{ab}-\ii\,\Gamma(\rho)_{ab}$
+(Section~\ref{sec:wick}), which part of the literature calls the correlation matrix\revs{, while
+$\Gamma$ itself is often called the covariance matrix}. Its
+symmetric part is fixed by the anticommutation relations, so $\Gamma$ carries the same information
+in real form. The matrix of the annihilation operators $a_j=\tfrac12(c_{x_j}+\ii c_{y_j})$ follows
+from $\G$ by expanding the products, a computation on paper:
+\[
+ \tr(\rho\,a_j^*a_k)=\tfrac12\delta_{jk}+\tfrac14\bigl(\Gamma_{x_jy_k}+\Gamma_{x_ky_j}\bigr)
+ -\tfrac{\ii}4\bigl(\Gamma_{x_jx_k}+\Gamma_{y_jy_k}\bigr),
+\]
+whose diagonal $j=k$ is the occupation $\tfrac12(1+\Gamma_{x_jy_j})$ of mode $j$
+(Section~\ref{sec:fock}).}
+
+\medskip
+\noindent\revs{\textbf{The sign.} The vacuum has $\Gamma=-\Omega_n$ (Corollary~\ref{cor:vacuum}),
+and $\Gamma_{x_jy_j}$ is $-1$ for an empty and $+1$ for an occupied mode. The sign comes from the
+factor $+\tfrac{\ii}{2}$ in Definition~\ref{def:density} together with the choice
+$c_{y_j}=\ii Z_{<j}X_jZ_j$ of Definition~\ref{def:majorana}, under which $a_j$ annihilates the
+vacuum. Replacing the factor by $-\tfrac{\ii}{2}$ replaces $\Gamma$ by $-\Gamma$, so that the
+vacuum has $+\Omega_n$, the convention of part of the literature, and the ground covariance
+$\ii\,\sgn(\ii h)$ of $H_h$ (after Theorem~\ref{thm:ground-state}) becomes $-\ii\,\sgn(\ii h)$.
+Replacing $c_{y_j}$ by $-c_{y_j}$ conjugates $\Gamma$ by the reflection
+$\operatorname{diag}(1_n,-1_n)$ of the $y$-labels; then $a_j$ annihilates the state with every mode
+occupied, whose covariance is again $-\Omega_n$, and with $H_h$ written in the new operators the
+ground covariance remains $\ii\,\sgn(\ii h)$, by a computation on paper. The
+sign of the hopping in the Kitaev chain is a gauge (Remark~\ref{rem:kitaev-convention}).}
+
+\medskip
+\noindent\revs{\textbf{Order of the labels.} In the interleaved numbering of~\cite{bravyi}
+and~\cite{ksvc}, $c_{2j-1}=x_j$ and $c_{2j}=y_j$. A matrix in block order becomes the matrix in
+interleaved order by permuting rows and columns by $x_j\mapsto2j-1$, $y_j\mapsto2j$, which leaves
+admissibility and purity unchanged (Lemma~\ref{lem:relabel}). In interleaved order $\Omega_n$
+becomes $\bigoplus_j\begin{psmallmatrix}0&1\\-1&0\end{psmallmatrix}$ and the canonical form
+$\D(\varepsilon)$ of Definition~\ref{def:block} becomes
+$\bigoplus_j\varepsilon_j\begin{psmallmatrix}0&1\\-1&0\end{psmallmatrix}$.}
+
+\medskip
+\noindent\revs{\textbf{Gaussian unitaries.} A unitary $U$ implements a real matrix $O$ when
+$Uc_aU^*=\sum_bO_{ab}c_b$; then $O$ is orthogonal and $\Gamma(U\rho U^*)=O^{\T}\Gamma(\rho)O$
+(Theorem~\ref{thm:congruence}). A text that writes the Heisenberg form $U^*c_aU=\sum_bO'_{ab}c_b$
+has $O'=O^{\T}$, and the same rule reads $\Gamma(U\rho U^*)=O'\,\Gamma(\rho)O'^{\T}$. The evolution
+$e^{-\ii tH_h}$ implements $e^{-th}$ and moves covariances by $\Gamma\mapsto e^{th}\Gamma e^{-th}$
+(Theorem~\ref{thm:evolution}).}
+
+\medskip
+\noindent\revs{\textbf{Contraction.} The contraction
+$\Gamma\star\Gamma_p=A+B\,\Gamma_p(1-D\Gamma_p)^{-1}C$ of Definition~\ref{def:contract} is written
+for any pair covariance $\Gamma_p$. On Fock space, for a Gaussian state $\rho$ with covariance
+$\Gamma$, a Gaussian state $\sigma$ on the eliminated modes with covariance $\Gamma_p$, and
+$1-D\Gamma_p$ invertible, it is the covariance of the normalized state $\rho$ traced against
+$\sigma$ (Corollary~\ref{cor:contract-state} and Theorem~\ref{thm:normalization}). For antisymmetric $\Gamma$ and pure $\Gamma_p$, as for the bonds of a
+chain, it equals $A+B(D+\Gamma_p)^{-1}B^{\T}$ (Theorem~\ref{thm:pure-bond}), the form
+of~\cite[Sec.~II]{ksvc}. The sign of that formula depends on the orientation of the pair, which
+Definition~\ref{def:bond} fixes and Theorem~\ref{thm:teleport} checks; reversing the orientation
+replaces $\Gamma_p$ by $-\Gamma_p$. On Fock space the bond is the state
+$(|00\rangle+\ii|11\rangle)/\sqrt2$ (Theorem~\ref{thm:bondstate}); it differs from
+$|00\rangle+|11\rangle$ by a phase on one mode, and that phase makes the bond pair $x$ with $x$ and
+$y$ with $y$.}
+
+\medskip
+\noindent\revs{\textbf{The Gaussian class.} A density operator is Gaussian here when its moments
+are given by Wick's rule from its own two-point matrix (Definition~\ref{def:wick}); Wick's rule is
+a condition beyond the second moments (Remark~\ref{rem:wick-condition}), \revf{and its recursion is the first-row expansion of
+the Pfaffian form of~\cite{bravyi} (after Definition~\ref{def:wick})}. Gaussian states are often defined instead as normalized exponentials of
+quadratic Hamiltonians together with their limits. The notes connect the two descriptions: the
+Gibbs and thermal states are Gaussian (Corollary~\ref{cor:families}), every Gaussian state is a
+rotated product mixture $U^*\rho_\lambda U$, a pure one is $U^*|s\rangle\langle s|U$, and one with
+strictly admissible covariance is a Gibbs state (Corollary~\ref{cor:converse}). A Gaussian state is
+determined by its covariance (Theorem~\ref{thm:unique}).}
+
+\medskip
+\noindent\revs{\textbf{Momentum space.} Section~\ref{sec:fourier} uses the characters
+$\chi_k(i)=e^{-2\pi\ii\,ki/N}$ and expands the chain covariance in
+$e^{+2\pi\ii\,k(i-j)/N}\,\Sigma(k)$; in the opposite convention the block at momentum $k$ is
+$\Sigma(-k)=\overline{\Sigma(k)}$ (Theorem~\ref{thm:blocks}).}

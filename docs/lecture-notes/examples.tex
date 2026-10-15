@@ -1,0 +1,298 @@
+\section{Examples}
+\label{sec:examples}
+\motiv{Two families of states are chains of Section~\ref{sec:chain}: the occupation states
+of Section~\ref{sec:fock}, as chains without virtual modes (Theorem~\ref{thm:product}), and
+the Kitaev chain at its solvable point, as a chain with one virtual mode per bond
+(Theorem~\ref{thm:kitaev}). The third example is the hopping gate on $\mathcal F_n$, a
+Gaussian unitary (Theorem~\ref{thm:gate}); such unitaries act on covariances by orthogonal
+congruence (Theorem~\ref{thm:congruence}).}
+
+\subsection{Product states}
+\label{sec:product}
+A chain with $M=0$ virtual modes has no bonds.
+
+\begin{proposition}[Chains without virtual modes]\label{prop:M0}
+Let $M=0$ and $P\geq0$. For any on-site covariances $\Gamma_\bullet$ (matrices on
+$I_{\mathrm{site}}=(x_C,y_C)$), $1-D\beta_N=1$ is invertible and
+\[
+ \Gamma_N(\Gamma_\bullet)_{(i,a)(j,b)}=\begin{cases}(\Gamma_i)_{ab}&i=j\\0&i\neq j,\end{cases}
+\]
+the direct sum of the on-site covariances. It is admissible (pure) if and only if
+every $\Gamma_i$ is.
+\end{proposition}
+\begin{proof}
+$E$ is empty, so $D$, $\beta_N$ and the term $B\beta_N(1-D\beta_N)^{-1}C$ are empty
+matrices and $\Gamma_N=A=\Gamma_{\mathrm{in}}$, which is $\operatorname{diag}(\Gamma_i)$
+relabelled by $e$ restricted to $R$ (Definition~\ref{def:input}). Admissibility and
+purity transfer by Lemma~\ref{lem:relabel}.
+\end{proof}
+
+\begin{theorem}[Occupation states as chains]\label{thm:product}
+Let $s:\mathbb Z/N\times\{1,\ldots,P\}\to\{0,1\}$ and let $s_i$ be its restriction to
+site $i$. Identify the $NP$ modes with the pairs $(i,c)$ site by site,
+$(i,c)\mapsto c+Pi$. Then the covariance of the occupation state $|s\rangle\langle s|$ on
+$NP$ modes equals $\Gamma_N(\Gamma_\bullet)$ with $M=0$ and
+$\Gamma_i=\begin{pmatrix}0&\Lambda_{s_i}\\-\Lambda_{s_i}&0\end{pmatrix}$, the occupation
+covariance of the site (Theorem~\ref{thm:occupation}). In particular the vacuum on $NP$
+modes is the chain with $\Gamma_i=-\Omega_P$ at every site.
+\end{theorem}
+\begin{proof}
+Theorem~\ref{thm:occupation} gives
+$\Gamma(|s\rangle\langle s|)=\begin{pmatrix}0&\Lambda_s\\-\Lambda_s&0\end{pmatrix}$ on the
+$NP$ modes; $\Lambda_s$ is diagonal, so the $(x,y)$ block couples only equal modes, and
+after the site-by-site relabelling this is the right side of Proposition~\ref{prop:M0}.
+The vacuum is Corollary~\ref{cor:vacuum}.
+\end{proof}
+
+\subsection{The Kitaev chain}
+\label{sec:kitaev}
+The Kitaev chain at the point where the chemical potential vanishes and the hopping equals
+the pairing amplitude has a ground state in which $y_i$ is paired with $x_{i+1}$ around the
+ring~\cite[Sec.~2]{kitaev}. With sites $i\in\mathbb Z/N$ and the labels
+$(x_0,\ldots,x_{N-1},y_0,\ldots,y_{N-1})$, this pairing is the matrix $K_N$ with
+\[
+ (K_N)_{y_i\,x_{i+1}}=1,\qquad (K_N)_{x_{i+1}\,y_i}=-1,\qquad\text{all other entries }0
+\]
+(Figure~\ref{fig:kitaev}); for $N=1$, $K_1=-\Omega_1$ is the vacuum covariance. $K_N$ is the
+ground covariance of the quadratic Hamiltonian
+$H_{-K_N}=-\tfrac{\ii}{2}\sum_ic_{y_i}c_{x_{i+1}}$ (\vet{Lemma~\ref{lem:kitaev-explicit} and} Theorem~\ref{thm:kitaev-ground}); Kitaev's
+$H=\ii t\sum_jc_{2j}c_{2j+1}$ with $t>0$, which in the dictionary $c_{2j-1}=x_j$, $c_{2j}=y_j$
+reads $\ii t\sum_ic_{y_i}c_{x_{i+1}}=2t\,H_{+K_N}$, has ground covariance $-K_N$; we remove the sign of $t$
+by reflecting the $y$ Majoranas (Remark~\ref{rem:kitaev-convention}). The chain construction of
+Section~\ref{sec:chain} produces $K_N$ from one virtual mode per bond and an on-site
+covariance that is admissible but not pure.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  site/.style={draw=black!50,fill=blue!8,thick,ellipse,minimum width=1.7cm,minimum height=1.1cm},
+  maj/.style={circle,fill=red!75!black,inner sep=2.2pt},
+  pair/.style={very thick,black!70},
+  lab/.style={font=\scriptsize}]
+  \foreach \i/\x in {0/0,1/2.8,2/5.6,3/8.4} {
+    \node[site] at (\x,0) {};
+    \node[lab,anchor=south] at (\x,0.6) {$C_{\i}$};
+    \node[maj] (x\i) at (\x-0.45,0) {};
+    \node[maj] (y\i) at (\x+0.45,0) {};
+    \node[lab,anchor=north] at ([yshift=-3pt]x\i.south) {$x_{\i}$};
+    \node[lab,anchor=north] at ([yshift=-3pt]y\i.south) {$y_{\i}$};
+  }
+  \draw[pair] (y0) -- (x1);
+  \draw[pair] (y1) -- (x2);
+  \draw[pair] (y2) -- (x3);
+  \draw[pair] (y3) -- ++(0.7,0) arc (-90:90:0.6) -- ++(-10.7,0) arc (90:270:0.6) -- (x0);
+\end{tikzpicture}
+\caption{The Kitaev chain covariance $K_N$ for $N=4$. Dots are the Majorana labels
+$x_i,y_i$ of the physical mode $C_i$, $i\in\mathbb Z/N$; a line joining $y_i$ to $x_{i+1}$ is
+the pair $(K_N)_{y_ix_{i+1}}=1$. Every label lies on exactly one line, which is the purity
+$K_N^2=-1$.}
+\label{fig:kitaev}
+\end{figure}
+
+\begin{definition}[Kitaev on-site covariance]\label{def:kitaev}
+Let $M=P=1$. $\Gamma_K$ is the matrix on the labels $I_{\mathrm{site}}=(x_A,x_B,x_C,y_A,y_B,y_C)$ with
+\[
+ (\Gamma_K)_{x_C\,x_A}=1,\qquad(\Gamma_K)_{y_C\,x_B}=1,
+\]
+their antisymmetric partners $-1$, and every other entry $0$; the rows and columns of
+$y_A$ and $y_B$ are zero.
+\end{definition}
+
+\begin{lemma}\label{lem:kitaev-adm}
+$\Gamma_K$ is admissible and not pure: $\Gamma_K^{\T}=-\Gamma_K$, $1-\Gamma_K^{\T}\Gamma_K$ is
+the projector onto $(y_A,y_B)$, and $\Gamma_K^2\neq-1$.
+\end{lemma}
+\begin{proof}
+Antisymmetry is by construction. Each nonzero column of $\Gamma_K$ has a single entry
+$\pm1$, and the four nonzero columns $x_A,x_C,x_B,y_C$ are supported on the rows
+$x_C,x_A,y_C,x_B$ respectively, so $\Gamma_K^{\T}\Gamma_K=\operatorname{diag}(1,1,1,0,0,1)$ on
+$(x_A,x_B,x_C,y_A,y_B,y_C)$ and $1-\Gamma_K^{\T}\Gamma_K$ is the projector onto $(y_A,y_B)$,
+positive semidefinite. $\Gamma_K^2=-\Gamma_K^{\T}\Gamma_K\neq-1$.
+\end{proof}
+
+\begin{theorem}[The Kitaev chain as a chain with one virtual mode]\label{thm:kitaev}
+For every $N\geq1$, with $\Gamma_i=\Gamma_K$ at every site: $\det(1-D\beta_N)=1$ and
+\[
+ \Gamma_N(\Gamma_K,\ldots,\Gamma_K)=K_N .
+\]
+$K_N$ is pure and translation invariant, and its momentum-space covariance
+(Definition~\ref{def:symbol}) is
+\[
+ \Sigma(k)=\begin{pmatrix}0&-\omega_k\\ \overline{\omega_k}&0\end{pmatrix}
+ \quad\text{on }(x_C,y_C),\qquad k\in\mathbb Z/N .
+\]
+\end{theorem}
+\begin{proof}
+\begin{enumerate}
+\item[(a)] $\Gamma_K$ has no entry between two virtual labels and none between $x_C$ and
+$y_C$, so the retained block $A$ and the eliminated block $D$ of $\Gamma_{\mathrm{in}}$
+vanish: $\det(1-D\beta_N)=\det1=1$ and $\Gamma_N=B\beta_NC$. In the labels of
+Definition~\ref{def:input}, the only entries of $B$ are
+$B_{y_{C_i}x_{B_i}}=(\Gamma_K)_{y_Cx_B}=1$ and $B_{x_{C_i}x_{A_i}}=(\Gamma_K)_{x_Cx_A}=1$,
+$C=-B^{\T}$, and $\beta_N$ pairs $x_{A_{i+1}}$ with $x_{B_i}$:
+$(\beta_N)_{x_{A_{i+1}}x_{B_i}}=1$ (Definition~\ref{def:periodic}). Each row of $B\beta_NC$
+therefore has a single nonzero entry,
+\begin{align*}
+ (\Gamma_N)_{y_{C_i}\,x_{C_{i+1}}}&=B_{y_{C_i}x_{B_i}}\,(\beta_N)_{x_{B_i}x_{A_{i+1}}}\,C_{x_{A_{i+1}}x_{C_{i+1}}}
+ =1\cdot(-1)\cdot(-1)=1,\\
+ (\Gamma_N)_{x_{C_{i+1}}\,y_{C_i}}&=B_{x_{C_{i+1}}x_{A_{i+1}}}\,(\beta_N)_{x_{A_{i+1}}x_{B_i}}\,C_{x_{B_i}y_{C_i}}
+ =1\cdot1\cdot(-1)=-1,
+\end{align*}
+which is $K_N$; for $N=1$ the same computation pairs $y_{C_0}$ with $x_{C_0}$ and gives $-\Omega_1$.
+\item[(b)] $K_N^2=-1$: every label is paired with exactly one other label, with product of
+entries $-1$. The entries depend on $i,j$ only through $j-i$, which is translation
+invariance.
+\item[(c)] The twisted on-site covariance $\revs{\Gamma_K^{(k)}}$ of Definition~\ref{def:twist} has
+$A_k=0$ and $D_k=0$ as in (a), so $\Sigma(k)=B_k\beta_1C_k$. $B_k$ has the entries
+$(B_k)_{x_C\,x_A}=1$ and $(B_k)_{y_C\,x_B}=\overline{\omega_k}$ (the twist puts
+$\overline{\omega_k}$ on the $x_B$ column), $C_k=-B_k^*$, and $\beta_1$ pairs $x_A$ with
+$x_B$ with $(\beta_1)_{x_Ax_B}=1$. Hence
+\begin{align*}
+ \Sigma(k)_{y_Cx_C}&=(B_k)_{y_Cx_B}(\beta_1)_{x_Bx_A}(C_k)_{x_Ax_C}=\overline{\omega_k}\cdot(-1)\cdot(-1)=\overline{\omega_k},\\
+ \Sigma(k)_{x_Cy_C}&=(B_k)_{x_Cx_A}(\beta_1)_{x_Ax_B}(C_k)_{x_By_C}=1\cdot1\cdot(-\omega_k)=-\omega_k,
+\end{align*}
+and the diagonal entries vanish. \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}[A pure on-site choice closes a virtual loop]\label{prop:loop}
+Let $\Gamma'_K$\vet{, the pure completion of $\Gamma_K$,} be $\Gamma_K$ with the additional entries
+$(\Gamma'_K)_{y_Ay_B}=-1$, $(\Gamma'_K)_{y_By_A}=1$, which is pure. Then, for the on-site
+covariances $\Gamma_i=\Gamma'_K$,
+\[
+ \det(1-D\beta_N)=2\bigl(1-(-1)^N\bigr)=\begin{cases}4&N\text{ odd}\\0&N\text{ even,}\end{cases}
+\]
+so the chain covariance is defined only for odd $N$, where it equals $K_N$.
+\end{proposition}
+\begin{proof}
+\begin{enumerate}
+\item[(a)] The twisted virtual block of $\Gamma'_K$ has the single pair
+$(D_k)_{y_Ay_B}=-\overline{\omega_k}$, $(D_k)_{y_By_A}=\omega_k$, and $\beta_1$ pairs $y_A$
+with $y_B$ with entry $-1$; so $1-D_k\beta_1=\operatorname{diag}(1,1,1+\overline{\omega_k},1+\omega_k)$
+on $(x_A,x_B,y_A,y_B)$ and $\det(1-D_k\beta_1)=|1+\omega_k|^2$. By
+Theorem~\ref{thm:det-factor}, $\det(1-D\beta_N)=\bigl|\prod_k(1+\omega_k)\bigr|^2$.
+\item[(b)] The $\omega_k$, $k\in\mathbb Z/N$, are the $N$ distinct $N$-th roots of unity
+(they satisfy $\omega_k^N=1$, and $\omega_k=\omega_l$ forces $k=l$ since
+$|k-l|<N$), so $z^N-1=\prod_k(z-\omega_k)$; at $z=-1$,
+$(-1)^N-1=(-1)^N\prod_k(1+\omega_k)$, that is $\prod_k(1+\omega_k)=1-(-1)^N$. Hence
+$\det(1-D\beta_N)=(1-(-1)^N)^2=2(1-(-1)^N)$, as $1-(-1)^N\in\{0,2\}$.
+\item[(c)] For odd $N$ every $1-D_k\beta_1$ is invertible, and
+$(1-D_k\beta_1)^{-1}=\operatorname{diag}(1,1,(1+\overline{\omega_k})^{-1},(1+\omega_k)^{-1})$ acts as the
+identity on the labels $x_A,x_B$, the only virtual labels coupled to $C$; so
+$\Sigma(k)=B_k\beta_1(1-D_k\beta_1)^{-1}C_k$ is the matrix of Theorem~\ref{thm:kitaev}(c).
+By Theorem~\ref{thm:reconstruct},
+$(\Gamma_N)_{(i,y)(j,x)}=\frac1N\sum_k\overline{\chi_k(i)}\,\overline{\omega_k}\,\chi_k(j)
+=\frac1N\sum_k\overline{\chi_k(i+1)}\,\chi_k(j)=[\,j=i+1\,]$ by
+$\chi_k(i+1)=\chi_k(i)\omega_k$ and orthogonality, likewise
+$(\Gamma_N)_{(i,x)(j,y)}=-[\,i=j+1\,]$, and the $(x,x)$ and $(y,y)$ blocks vanish: this is
+$K_N$. \qedhere
+\end{enumerate}
+\end{proof}
+The pairs $(y_{A_i},y_{B_i})$ of $\Gamma'_K$ and the bonds $(y_{B_i},y_{A_{i+1}})$ form a
+closed loop of Majorana pairs around the ring with no physical label on it, and the
+determinant is the product over momenta of the loop's factors $|1+\omega_k|^2$. The three-site family of Section~\ref{sec:chain} contains such a
+loop as well: the rotation of $\Gamma_{\mathrm{seed}}$ leaves the pair $(y_A,y_B)$ untouched,
+so $D_k\beta_1$ is block diagonal with the same $(y_A,y_B)$ block as in (a),
+$\det(1-D_k\beta_1)$ carries the factor $|1+\omega_k|^2$, and the chain determinant of that
+family vanishes for even $N$.
+
+\subsection{Hopping gates}
+\label{sec:gate}
+Fix $n$ modes and two distinct modes $j\neq k$, with the Jordan--Wigner operators $c_a$ of
+Definition~\ref{def:majorana}, and $\varphi\in\R$.
+
+\begin{definition}[Hopping gate]\label{def:gate}
+\[
+ U_{jk}(\varphi)=\bigl(\cos\varphi+\sin\varphi\,c_{x_j}c_{x_k}\bigr)\bigl(\cos\varphi+\sin\varphi\,c_{y_j}c_{y_k}\bigr),
+\]
+a matrix on $\mathcal F_n$. The rotation $O_{jk}(\varphi)\in\R^{2n\times2n}$ acts on the labels
+$(x_j,x_k)$ and on $(y_j,y_k)$ by
+\[
+ \Rot=\begin{pmatrix}\cos2\varphi&-\sin2\varphi\\
+\sin2\varphi&\cos2\varphi\end{pmatrix}
+\]
+and as the identity on all other labels;
+in $(x,y)$ blocks, $O_{jk}(\varphi)=\operatorname{diag}(\Rot_n,\Rot_n)$ with $\Rot_n$ the
+rotation by $2\varphi$ in the plane $(j,k)$ of $\R^n$.
+\end{definition}
+$U_{jk}(\varphi)=\exp\bigl(\varphi\,(c_{x_j}c_{x_k}+c_{y_j}c_{y_k})\bigr)
+=\exp\bigl(2\varphi\,(a_j^*a_k-a_k^*a_j)\bigr)$ with
+$a_j=\tfrac12(c_{x_j}+\ii c_{y_j})$, the number-conserving hopping gate of angle
+$2\varphi$; on covariances the hopping gate is the Givens rotation by $2\varphi$ of the modes
+$j,k$ (Theorem~\ref{thm:congruence}). We do not prove the exponential form in these notes.
+
+\begin{theorem}[The hopping gate is a Gaussian unitary]\label{thm:gate}
+$U_{jk}(\varphi)$ is unitary, and for every label $a$,
+\[
+ U_{jk}(\varphi)\,c_a\,U_{jk}(\varphi)^*=\sum_b\bigl(O_{jk}(\varphi)\bigr)_{ab}\,c_b ,
+\]
+that is, $U c_{x_j}U^*=\cos2\varphi\,c_{x_j}-\sin2\varphi\,c_{x_k}$,
+$U c_{x_k}U^*=\sin2\varphi\,c_{x_j}+\cos2\varphi\,c_{x_k}$, the same with $y$, and
+$Uc_aU^*=c_a$ for the other labels.
+\end{theorem}
+\begin{proof}
+Let $g=c_{x_j}c_{x_k}$. By Theorem~\ref{thm:car}, $g^2=-1$, $g^*=-g$, $g$ anticommutes with
+$c_{x_j}$ and $c_{x_k}$ and commutes with every other $c_a$, including $c_{y_j},c_{y_k}$;
+moreover $gc_{x_j}=-c_{x_k}$, $c_{x_j}g=c_{x_k}$, $gc_{x_k}=c_{x_j}$, $c_{x_k}g=-c_{x_j}$.
+Hence $V=\cos\varphi+\sin\varphi\,g$ satisfies
+$VV^*=(\cos\varphi+\sin\varphi\,g)(\cos\varphi-\sin\varphi\,g)=\cos^2\varphi-\sin^2\varphi\,g^2=1$,
+likewise $V^*V=1$, and
+\begin{align*}
+ Vc_{x_j}V^*&=(\cos\varphi\,c_{x_j}+\sin\varphi\,gc_{x_j})(\cos\varphi-\sin\varphi\,g)
+ =(\cos\varphi\,c_{x_j}-\sin\varphi\,c_{x_k})(\cos\varphi-\sin\varphi\,g)\\
+ &=(\cos^2\varphi-\sin^2\varphi)\,c_{x_j}-2\sin\varphi\cos\varphi\,c_{x_k}=\cos2\varphi\,c_{x_j}-\sin2\varphi\,c_{x_k};
+\end{align*}
+similarly $Vc_{x_k}V^*=\sin2\varphi\,c_{x_j}+\cos2\varphi\,c_{x_k}$, and $Vc_aV^*=c_aVV^*=c_a$
+for the other labels. The same computation applies to the $y$ factor
+$W=\cos\varphi+\sin\varphi\,c_{y_j}c_{y_k}$, which commutes with $c_{x_j},c_{x_k}$; $U=VW$ is unitary as a product of
+unitaries, and $Uc_aU^*=V(Wc_aW^*)V^*$ gives the formulas label by label.
+\end{proof}
+
+\begin{theorem}[Gaussian unitaries act by orthogonal congruence]\label{thm:congruence}
+Let $U$ be unitary and $O\in\R^{2n\times2n}$ with $Uc_aU^*=\sum_bO_{ab}c_b$ for all $a$.
+Then $OO^{\T}=1$, and for every density operator $\rho$, $U\rho U^*$ is a density operator with
+\[
+ \Gamma(U\rho U^*)=O^{\T}\,\Gamma(\rho)\,O .
+\]
+\end{theorem}
+\begin{proof}
+\begin{enumerate}
+\item[(a)] $\tr(c_ac_b)=2^n\delta_{ab}$: $\tr(c_ac_b)=\tr(c_bc_a)$, so
+$2\tr(c_ac_b)=\tr(c_ac_b+c_bc_a)=2\delta_{ab}\tr 1$ (Theorem~\ref{thm:car}).
+\item[(b)] $OO^{\T}=1$: $\tr\bigl((Uc_aU^*)(Uc_bU^*)\bigr)=\tr(Uc_ac_bU^*)=\tr(c_ac_b)=2^n\delta_{ab}$,
+and by the hypothesis the same trace is
+$\sum_{a',b'}O_{aa'}O_{bb'}\tr(c_{a'}c_{b'})=2^n\sum_{a'}O_{aa'}O_{ba'}=2^n(OO^{\T})_{ab}$.
+\item[(c)] $U^*c_aU=\sum_bO_{ba}c_b$: conjugating the hypothesis by $U^*$ gives
+$c_b=\sum_{b'}O_{bb'}\,U^*c_{b'}U$, and $O^{\T}O=1$ inverts this relation.
+\item[(d)] Density: $U\rho U^*\succeq0$ and $\tr(U\rho U^*)=\tr\rho=1$.\linebreak Covariance:
+$\Gamma(U\rho U^*)_{ab}=\tfrac\ii2\tr(U\rho U^*[c_a,c_b])$
+$=\tfrac\ii2\tr(\rho\,U^*[c_a,c_b]U)$,
+and by (c)
+\[
+ U^*[c_a,c_b]U=[U^*c_aU,U^*c_bU]=\sum_{a'b'}O_{a'a}O_{b'b}[c_{a'},c_{b'}];
+\]
+taking the trace gives $\sum_{a'b'}O_{a'a}\Gamma(\rho)_{a'b'}O_{b'b}=(O^{\T}\Gamma(\rho)O)_{ab}$,
+both sides being real (Theorem~\ref{thm:reality}). \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{corollary}[One gate on an occupation state]\label{cor:gate-example}
+For $n=2$, $j=1$, $k=2$ and $\rho=|10\rangle\langle10|$,
+\[
+ \Gamma\bigl(U_{12}(\varphi)\rho U_{12}(\varphi)^*\bigr)
+ =\begin{pmatrix}0&X\\-X^{\T}&0\end{pmatrix},\qquad
+ X=\begin{pmatrix}\cos4\varphi&-\sin4\varphi\\-\sin4\varphi&-\cos4\varphi\end{pmatrix},
+\]
+in the labels $(x_1,x_2,y_1,y_2)$. The vacuum is fixed by every hopping gate:
+$\Gamma(U_{jk}(\varphi)\,|0\rangle\langle0|\,U_{jk}(\varphi)^*)=-\Omega_n$.
+\end{corollary}
+\begin{proof}
+Theorem~\ref{thm:congruence} with $\Gamma(\rho)=\begin{pmatrix}0&\Lambda_{10}\\-\Lambda_{10}&0\end{pmatrix}$,
+$\Lambda_{10}=\operatorname{diag}(1,-1)$ (Theorem~\ref{thm:occupation}), and $O=\operatorname{diag}(\Rot,\Rot)$
+with $\Rot$ the rotation by $2\varphi$: the $(x,y)$ block is $\Rot^{\T}\Lambda_{10}\Rot=X$, with
+$\cos^22\varphi-\sin^22\varphi=\cos4\varphi$ and $2\sin2\varphi\cos2\varphi=\sin4\varphi$. For
+the vacuum, $\Lambda=-1_n$ and $\Rot_n^{\T}(-1)\Rot_n=-1$ since $\Rot_n^{\T}\Rot_n=1$, which follows from
+$O^{\T}O=1$.
+\end{proof}
+A composition of gates acts by the product of the rotations, by
+Theorem~\ref{thm:congruence} applied to each factor.

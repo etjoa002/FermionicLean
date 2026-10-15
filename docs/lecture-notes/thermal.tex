@@ -1,0 +1,346 @@
+\section{Thermal states and unitary evolution}
+\label{sec:thermal}
+\motiv{For $h=O\D(\varepsilon)O^{\T}$, the Gibbs state $e^{-H_h}/\tr e^{-H_h}$ of the quadratic
+Hamiltonian $H_h$ has covariance $O\,\D(-\tanh(\varepsilon/2))\,O^{\T}$
+(Theorem~\ref{thm:thermal}), and the unitary $e^{-\ii tH_h}$ implements the rotation $e^{-th}$
+of the Majorana operators (Theorem~\ref{thm:evolution}). Both reduce to the canonical form by
+the conjugation $U^*H_{\D(\varepsilon)}U=H_h$ of Section~\ref{sec:hamiltonian}, since
+$H_{\D(\varepsilon)}$ is diagonal and we compute its exponentials entrywise.}
+
+The conventions of Section~\ref{sec:hamiltonian} are in force. For a square matrix $A$, real
+or complex, $e^A=\sum_{k\geq0}A^k/k!$; we use the facts $e^{\operatorname{diag}(v)}
+=\operatorname{diag}(e^{v})$ entrywise, $e^{WAW^{-1}}=We^AW^{-1}$ for invertible $W$,
+$e^{A+B}=e^Ae^B$ when $AB=BA$, $(e^A)^*=e^{A^*}$, $(e^A)^{\T}=e^{A^{\T}}$, and
+$\tr(WAW^{-1})=\tr A$.
+
+\subsection{The Gibbs family}
+\label{sec:exponential-family}
+
+\begin{definition}[Partition function, Gibbs state, thermal state]\label{def:thermal}
+For a real matrix $h$ on the labels, the \emph{partition function} and the \emph{Gibbs
+state} of $H_h$ are
+\[
+ \mathcal Z(h)=\tr e^{-H_h},\qquad \rho_h=\mathcal Z(h)^{-1}e^{-H_h},
+\]
+and for $\tau\in\R$ (the inverse temperature, written $\beta$ in the literature; here
+$\beta$ is the bond covariance) the \emph{thermal state} of $H_h$ at inverse temperature
+$\tau$ is $\rho_{\tau h}=e^{-\tau H_h}/\tr e^{-\tau H_h}$. The results below assume $h^{\T}=-h$.
+\end{definition}
+For one mode and $h=\D(\varepsilon)$, $H_h=\operatorname{diag}(-\tfrac\varepsilon2,\tfrac\varepsilon2)$
+on $(|0\rangle,|1\rangle)$ (Lemma~\ref{lem:diagonal} for $n=1$), so
+$e^{-H_h}=\operatorname{diag}(e^{\varepsilon/2},e^{-\varepsilon/2})$ and $\mathcal Z=2\cosh(\varepsilon/2)$.
+Hence $\rho_h=\operatorname{diag}\bigl(\tfrac12(1+\tanh\tfrac\varepsilon2),\tfrac12(1-\tanh\tfrac\varepsilon2)\bigr)$,
+and for $\varepsilon>0$ the empty mode has the larger weight, as in the ground state of
+Theorem~\ref{thm:block-gs} ($s^\varepsilon_j=0$ for $\varepsilon_j>0$). $\rho_h$ is the thermal state at $\tau=1$; Corollary~\ref{cor:beta} passes to
+$\rho_{\tau h}$ by the substitution $\varepsilon\mapsto\tau\varepsilon$.
+
+\begin{lemma}[The Gibbs state of a canonical form]\label{lem:block-exp}
+Let $\varepsilon\in\R^n$ and $\lambda_j=-\tanh(\varepsilon_j/2)$. Then
+\begin{enumerate}
+\item[(a)] $e^{-H_{\D(\varepsilon)}}=\operatorname{diag}\bigl(s\mapsto e^{-d_\varepsilon(s)}\bigr)$;
+\item[(b)] $\mathcal Z(\D(\varepsilon))=\prod_j2\cosh(\varepsilon_j/2)$, a positive real number;
+\item[(c)] $\rho_{\D(\varepsilon)}=\rho_\lambda$, the product mixture with parameter
+$\lambda$; hence $\rho_{\D(\varepsilon)}$ is a density operator with covariance $\D(\lambda)$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) $-H_{\D(\varepsilon)}=\operatorname{diag}(-d_\varepsilon)$ (Lemma~\ref{lem:diagonal}) and the
+exponential of a diagonal matrix is the diagonal matrix of the exponentials of its entries.
+(b) $e^{-d_\varepsilon(s)}=\prod_je^{-\varepsilon_j(s_j-1/2)}$, so
+\[
+ \tr e^{-H_{\D(\varepsilon)}}=\sum_s\prod_je^{-\varepsilon_j(s_j-1/2)}
+ =\prod_j\bigl(e^{\varepsilon_j/2}+e^{-\varepsilon_j/2}\bigr)=\prod_j2\cosh(\varepsilon_j/2),
+\]
+the sum over $s\in\{0,1\}^n$ of a product factorizing over $j$.
+(c) By (a) and (b), $\rho_{\D(\varepsilon)}=\sum_sp(s)|s\rangle\langle s|$ with
+$p(s)=\prod_je^{-\varepsilon_j(s_j-1/2)}/(2\cosh(\varepsilon_j/2))$. For one factor and
+$b\in\{0,1\}$,
+\[
+ \frac{e^{-\varepsilon(b-1/2)}}{2\cosh(\varepsilon/2)}
+ =\frac{\cosh(\varepsilon/2)\mp\sinh(\varepsilon/2)}{2\cosh(\varepsilon/2)}
+ =\frac{1\mp\tanh(\varepsilon/2)}2=p_j(b)\quad(\text{sign }-\text{ for }b=1,\ +\text{ for }b=0),
+\]
+with $p_j$ the Bernoulli weight of parameter $\lambda_j=-\tanh(\varepsilon_j/2)$ of
+Definition~\ref{def:mixture}. Hence $p(s)=\prod_jp_j(s_j)$ and
+$\rho_{\D(\varepsilon)}=\rho_\lambda$. Theorem~\ref{thm:mixture} gives
+the rest.
+\end{proof}
+
+\begin{theorem}[The Gibbs family]\label{thm:thermal}
+Let $h^{\T}=-h$.
+\begin{enumerate}
+\item[(a)] Let $h=O\D(\varepsilon)O^{\T}$ with $OO^{\T}=1$ and let the unitary $U$ implement
+$O$. Then $\mathcal Z(h)=\prod_j2\cosh(\varepsilon_j/2)$ and
+\[
+ \rho_h=U^*\rho_{\D(\varepsilon)}U=U^*\rho_\lambda U,\qquad \lambda_j=-\tanh(\varepsilon_j/2),
+\]
+so $\rho_h$ is a density operator with
+$\Gamma(\rho_h)=O\,\D(-\tanh(\varepsilon/2))\,O^{\T}$ and energy
+$\tr(\rho_hH_h)=-\tfrac12\sum_j\varepsilon_j\tanh(\varepsilon_j/2)$.
+\item[(b)] For every real antisymmetric $h$: $\mathcal Z(h)$ is a positive real number, $\rho_h$ is a
+density operator, and there are $O$ with $OO^{\T}=1$, $\det O=1$, and $\varepsilon\in\R^n$ with
+$h=O\D(\varepsilon)O^{\T}$ and $\Gamma(\rho_h)=O\,\D(-\tanh(\varepsilon/2))\,O^{\T}$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+(a) $U^*H_{\D(\varepsilon)}U=H_h$ (proof of Theorem~\ref{thm:rotated-gs}) and $U^*=U^{-1}$, so
+$e^{-H_h}=U^*e^{-H_{\D(\varepsilon)}}U$ and $\mathcal Z(h)=\tr e^{-H_{\D(\varepsilon)}}=\mathcal Z(\D(\varepsilon))$ by
+Lemma~\ref{lem:block-exp}(b). Hence $\rho_h=U^*\rho_{\D(\varepsilon)}U=U^*\rho_\lambda U$ by
+Lemma~\ref{lem:block-exp}(c), which is \vet{the state built in the proof of Theorem~\ref{thm:realization}
+(the proof uses only that $U$ implements $O$, not $\det O=1$)} for the
+admissible matrix $O\D(\lambda)O^{\T}$: a density operator with covariance $O\D(\lambda)O^{\T}$.
+For the energy, Lemma~\ref{lem:energy}(b) and Lemma~\ref{lem:rotated-form}(c) with
+$\Gamma(\rho_h)=O\D(\lambda)O^{\T}$ give
+$\tr(\rho_hH_h)=\tfrac14\sum_{ab}h_{ab}\Gamma(\rho_h)_{ab}
+=\tfrac12\sum_j\varepsilon_j\lambda_j=-\tfrac12\sum_j\varepsilon_j\tanh(\varepsilon_j/2)$.
+(b) Theorem~\ref{thm:normal-form}(a) and Theorem~\ref{thm:implement} supply $O$, $\varepsilon$,
+$U$; apply (a).
+\end{proof}
+
+\begin{corollary}[Thermal states]\label{cor:beta}
+Let $h=O\D(\varepsilon)O^{\T}$ with $OO^{\T}=1$, $U$ implementing $O$, and $\tau\in\R$.
+The thermal state $\rho_{\tau h}$ is a density operator with
+\[
+ \Gamma(\rho_{\tau h})=O\,\D\bigl(-\tanh(\tau\varepsilon/2)\bigr)\,O^{\T}
+ \qquad\text{and}\qquad
+ \tr(\rho_{\tau h}H_h)=-\tfrac12\sum_j\varepsilon_j\tanh(\tau\varepsilon_j/2).
+\]
+For $h=0$ (or $\tau=0$) the thermal state is $2^{-n}\,1$, with covariance $\Gamma(2^{-n}1)=0$.
+\end{corollary}
+\begin{proof}
+$\tau h=O\D(\tau\varepsilon)O^{\T}$, and Theorem~\ref{thm:thermal}(a) applies. The energy is
+\[
+ \tfrac14\sum_{ab}h_{ab}\Gamma_{ab}=\tfrac12\sum_j\varepsilon_j\bigl(-\tanh(\tau\varepsilon_j/2)\bigr)
+\]
+by Lemma~\ref{lem:rotated-form}(c) with $\Gamma(\rho_{\tau h})=O\D(-\tanh(\tau\varepsilon/2))O^{\T}$. For $h=0$: $H_0=0$, $e^0=1$, $\mathcal Z(0)=2^n$, and
+Theorem~\ref{thm:thermal}(a) with $O=1$, $U=1$, $\varepsilon=0$ gives $\Gamma(2^{-n}1)=\D(0)=0$.
+\end{proof}
+\begin{remark}\label{rem:zero-temperature}
+As $\tau\to\infty$, $-\tanh(\tau\varepsilon_j/2)\to-\sgn\varepsilon_j$ for every
+$\varepsilon_j\neq0$, so \vet{when every $\varepsilon_j\neq0$} the thermal covariance tends entrywise to the ground covariance
+$O\D(-\sgn\varepsilon)O^{\T}$ of Theorem~\ref{thm:rotated-gs} and the energy to the ground
+energy $-\tfrac12\sum_j|\varepsilon_j|$. For $h=\D(\varepsilon)$ with all $\varepsilon_j>0$ the
+limit is the vacuum covariance $-\Omega_n$ of Corollary~\ref{cor:vacuum}.
+\end{remark}
+
+\begin{proposition}[Strict admissibility]\label{prop:strict}
+Call $\Gamma$ \emph{strictly admissible} when $\Gamma^{\T}=-\Gamma$ and $1-\Gamma^{\T}\Gamma\succ0$
+(positive definite). For $h^{\T}=-h$:
+\begin{enumerate}
+\item[(a)] $\Gamma(\rho_h)$ is strictly admissible;
+\item[(b)] if $n\geq1$, $\Gamma(\rho_h)$ is not pure;
+\item[(c)] $O\Gamma O^{\T}$ is strictly admissible with $\Gamma$ when $OO^{\T}=1$, and
+$\D(\lambda)$ is strictly admissible if and only if $|\lambda_j|<1$ for all $j$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+(c) $1-(O\Gamma O^{\T})^{\T}(O\Gamma O^{\T})=O(1-\Gamma^{\T}\Gamma)O^{\T}$, and $M\mapsto OMO^{\T}$
+preserves positive definiteness for invertible $O$;
+$1-\D(\lambda)^{\T}\D(\lambda)=\operatorname{diag}(1-\lambda^2,1-\lambda^2)$ is positive definite
+if and only if every $1-\lambda_j^2>0$. (a) By Theorem~\ref{thm:thermal}(b),
+$\Gamma(\rho_h)=O\D(\lambda)O^{\T}$ with $|\lambda_j|=|{-\tanh(\varepsilon_j/2)}|<1$; apply (c).
+(b) If $\Gamma(\rho_h)$ were pure, $\D(\lambda)=O^{\T}\Gamma(\rho_h)O$ would be pure
+(Theorem~\ref{thm:orthogonal} with $O^{\T}$, since $OO^{\T}=1$ gives $O^{\T}O=1$), forcing
+$|\lambda_j|=1$ for every $j$; with $n\geq1$ there is a $j$, and $|\lambda_j|<1$ by (a), a
+contradiction. Hence $\Gamma(\rho_h)$ is not pure.
+\end{proof}
+\begin{remark}\label{rem:coordinate-free}
+In the normal form, $(\ii\D(\varepsilon))^2=\operatorname{diag}(\varepsilon^2,\varepsilon^2)$,
+so for an odd function $f$ the matrix function $f(\ii\D(\varepsilon))$ of the Hermitian matrix
+$\ii\D(\varepsilon)$ is $\ii\D(f(\varepsilon))$. Theorem~\ref{thm:thermal} therefore reads
+$\Gamma(\rho_h)=\ii\tanh(\ii h/2)$, and Theorem~\ref{thm:exp-realization}(a) reads
+$h=2\ii\,\artanh(\ii\Gamma(\rho_h))$: the coordinate-free form of the two theorems.
+\end{remark}
+
+\begin{theorem}[Realization by the Gibbs family]\label{thm:exp-realization}
+\begin{enumerate}
+\item[(a)] Let $\Gamma=O\D(\eta)O^{\T}$ with $OO^{\T}=1$, $|\eta_j|<1$ for all $j$, and let $U$
+implement $O$. Put $\varepsilon_j=-2\artanh(\eta_j)$ and $h=O\D(\varepsilon)O^{\T}$. Then
+$h^{\T}=-h$ and $\Gamma(\rho_h)=\Gamma$.
+\item[(b)] Every strictly admissible $\Gamma$ is the covariance of a Gibbs state:
+there is $h$ with $h^{\T}=-h$ and $\Gamma(\rho_h)=\Gamma$.
+\item[(c)] (Uniqueness of the parameter in a frame.) Let $OO^{\T}=1$, $U$ implement $O$, and
+$\varepsilon,\varepsilon'\in\R^n$. If
+$\Gamma(\rho_{O\D(\varepsilon)O^{\T}})=\Gamma(\rho_{O\D(\varepsilon')O^{\T}})$ then
+$\varepsilon=\varepsilon'$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+(a) $\D(\varepsilon)^{\T}=-\D(\varepsilon)$ gives $h^{\T}=-h$. By Theorem~\ref{thm:thermal}(a),
+\[
+ \Gamma(\rho_h)=O\D(-\tanh(-\artanh\eta))O^{\T}=O\D(\eta)O^{\T},
+\]
+since $\tanh$ is odd and $\tanh(\artanh x)=x$ for $|x|<1$. (b) Theorem~\ref{thm:normal-form}(a) gives
+$\Gamma=O\D(\eta)O^{\T}$ with $OO^{\T}=1$, $\det O=1$; $\D(\eta)=O^{\T}\Gamma O$ is strictly
+admissible by Proposition~\ref{prop:strict}(c), so $|\eta_j|<1$; Theorem~\ref{thm:implement}
+gives $U$; apply (a). (c) Theorem~\ref{thm:thermal}(a) gives
+$O\D(\lambda)O^{\T}=O\D(\lambda')O^{\T}$ with $\lambda_j=-\tanh(\varepsilon_j/2)$,
+$\lambda'_j=-\tanh(\varepsilon'_j/2)$; multiplying by $O^{\T}$ on the left and $O$ on the right
+($O^{\T}O=1$), $\D(\lambda)=\D(\lambda')$, so $\lambda=\lambda'$ (the entries $x_jy_j$), and
+$\tanh$ is injective.
+\end{proof}
+Uniqueness of the Gibbs state with a given covariance, beyond the fixed frame of (c), is
+Corollary~\ref{cor:converse}(c).
+
+\subsection{Unitary evolution}
+\label{sec:evolution}
+\motiv{In the canonical form the unitary $e^{-\ii tH_{\D(\varepsilon)}}$ is diagonal with the phases
+$e^{-\ii td_\varepsilon(s)}$, a product of the factors $\cos\varphi_j+\sin\varphi_j\,c_{x_j}c_{y_j}$
+of Lemma~\ref{lem:factor} with $\varphi_j=t\varepsilon_j/2$, and it rotates each plane
+$(x_j,y_j)$ by the angle $t\varepsilon_j$ (Lemma~\ref{lem:block-evolution}). For
+$h=O\D(\varepsilon)O^{\T}$ the conjugation by $U$ turns this into the rotation $e^{-th}$
+(Theorem~\ref{thm:evolution}), so a covariance evolves as $\Gamma\mapsto e^{th}\Gamma e^{-th}$
+and the Gibbs states are stationary (Corollary~\ref{cor:stationary}).}
+
+\begin{definition}[Evolution operator, rotation of the planes]\label{def:evolution}
+For a real matrix $h$ on the labels and $t\in\R$, $U_h(t)=e^{-\ii tH_h}$. For $\theta\in\R^n$,
+$\Rot(\theta)$ is the matrix on the labels written in $(x,y)$ blocks as
+\[
+ \Rot(\theta)=\begin{pmatrix}\operatorname{diag}(\cos\theta)&-\operatorname{diag}(\sin\theta)\\
+ \operatorname{diag}(\sin\theta)&\operatorname{diag}(\cos\theta)\end{pmatrix},
+\]
+that is, the rows $x_j$ and $y_j$ are $(\cos\theta_j,-\sin\theta_j)$ and
+$(\sin\theta_j,\cos\theta_j)$ on the columns $(x_j,y_j)$ and zero elsewhere: the product
+of the plane rotations $\Rot_{x_jy_j}(\cos\theta_j,\sin\theta_j)$ of Definition~\ref{def:plane}
+over $j$.
+\end{definition}
+
+\begin{lemma}[Unitarity and the group law]\label{lem:unitary}
+Let $h^{\T}=-h$ and $t,t'\in\R$. Then $U_h(t)^*=U_h(-t)$, $U_h(t)U_h(t)^*=U_h(t)^*U_h(t)=1$,
+$U_h(t)U_h(t')=U_h(t+t')$ and $U_h(0)=1$.
+\end{lemma}
+\begin{proof}
+$H_h^*=H_h$ (Lemma~\ref{lem:energy}(a)), so $(-\ii tH_h)^*=\ii tH_h$ and
+$U_h(t)^*=e^{\ii tH_h}=U_h(-t)$. The exponents $-\ii tH_h$ and $-\ii t'H_h$ commute, so
+$U_h(t)U_h(t')=e^{-\ii(t+t')H_h}=U_h(t+t')$; with $t'=-t$ this gives $U_h(t)U_h(t)^*=U_h(0)=e^0=1$,
+and the other order likewise.
+\end{proof}
+
+\begin{lemma}[The exponential of a canonical form is a rotation]\label{lem:block-rot}
+For $\theta\in\R^n$, $e^{\D(\theta)}=\Rot(-\theta)$; hence $e^{-t\D(\varepsilon)}=\Rot(t\varepsilon)$
+for $t\in\R$, $\varepsilon\in\R^n$. Moreover $\Rot(\theta)\Rot(\theta)^{\T}=1$ and
+$\Rot(\theta)^{\T}=\Rot(-\theta)$.
+\end{lemma}
+\begin{proof}
+Let $\Upsilon=\operatorname{diag}(\theta,\theta)$, the block-diagonal matrix with $\theta_j$ at $x_j$
+and at $y_j$. Then $\D(\theta)^2=-\Upsilon^2$ and $\Upsilon$ commutes with $\D(\theta)$, so for $m\geq0$
+\[
+ \D(\theta)^{2m}=(-1)^m\Upsilon^{2m}=(-1)^m\operatorname{diag}(\theta^{2m},\theta^{2m}),\quad
+ \D(\theta)^{2m+1}=(-1)^m\Upsilon^{2m}\D(\theta)=(-1)^m\D(\theta^{2m+1}),
+\]
+by induction on $m$, with $\theta^{k}$ entrywise. The exponential series converges
+absolutely, so we may split it into its even and odd terms:
+\[
+ e^{\D(\theta)}=\sum_{m\geq0}\frac{(-1)^m}{(2m)!}\operatorname{diag}(\theta^{2m},\theta^{2m})
+ +\sum_{m\geq0}\frac{(-1)^m}{(2m+1)!}\D(\theta^{2m+1}).
+\]
+Both sums are entrywise: the first is $\operatorname{diag}(\cos\theta,\cos\theta)$ and the
+second is $\D(\sin\theta)$, by the series $\cos x=\sum_m(-1)^mx^{2m}/(2m)!$ and
+$\sin x=\sum_m(-1)^mx^{2m+1}/(2m+1)!$ applied to each $\theta_j$ (the maps
+$v\mapsto\operatorname{diag}(v,v)$ and $v\mapsto\D(v)$ are linear and continuous, so they
+commute with the sums). Hence $e^{\D(\theta)}$ has the blocks $\operatorname{diag}(\cos\theta)$,
+$\operatorname{diag}(\sin\theta)$, $-\operatorname{diag}(\sin\theta)$,
+$\operatorname{diag}(\cos\theta)$, which is $\Rot(-\theta)$; and
+$e^{-t\D(\varepsilon)}=e^{\D(-t\varepsilon)}=\Rot(t\varepsilon)$. The block products
+$\Rot(\theta)\Rot(\theta)^{\T}$ have the diagonal blocks
+$\operatorname{diag}(\cos^2\theta+\sin^2\theta)=1$ and the off-diagonal blocks
+$\operatorname{diag}(-\cos\theta\sin\theta+\sin\theta\cos\theta)=0$;
+$\Rot(\theta)^{\T}=\Rot(-\theta)$ by inspection of the blocks.
+\end{proof}
+For one mode, $\D(\theta)=\begin{pmatrix}0&\theta\\-\theta&0\end{pmatrix}$ and
+$e^{\D(\theta)}=\begin{pmatrix}\cos\theta&\sin\theta\\-\sin\theta&\cos\theta\end{pmatrix}$,
+the rotation of the plane $(x,y)$ by the angle $-\theta$.
+
+\begin{lemma}[Evolution in the canonical form]\label{lem:block-evolution}
+Let $\varepsilon\in\R^n$, $t\in\R$, and $\varphi_j=t\varepsilon_j/2$. Then
+\[
+ U_{\D(\varepsilon)}(t)=\operatorname{diag}\bigl(s\mapsto e^{-\ii t\,d_\varepsilon(s)}\bigr)
+ =\operatorname{diag}\Bigl(s\mapsto\prod_je^{\ii\varphi_j(-1)^{s_j}}\Bigr),
+\]
+and $U_{\D(\varepsilon)}(t)$ implements $\Rot(t\varepsilon)$: for every $j$,
+\[
+ U\,c_{x_j}U^*=\cos(t\varepsilon_j)\,c_{x_j}-\sin(t\varepsilon_j)\,c_{y_j},\qquad
+ U\,c_{y_j}U^*=\sin(t\varepsilon_j)\,c_{x_j}+\cos(t\varepsilon_j)\,c_{y_j},
+\]
+with $U=U_{\D(\varepsilon)}(t)$.
+\end{lemma}
+\begin{proof}
+$-\ii tH_{\D(\varepsilon)}=\operatorname{diag}(-\ii t\,d_\varepsilon)$ (Lemma~\ref{lem:diagonal}),
+whose exponential is the diagonal of the entrywise exponentials; and
+$d_\varepsilon(s)=-\tfrac12\sum_j\varepsilon_j(-1)^{s_j}$ since $s_j-\tfrac12=-\tfrac12(-1)^{s_j}$,
+so $e^{-\ii td_\varepsilon(s)}=\prod_je^{\ii\varphi_j(-1)^{s_j}}$.
+Write $f(s)$ for this entry and $G=\operatorname{diag}(f)$; $|f(s)|=1$, so
+$G^*=\operatorname{diag}(\bar f)$. Fix $j$. The diagonal matrices $G$, $G^*$, $Z_{<j}$, $Z_j$
+commute with one another, and $GX_j=X_j\operatorname{diag}(f\circ\mathrm{flip}_j)$
+(Lemma~\ref{lem:pauli}(c), read from right to left). Hence
+\begin{gather*}
+ Gc_{x_j}G^*=Z_{<j}\,GX_jG^*=Z_{<j}X_j\,\operatorname{diag}\bigl((f\circ\mathrm{flip}_j)\,\bar f\bigr),\\
+ Gc_{y_j}G^*=\ii Z_{<j}\,GX_jG^*\,Z_j=c_{y_j}\,\operatorname{diag}\bigl((f\circ\mathrm{flip}_j)\,\bar f\bigr)
+\end{gather*}
+(in the second, the diagonal factor commutes with $Z_j$). Now
+$f(\mathrm{flip}_js)\overline{f(s)}=e^{\ii\varphi_j((-1)^{s_j+1}-(-1)^{s_j})}=e^{-2\ii\varphi_j(-1)^{s_j}}$,
+so $\operatorname{diag}((f\circ\mathrm{flip}_j)\bar f)=\cos2\varphi_j-\ii\sin2\varphi_j\,Z_j$.
+Therefore
+\[
+ Gc_{x_j}G^*=\cos2\varphi_j\,c_{x_j}-\ii\sin2\varphi_j\,c_{x_j}Z_j
+ =\cos2\varphi_j\,c_{x_j}-\sin2\varphi_j\,c_{y_j},
+\]
+using $c_{x_j}Z_j=Z_{<j}X_jZ_j=-\ii c_{y_j}$, and
+\[
+ Gc_{y_j}G^*=\cos2\varphi_j\,c_{y_j}-\ii\sin2\varphi_j\,c_{y_j}Z_j
+ =\cos2\varphi_j\,c_{y_j}+\sin2\varphi_j\,c_{x_j},
+\]
+using $c_{y_j}Z_j=\ii Z_{<j}X_jZ_jZ_j=\ii c_{x_j}$. With $2\varphi_j=t\varepsilon_j$ these are the
+rows $x_j$ and $y_j$ of $\Rot(t\varepsilon)$.
+\end{proof}
+Equivalently, $U_{\D(\varepsilon)}(t)=\prod_j(\cos\varphi_j+\sin\varphi_j\,c_{x_j}c_{y_j})$, since
+$c_{x_j}c_{y_j}=\ii Z_j$ and each factor is $\operatorname{diag}(e^{\ii\varphi_j(-1)^{s_j}})$;
+Lemma~\ref{lem:factor} then gives the same rotation.
+
+\begin{theorem}[Unitary evolution is a rotation]\label{thm:evolution}
+Let $h^{\T}=-h$ and $t\in\R$.
+\begin{enumerate}
+\item[(a)] $U_h(t)$ implements $e^{-th}$: $U_h(t)\,c_a\,U_h(t)^*=\sum_b(e^{-th})_{ab}c_b$ for
+every label $a$. If $h=O\D(\varepsilon)O^{\T}$ with $OO^{\T}=1$ and $U$ implements $O$, then
+$U_h(t)=U^*U_{\D(\varepsilon)}(t)U$ and $e^{-th}=O\Rot(t\varepsilon)O^{\T}$.
+\item[(b)] (Heisenberg picture.) $U_h(t)^*\,c_a\,U_h(t)=\sum_b(e^{th})_{ab}c_b$.
+\item[(c)] For every density operator $\sigma$, the operator $U_h(t)\sigma U_h(t)^*$ is a
+density operator with covariance $e^{th}\,\Gamma(\sigma)\,e^{-th}$.
+\item[(d)] (Generator.) $\ii[H_h,c_a]=\sum_bh_{ab}c_b$ for every label $a$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+(a) Theorem~\ref{thm:normal-form}(a) and Theorem~\ref{thm:implement} supply
+$h=O\D(\varepsilon)O^{\T}$, $OO^{\T}=1$, $\det O=1$, and $U$ implementing $O$; fix any such data.
+$U^*H_{\D(\varepsilon)}U=H_h$ gives $-\ii tH_h=U^*(-\ii tH_{\D(\varepsilon)})U$, so
+$U_h(t)=U^*U_{\D(\varepsilon)}(t)U$. By Lemma~\ref{lem:block-evolution},
+$V=U_{\D(\varepsilon)}(t)$ implements $\Rot(t\varepsilon)$; by the product rule of
+Lemma~\ref{lem:factor}, $VU$ implements $O\Rot(t\varepsilon)$, and since $U^*$ implements
+$O^{\T}$, $U^*(VU)$ implements $O\Rot(t\varepsilon)O^{\T}$. Finally
+$O\Rot(t\varepsilon)O^{\T}=Oe^{-t\D(\varepsilon)}O^{\T}=e^{-tO\D(\varepsilon)O^{\T}}=e^{-th}$ by
+Lemma~\ref{lem:block-rot} and $O^{\T}=O^{-1}$.
+(b) For $U$ implementing $O$, $U^*c_aU=\sum_bO_{ba}c_b$, and
+$(e^{-th})_{ba}=\bigl((e^{-th})^{\T}\bigr)_{ab}=(e^{-th^{\T}})_{ab}=(e^{th})_{ab}$.
+(c) $U_h(t)$ is unitary (Lemma~\ref{lem:unitary}) and implements $O=e^{-th}$, so
+Theorem~\ref{thm:congruence} gives a density operator with covariance
+$O^{\T}\Gamma(\sigma)O=e^{th}\Gamma(\sigma)e^{-th}$.
+(d) By Theorem~\ref{thm:car},
+$[c_bc_c,c_a]=c_b\{c_c,c_a\}-\{c_b,c_a\}c_c=2\delta_{ca}c_b-2\delta_{ba}c_c$, so
+$[H_h,c_a]=\tfrac\ii4\sum_{b,c}h_{bc}(2\delta_{ca}c_b-2\delta_{ba}c_c)
+=\tfrac\ii2\bigl(\sum_bh_{ba}c_b-\sum_ch_{ac}c_c\bigr)=-\ii\sum_bh_{ab}c_b$,
+using $h_{ba}=-h_{ab}$; multiply by $\ii$.
+\end{proof}
+Parts (b) and (d) together are the Heisenberg equation: differentiating the closed form
+$c_a(t)=U_h(t)^*c_aU_h(t)=\sum_b(e^{th})_{ab}c_b$ of (b) gives
+$\dot c_a(t)=\sum_bh_{ab}c_b(t)=\ii[H_h,c_a(t)]$, the commutator of (d) at time $t$.
+
+\begin{corollary}[Stationarity of the Gibbs family]\label{cor:stationary}
+Let $h^{\T}=-h$ and $t\in\R$. Then $U_h(t)\rho_hU_h(t)^*=\rho_h$, and
+$e^{th}\,\Gamma(\rho_h)\,e^{-th}=\Gamma(\rho_h)$.
+\end{corollary}
+\begin{proof}
+$-\ii tH_h$ and $-H_h$ commute, so $e^{-\ii tH_h}e^{-H_h}=e^{-\ii tH_h-H_h}=e^{-H_h}e^{-\ii tH_h}$;
+hence $U_h(t)\rho_h=\rho_hU_h(t)$ and $U_h(t)\rho_hU_h(t)^*=\rho_h$ by Lemma~\ref{lem:unitary}.
+Theorem~\ref{thm:evolution}(c) applied to $\sigma=\rho_h$ (a density operator by
+Theorem~\ref{thm:thermal}(b)) gives the covariance identity.
+\end{proof}

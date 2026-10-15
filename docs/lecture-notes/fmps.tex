@@ -1,0 +1,226 @@
+\section{Purity of the Gaussian fMPS and the Kitaev ground state}
+\label{sec:fmps}
+\motiv{Section~\ref{sec:gaussianmap} built the periodic chain as the state
+$\rho_N=\mathcal N(\rho_{\mathrm{in}},\sigma_N)^{-1}\rho_{\mathrm{in}}\star\sigma_N$ with covariance
+$\Gamma_N$. When the on-site covariances are pure, $\rho_N$ is a pure state and $\Gamma_N$ is
+pure (Corollary~\ref{cor:chain-pure}): the contraction of two vectors is a rank-one
+computation, and a Gaussian state with $\rho^2=\rho$ has a pure covariance
+(Theorem~\ref{thm:idempotent}). For a pure covariance $\Gamma$ the quadratic Hamiltonian
+$H_{-\Gamma}$ is the parent Hamiltonian of $\rho[\Gamma]$: its unique ground state is
+$\rho[\Gamma]$, separated from the rest of the spectrum by a gap of one unit
+(Theorem~\ref{thm:gap}). Applied to $K_N$, the Gaussian fMPS of the Kitaev chain is the ground state of
+the Kitaev Hamiltonian $H_{-K_N}$.}
+
+The conventions of Sections~\ref{sec:hamiltonian} and~\ref{sec:gaussianmap} are in force;
+$\mathcal E_h(\rho)=\tr(\rho H_h)=\tfrac14\sum_{ab}h_{ab}\Gamma(\rho)_{ab}$ for $h^{\T}=-h$
+(Lemma~\ref{lem:energy}), and $\rho_\lambda=\operatorname{diag}(p)$ with $p(s)=\prod_jp_j(s_j)$,
+$p_j(s_j)=\tfrac12(1-\lambda_j(-1)^{s_j})\in[0,1]$ and $p_j(0)+p_j(1)=1$
+(Definition~\ref{def:mixture}). For a vector $\psi\in\mathcal F_n$, $|\psi\rangle\langle\psi|$ is
+the matrix $\psi_s\overline{\psi_t}$.
+
+\subsection{Purity}
+\label{sec:purity}
+
+\begin{lemma}[Contraction of two vectors]\label{lem:rank-one}
+Let $\psi\in\mathcal F_{n+m}$ and $\varphi\in\mathcal F_m$, and let $\xi\in\mathcal F_n$ be the
+partial inner product $\xi_s=\sum_u\overline{\varphi_u}\,\psi_{(s,u)}$. Then
+$|\psi\rangle\langle\psi|\star|\varphi\rangle\langle\varphi|=|\xi\rangle\langle\xi|$ and
+$\mathcal N\bigl(|\psi\rangle\langle\psi|,|\varphi\rangle\langle\varphi|\bigr)=\|\xi\|^2$.
+\end{lemma}
+\begin{proof}
+With $M=|\psi\rangle\langle\psi|\,(1\otimes|\varphi\rangle\langle\varphi|)$,
+$M_{(s,u),(t,u')}=\sum_{u''}\psi_{(s,u)}\overline{\psi_{(t,u'')}}\,\varphi_{u''}\overline{\varphi_{u'}}
+=\psi_{(s,u)}\,\overline{\xi_t}\,\overline{\varphi_{u'}}$, so
+$(\ptr{E}M)_{st}=\sum_u\psi_{(s,u)}\overline{\varphi_u}\,\overline{\xi_t}=\xi_s\overline{\xi_t}$
+(Definition~\ref{def:ptrace}); the trace is $\sum_s|\xi_s|^2$.
+\end{proof}
+
+\begin{theorem}[An idempotent Gaussian state has a pure covariance]\label{thm:idempotent}
+A Gaussian state $\rho$ satisfies $\rho^2=\rho$ if and only if $\Gamma(\rho)$ is pure.
+\end{theorem}
+\begin{proof}
+If $\Gamma(\rho)$ is pure, $\rho=U^*|s\rangle\langle s|U$ (Corollary~\ref{cor:converse}(b)) and
+$\rho^2=\rho$. Conversely let $\rho^2=\rho$ and write $\rho=U^*\rho_\lambda U$ with
+$\Gamma(\rho)=O\D(\lambda)O^{\T}$ (Corollary~\ref{cor:converse}(a)). Then
+$\rho_\lambda^2=U\rho^2U^*=U\rho U^*=\rho_\lambda$, so $p(s)^2=p(s)$, that is $p(s)\in\{0,1\}$, for
+every configuration $s$. Suppose $|\lambda_j|<1$ for some $j$. For $k\neq j$ choose $s_k$ with
+$p_k(s_k)>0$, possible since $p_k(0)+p_k(1)=1$, and take any $s_j$; then
+$p_j(s_j)=\tfrac12(1\mp\lambda_j)\in(0,1)$ and $p(s)=p_j(s_j)\prod_{k\neq j}p_k(s_k)$ satisfies
+$0<p(s)\leq p_j(s_j)<1$, a contradiction. Hence $|\lambda_j|=1$ for all $j$, $\D(\lambda)$ is pure,
+and so is $\Gamma(\rho)=O\D(\lambda)O^{\T}$ (Theorem~\ref{thm:orthogonal}).
+\end{proof}
+Outside the Gaussian class a projection need not have a pure covariance: for one mode,
+$\rho=\tfrac12(1+c_{x_1})$ satisfies $\rho^2=\tfrac14(1+2c_{x_1}+c_{x_1}^2)=\rho$, while
+$\Gamma(\rho)_{x_1y_1}=\ii\tr(\rho c_{x_1}c_{y_1})=\tfrac{\ii}{2}\tr(c_{x_1}c_{y_1}+c_{y_1})=0$
+(Lemma~\ref{lem:monomial-trace}), so $\Gamma(\rho)=0$.
+
+\begin{theorem}[Contraction of pure Gaussian states]\label{thm:pure-contract}
+Let $\rho$ on $n+m$ modes and $\sigma$ on $m$ modes be Gaussian with pure covariances
+$\Gamma=\begin{psmallmatrix}A&B\\C&D\end{psmallmatrix}$ and $\beta$, and let $1-D\beta$ be
+invertible. Then $\rho=|\psi\rangle\langle\psi|$ and $\sigma=|\varphi\rangle\langle\varphi|$ for
+vectors $\psi,\varphi$; the contracted state is $\mathcal N(\rho,\sigma)^{-1}|\xi\rangle\langle\xi|$ with
+$\xi=(1\otimes\langle\varphi|)\psi\neq0$ and $\mathcal N(\rho,\sigma)=\|\xi\|^2$; it is a
+projection; and its covariance $\Gamma\star\beta$ is pure.
+\end{theorem}
+\begin{proof}
+$\rho=U^*|s\rangle\langle s|U=|\psi\rangle\langle\psi|$ with $\psi=U^*|s\rangle$
+(Corollary~\ref{cor:converse}(b)), likewise $\sigma$. Lemma~\ref{lem:rank-one} gives
+$\rho\star\sigma=|\xi\rangle\langle\xi|$ and $\mathcal N(\rho,\sigma)=\|\xi\|^2$;
+$\mathcal N(\rho,\sigma)>0$ by Theorem~\ref{thm:normalization}, so $\xi\neq0$ and
+$\mathcal N(\rho,\sigma)^{-1}|\xi\rangle\langle\xi|$ is a projection. It is Gaussian with
+covariance $\Gamma\star\beta$ (Corollary~\ref{cor:contract-state}), so
+Theorem~\ref{thm:idempotent} gives purity.
+\end{proof}
+
+\begin{corollary}[Purity of the contraction]\label{cor:cov-pure}
+If $\Gamma$ on $R\sqcup E$ and $\beta$ on $E$ are pure and $1-D\beta$ is invertible, then
+$\Gamma\star\beta$ is pure.
+\end{corollary}
+\begin{proof}
+Take Gaussian states with covariances $\Gamma$ and $\beta$ (Theorem~\ref{thm:realization},
+Corollary~\ref{cor:families}(a)) and apply Theorem~\ref{thm:pure-contract}.
+\end{proof}
+
+\begin{corollary}[The Gaussian fMPS of pure on-site covariances]\label{cor:chain-pure}
+In the setting of Definition~\ref{def:chain-state}, let every on-site covariance $\Gamma_i$ be
+pure and $1-D\beta_N$ invertible. Then $\rho_N^2=\rho_N$ and $\Gamma_N(\Gamma_\bullet)$ is pure.
+\end{corollary}
+\begin{proof}
+$\Gamma_{\mathrm{in}}$ is pure, being a relabelled direct sum of pure matrices
+(Lemma~\ref{lem:relabel}), and $\beta_N$ is pure (Theorem~\ref{thm:bond-pure}); the input and
+bond states are Gaussian with these covariances. Theorem~\ref{thm:pure-contract} and the
+relabelling of Theorem~\ref{thm:chain-state} complete the proof.
+\end{proof}
+
+\subsection{Pure covariances are ground covariances}
+\label{sec:pure-ground}
+
+\begin{theorem}[The ground state of $H_{-\Gamma}$ for pure $\Gamma$]\label{thm:pure-ground}
+Let $\Gamma$ be pure on $n$ modes. Then the ground energy of $H_{-\Gamma}$ is $-n/2$; every
+density operator $\rho$ with $\mathcal E_{-\Gamma}(\rho)=-n/2$ equals the Gaussian state $\rho[\Gamma]$
+with covariance $\Gamma$; and every admissible $\Gamma'$ satisfies
+$\tfrac14\sum_{ab}(-\Gamma)_{ab}\Gamma'_{ab}\geq-n/2$, with equality iff $\Gamma'=\Gamma$.
+\end{theorem}
+\begin{proof}
+$-\Gamma$ is pure, so its normal form $-\Gamma=O\D(\varepsilon)O^{\T}$ ($OO^{\T}=1$, $\det O=1$)
+has $|\varepsilon_j|=1$ for all $j$ (Theorem~\ref{thm:normal-form}), in particular
+$\varepsilon_j\neq0$. We apply Theorem~\ref{thm:ground-state} with $h=-\Gamma$ and $U$ implementing $O$:
+the ground energy is $-\tfrac12\sum_j|\varepsilon_j|=-n/2$; every density operator of that
+energy is $\rho_{\mathrm{gs}}=U^*|s^\varepsilon\rangle\langle s^\varepsilon|U$; and an admissible $\Gamma'$
+has $\tfrac14\sum_{ab}(-\Gamma)_{ab}\Gamma'_{ab}\geq-n/2$ with equality iff $\Gamma'=\Gamma(\rho_{\mathrm{gs}})$.
+Finally $\Gamma(\rho_{\mathrm{gs}})=O\D(-\sgn\varepsilon)O^{\T}=-O\D(\varepsilon)O^{\T}=\Gamma$, since
+$\D(-\sgn\varepsilon)=-\D(\varepsilon)$ when $|\varepsilon_j|=1$; and $\rho_{\mathrm{gs}}$ is Gaussian
+(Corollary~\ref{cor:families}(c)) with covariance $\Gamma$, hence $\rho_{\mathrm{gs}}=\rho[\Gamma]$
+(Theorem~\ref{thm:unique}).
+\end{proof}
+\begin{remark}\label{rem:sign}
+Since $\mathcal E_h(\rho)=-\tfrac14\tr\bigl(h\,\Gamma(\rho)\bigr)$, the choice $h=-\Gamma$ gives
+$\mathcal E(\rho)=\tfrac14\tr\bigl(\Gamma\,\Gamma(\rho)\bigr)=-\tfrac14\sum_a(\Gamma e_a)^{\T}(\Gamma(\rho)e_a)$.
+Each column of $\Gamma$ is a unit vector and each column of $\Gamma(\rho)$ has norm at most $1$
+(Theorem~\ref{thm:norm-form}), so by the Cauchy--Schwarz inequality $\mathcal E(\rho)\geq-\tfrac14\cdot2n=-n/2$,
+with equality exactly when $\Gamma(\rho)e_a=\Gamma e_a$ for every $a$, that is at $\Gamma(\rho)=\Gamma$. For $H_{+\Gamma}$ the same bound reads
+$-\tfrac14\tr\bigl(\Gamma\,\Gamma(\rho)\bigr)\geq-n/2$ with equality at $\Gamma(\rho)=-\Gamma$, so
+the ground covariance of $H_{+\Gamma}$ is $-\Gamma$.
+\end{remark}
+
+A gap that does not depend on $\Gamma$ or on $n$ separates the ground state from the rest
+of the spectrum. We call a density operator $\rho$ \emph{orthogonal} to the ground state when
+$\tr(\rho\,\rho[\Gamma])=0$. Since $\rho\succeq0$ and $\tr(\rho\,\rho[\Gamma])=\langle\psi_\Gamma|\rho|\psi_\Gamma\rangle$ for the
+ground vector $\psi_\Gamma$, this holds exactly when $\rho\psi_\Gamma=0$, that is, when $\rho$ is supported on
+the orthogonal complement of the ground vector; for a pure state $\rho=|\psi\rangle\langle\psi|$ it says
+that $\psi\perp\psi_\Gamma$.
+\begin{theorem}[The gap of $H_{-\Gamma}$]\label{thm:gap}
+Let $\Gamma$ be pure on $n$ modes and let $\rho$ be a density operator with
+$\tr(\rho\,\rho[\Gamma])=0$. Then $\mathcal E_{-\Gamma}(\rho)\geq-\tfrac n2+1$. For $n\geq1$ the bound is
+attained: some density operator $\rho'$ has $\tr(\rho'\rho[\Gamma])=0$ and
+$\mathcal E_{-\Gamma}(\rho')=-\tfrac n2+1$.
+\end{theorem}
+\begin{proof}
+As in the proof of Theorem~\ref{thm:pure-ground}, write $-\Gamma=O\D(\varepsilon)O^{\T}$ with
+$|\varepsilon_j|=1$, let $U$ implement $O$, and recall that
+$\rho[\Gamma]=U^*|s^\varepsilon\rangle\langle s^\varepsilon|U$. Put $\rho''=U\rho U^*$, a density
+operator with $\mathcal E_{-\Gamma}(\rho)=\mathcal E_{\D(\varepsilon)}(\rho'')$
+(Lemma~\ref{lem:energy}(c)). Since $H_{\D(\varepsilon)}=\operatorname{diag}(d_\varepsilon)$
+(Lemma~\ref{lem:diagonal}),
+\[
+ \mathcal E_{\D(\varepsilon)}(\rho'')=\sum_s\rho''_{ss}\,d_\varepsilon(s),\qquad
+ \rho''_{ss}\geq0,\qquad \sum_s\rho''_{ss}=1,
+\]
+and the weight of the ground configuration vanishes:
+\[
+ \rho''_{s^\varepsilon s^\varepsilon}=\tr\bigl(\rho''\,|s^\varepsilon\rangle\langle s^\varepsilon|\bigr)
+ =\tr\bigl(\rho\,U^*|s^\varepsilon\rangle\langle s^\varepsilon|U\bigr)=\tr(\rho\,\rho[\Gamma])=0.
+\]
+Every other configuration differs from $s^\varepsilon$ in at least one mode, and each such mode
+costs $|\varepsilon_j|=1$ (Definition~\ref{def:ground}): $d_\varepsilon(s)\geq d_\varepsilon(s^\varepsilon)+1=-\tfrac n2+1$.
+Hence $\mathcal E_{\D(\varepsilon)}(\rho'')\geq(-\tfrac n2+1)\sum_{s\neq s^\varepsilon}\rho''_{ss}=-\tfrac n2+1$.
+For the attainment let $s'$ be $s^\varepsilon$ with the occupation of mode $1$ flipped and
+$\rho'=U^*|s'\rangle\langle s'|U$; then $\tr(\rho'\rho[\Gamma])=|\langle s'|s^\varepsilon\rangle|^2=0$
+and $\mathcal E_{-\Gamma}(\rho')=d_\varepsilon(s')=-\tfrac n2+1$.
+\end{proof}
+The same argument gives the gap $\min_j|\varepsilon_j|$ of a general quadratic Hamiltonian
+$H_{O\D(\varepsilon)O^{\T}}$.
+
+\begin{definition}[The Kitaev Hamiltonian]\label{def:kitaev-ham}
+For $N\geq1$ the \emph{Kitaev Hamiltonian} is $H_{-K_N}$ on $\mathcal F_N$, the quadratic Hamiltonian
+of $h=-K_N$, with $K_N$ the Kitaev chain covariance of
+Section~\ref{sec:kitaev}.
+\end{definition}
+\begin{lemma}[$H_{-K_N}$ as a sum over the pairs $(y_i,x_{i+1})$]\label{lem:kitaev-explicit}
+\[
+ H_{-K_N}=\tfrac{\ii}{2}\sum_{i\in\mathbb Z/N}c_{x_{i+1}}c_{y_i}=-\tfrac{\ii}{2}\sum_{i\in\mathbb Z/N}c_{y_i}c_{x_{i+1}} .
+\]
+\end{lemma}
+\begin{proof}
+The nonzero entries of $-K_N$ are $(-K_N)_{y_i,x_{i+1}}=-1$ and $(-K_N)_{x_{i+1},y_i}=1$, so
+$H_{-K_N}=\tfrac{\ii}{4}\sum_i\bigl(c_{x_{i+1}}c_{y_i}-c_{y_i}c_{x_{i+1}}\bigr)
+=\tfrac{\ii}{2}\sum_ic_{x_{i+1}}c_{y_i}$, since $x_{i+1}\neq y_i$ and distinct Majorana operators
+anticommute (Theorem~\ref{thm:car}); this holds also for $N=1$, where $x_{i+1}=x_i$.
+\end{proof}
+\begin{remark}[The sign of the hopping]\label{rem:kitaev-convention}
+Kitaev's Hamiltonian $H=\ii t\sum_jc_{2j}c_{2j+1}$ reads, in the dictionary $c_{2j-1}=x_j$,
+$c_{2j}=y_j$, $\ii t\sum_jc_{y_j}c_{x_{j+1}}=2t\,H_{+K_N}$; so $H_{-K_N}$ is Kitaev's Hamiltonian
+at $t=-\tfrac12$, and for $t>0$ the ground covariance is $-K_N$ (Remark~\ref{rem:sign}). The
+sign of $t$ is a choice of gauge, not of physics: the unitary $U=c_{x_1}c_{x_2}\cdots c_{x_N}$
+satisfies $Uc_{x_j}U^*=(-1)^{N-1}c_{x_j}$ and $Uc_{y_j}U^*=(-1)^Nc_{y_j}$ (each $c_{x_j}$
+anticommutes with the other $N-1$ factors, each $c_{y_j}$ with all $N$), so $U$ implements
+$O=\operatorname{diag}((-1)^{N-1}1_N,(-1)^N1_N)$, which reverses the relative sign of the $x$
+and $y$ labels and sends $K_N$ to $OK_NO=-K_N$. Since $O$ is diagonal with $O^2=1$,
+$\Gamma(U\rho U^*)=O\Gamma(\rho)O$ and
+$\mathcal E_{K_N}(U\rho U^*)=-\tfrac14\tr\bigl(K_N\,O\Gamma(\rho)O\bigr)=\mathcal E_{-K_N}(\rho)$.
+Hence $\rho$ is the ground state of $H_{-K_N}$ if and only if $U\rho U^*$ is the ground state
+of $H_{+K_N}$: the ground state of Kitaev's Hamiltonian for $t>0$ is $U\rho_NU^*=\rho[-K_N]$,
+the Gaussian fMPS of Theorem~\ref{thm:kitaev-ground} with the $y$ Majoranas reflected. The
+pairing of $y_i$ with $x_{i+1}$ is the same for both signs of $t$.
+\end{remark}
+
+\begin{theorem}[The Gaussian fMPS of the Kitaev chain is the Kitaev ground state]\label{thm:kitaev-ground}
+Let $N\geq1$ and let $\rho_N$ be the Gaussian fMPS of Definition~\ref{def:chain-state} with the
+on-site covariance $\Gamma_K$ of Definition~\ref{def:kitaev} at every site. Then $\rho_N$ is
+well defined, $\rho_N^2=\rho_N$, $\Gamma(\rho_N)=K_N$, $\mathcal E_{-K_N}(\rho_N)=-N/2$ is the ground
+energy of $H_{-K_N}$, and every density operator $\rho$ with $\mathcal E_{-K_N}(\rho)=-N/2$ equals $\rho_N$.
+\end{theorem}
+\begin{proof}
+$1-D\beta_N$ is invertible and $\Gamma_N=K_N$ by Theorem~\ref{thm:kitaev}, and $K_N$ is pure
+(Theorem~\ref{thm:kitaev}). By Theorem~\ref{thm:chain-state}, $\rho_N$ is Gaussian with
+covariance $K_N$, so $\rho_N=\rho[K_N]$ (Theorem~\ref{thm:unique}) and $\rho_N^2=\rho_N$
+(Theorem~\ref{thm:idempotent}). Theorem~\ref{thm:pure-ground} with $\Gamma=K_N$ gives the rest.
+\end{proof}
+
+\begin{corollary}[The gap of the Kitaev chain]\label{cor:kitaev-gap}
+For $N\geq1$, every density operator $\rho$ on $\mathcal F_N$ with $\tr(\rho\,\rho_N)=0$ has
+$\mathcal E_{-K_N}(\rho)\geq-\tfrac N2+1$, and the value is attained. The gap of $H_{-K_N}$ is $1$,
+independent of $N$.
+\end{corollary}
+\begin{proof}
+$K_N$ is pure (Theorem~\ref{thm:kitaev}) and $\rho_N=\rho[K_N]$ (Theorem~\ref{thm:kitaev-ground});
+apply Theorem~\ref{thm:gap}.
+\end{proof}
+In Kitaev's normalization $H=2t\,H_{+K_N}$ the gap is $2|t|$, the energy of one broken pair.
+\begin{remark}\label{rem:mixed-input}
+The on-site covariance $\Gamma_K$ is not pure (Lemma~\ref{lem:kitaev-adm}), so the input
+state is not pure, yet the Gaussian fMPS is a pure state, since $\Gamma_N=K_N$ is pure
+(Theorem~\ref{thm:kitaev}) and Theorem~\ref{thm:idempotent} applies. The pure completion of $\Gamma_K$
+(Proposition~\ref{prop:loop}) gives the same $K_N$ for odd $N$ and a singular $1-D\beta_N$ for
+even $N$; the on-site covariance $\Gamma_K$, which is not pure, is the one valid for every $N$.
+\end{remark}

@@ -1,0 +1,141 @@
+\section{The entanglement rank of a Gaussian fMPS}
+\label{sec:entrank}
+\motiv{A bond of $M$ virtual modes cannot carry unlimited correlations across it. For a set
+$S$ of sites cut off from the rest of the ring by $b(S)$ bonds, the block of $\Gamma_N$
+between the physical labels of $S$ and of its complement has rank at most $2M\,b(S)$
+(Theorem~\ref{thm:cross-rank}), whatever the on-site matrices are; and when $\Gamma_N$ is pure,
+at most $M\,b(S)$ of the block's normal modes are entangled with the outside
+(Corollary~\ref{cor:ent-rank}). This is the fermionic form of the bound ``Schmidt rank at most
+the bond dimension'' for matrix product states. The proof runs through the contraction formula
+and a fact of linear algebra worth stating on its own: the off-diagonal block of an inverse
+has the rank of the off-diagonal block.}
+
+\subsection{Two lemmas of linear algebra}
+\begin{lemma}[Nullity lemma]\label{lem:nullity}
+Let $W=\begin{pmatrix}W_{11}&W_{12}\\W_{21}&W_{22}\end{pmatrix}$ be an invertible real matrix with square diagonal
+blocks of sizes $p$ and $q$, and let $V=W^{-1}=\begin{pmatrix}V_{11}&V_{12}\\V_{21}&V_{22}\end{pmatrix}$
+be partitioned the same way. Then $\operatorname{rank}V_{12}=\operatorname{rank}W_{12}$.
+\end{lemma}
+\begin{proof}
+Let $v\in\R^q$ with $W_{12}v=0$. Then $W\binom{0}{v}=\binom{W_{12}v}{W_{22}v}=\binom{0}{W_{22}v}$, so
+$\binom0v=V\binom{0}{W_{22}v}=\binom{V_{12}W_{22}v}{V_{22}W_{22}v}$: $V_{12}(W_{22}v)=0$ and $V_{22}(W_{22}v)=v$. The
+linear map $v\mapsto W_{22}v$ therefore sends $\ker W_{12}$ into $\ker V_{12}$, and it is injective there,
+since $W_{22}v=0$ forces $v=V_{22}W_{22}v=0$. Hence $\dim\ker W_{12}\leq\dim\ker V_{12}$. The same argument
+with $W$ and $V$ exchanged gives $\dim\ker V_{12}\leq\dim\ker W_{12}$. Both $W_{12}$ and $V_{12}$ are
+$p\times q$, so the ranks agree.
+\end{proof}
+The lemma holds when $W_{11}$ and $W_{22}$ are singular, which is the case for a chain whose on-site
+matrices have no virtual--virtual entries (the Kitaev chain, Section~\ref{sec:kitaev}); this is
+why we can bound the cross block without a Schur complement of the on-site matrices.
+
+\begin{lemma}[Contraction against a pure pair covariance]\label{lem:pure-inverse}
+Let $\Gamma_p$ be pure on $E$ and $D$ a matrix on $E$ with $1-D\Gamma_p$ invertible. Then
+$\Gamma_p+D$ is invertible and $\Gamma_p(1-D\Gamma_p)^{-1}=-(\Gamma_p+D)^{-1}$.
+\end{lemma}
+\begin{proof}
+$(\Gamma_p+D)\Gamma_p=\Gamma_p^2+D\Gamma_p=-(1-D\Gamma_p)$, so
+$\Gamma_p+D=(1-D\Gamma_p)\Gamma_p$ is a product of invertible matrices ($\Gamma_p^{-1}=-\Gamma_p$),
+and $(\Gamma_p+D)^{-1}=\Gamma_p^{-1}(1-D\Gamma_p)^{-1}=-\Gamma_p(1-D\Gamma_p)^{-1}$.
+\end{proof}
+
+\subsection{The cross-block rank bound}
+We work in the setting of Definitions~\ref{def:input} and~\ref{def:periodic}: $N$ sites, $P$
+physical and $2M$ virtual modes per site, on-site matrices $\Gamma_i$, input matrix
+$\Gamma_{\mathrm{in}}=\begin{pmatrix}A&B\\C&D\end{pmatrix}$ on $R\sqcup E$, bonds $\beta_N$ on
+$E$, and $\Gamma_N=A+B\beta_N(1-D\beta_N)^{-1}C$ when $1-D\beta_N$ is invertible. Every label
+belongs to a site: a physical label $(i,c)$ and a left virtual label $L(i,a)$ to site $i$, a
+right virtual label $L'(i,a)$ to site $i-1$; the bond $i$ joins $L(i,a)$ to \vet{$L'(i,a)$}, that
+is, site $i$ to site $i-1$. Since $\Gamma_{\mathrm{in}}$ is a relabelling of
+$\operatorname{diag}(\Gamma_i)_i$, an entry of $\Gamma_{\mathrm{in}}$ whose two labels belong to
+different sites is zero.
+
+\begin{definition}[Site sets, blocks, cut bonds]\label{def:siteset}
+For $S\subseteq\mathbb Z/N$ let $R_S$ be the physical labels of the sites in $S$, $E_S$ the
+virtual labels belonging to sites in $S$, and $S^c=\mathbb Z/N\setminus S$. The \emph{block
+covariance} of $S$ is $\Gamma_S=(\Gamma_N)_{R_SR_S}$ and its \emph{cross block} is
+$C_S=(\Gamma_N)_{R_SR_{S^c}}$. The bond $i$ is \emph{cut} by $S$ when exactly one of $i-1,i$
+lies in $S$; $b(S)$ is the number of cut bonds (the bonds crossing the boundary of $S$).
+\end{definition}
+A set of $k$ consecutive sites with $1\leq k\leq N-1$ has $b(S)=2$; $b(\emptyset)=b(\mathbb Z/N)=0$.
+
+\begin{theorem}[Cross-block rank]\label{thm:cross-rank}
+Let the on-site matrices $\Gamma_i$ be arbitrary real matrices with $1-D\beta_N$ invertible.
+Then $\operatorname{rank}C_S\leq2M\,b(S)$ for every $S\subseteq\mathbb Z/N$.
+\end{theorem}
+\begin{proof}
+The correlations between $S$ and $S^c$ enter $\Gamma_N$ only through the inverse
+$(\beta_N+D)^{-1}$, whose $(E_S,E_{S^c})$ block is hard to compute but easy to bound: by
+Lemma~\ref{lem:nullity} its rank is that of the $(E_S,E_{S^c})$ block of $\beta_N+D$ itself, and
+there only the cut bonds contribute. Lemma~\ref{lem:pure-inverse} puts the contraction in the
+form that exposes this inverse.
+
+By Lemma~\ref{lem:pure-inverse} ($\beta_N$ is pure, Theorem~\ref{thm:bond-pure}),
+$\Gamma_N=A-B(\beta_N+D)^{-1}C$. Take the $(R_S,R_{S^c})$ block of each term.
+$A_{R_SR_{S^c}}=0$, since a physical label of $S$ and one of $S^c$ lie at different sites. In the
+product $B(\beta_N+D)^{-1}C$, the row $a\in R_S$ of $B$ is supported on the columns $E_S$ and the
+column $a'\in R_{S^c}$ of $C$ on the rows $E_{S^c}$, by the same-site support, so
+\[
+ C_S=-\,B_{R_SE_S}\,\bigl[(\beta_N+D)^{-1}\bigr]_{E_SE_{S^c}}\,C_{E_{S^c}R_{S^c}},\qquad
+ \operatorname{rank}C_S\leq\operatorname{rank}\bigl[(\beta_N+D)^{-1}\bigr]_{E_SE_{S^c}} .
+\]
+Partition $E=E_S\sqcup E_{S^c}$ and apply Lemma~\ref{lem:nullity} to the invertible matrix
+$\beta_N+D$: the rank on the right equals $\operatorname{rank}(\beta_N+D)_{E_SE_{S^c}}
+=\operatorname{rank}(\beta_N)_{E_SE_{S^c}}$, because $D_{E_SE_{S^c}}=0$. Finally, the nonzero
+entries of $\beta_N$ are \vet{$\beta_{x_{L(i,a)}x_{L'(i,a)}}=1$} and
+\vet{$\beta_{y_{L(i,a)}y_{L'(i,a)}}=-1$} with their transposes, one $x$-entry and one $y$-entry per
+bond $i$ and $a\in\{1,\ldots,M\}$, in distinct rows and columns. Such an entry lies in the
+$(E_S,E_{S^c})$ block only if its bond is cut, and a cut bond contributes at most $2M$ nonzero
+rows, so $\operatorname{rank}(\beta_N)_{E_SE_{S^c}}\leq2M\,b(S)$.
+\end{proof}
+
+\begin{corollary}[Entanglement rank of a pure Gaussian fMPS]\label{cor:ent-rank}
+If in addition $\Gamma_N$ is pure (for instance all $\Gamma_i$ pure, Corollary~\ref{cor:chain-pure}),
+then for every $S$: $\Gamma_S$ is admissible, $1+\Gamma_S^2=C_SC_S^{\T}$, and with a normal
+form $\Gamma_S=O\D(\lambda)O^{\T}$ (Theorem~\ref{thm:normal-form}; $|\lambda_j|\leq1$)
+\[
+ \#\{j:|\lambda_j|<1\}=\tfrac12\operatorname{rank}(1+\Gamma_S^2)\leq M\,b(S).
+\]
+\end{corollary}
+\begin{proof}
+$\Gamma_S$ is a principal submatrix of the admissible $\Gamma_N$, hence admissible
+(Theorem~\ref{thm:subsystem}). Order the physical labels as $R_S\sqcup R_{S^c}$; then
+$\Gamma_N=\begin{pmatrix}\Gamma_S&C_S\\-C_S^{\T}&\Gamma_{S^c}\end{pmatrix}$ by antisymmetry, and
+the $(R_S,R_S)$ block of $\Gamma_N^2=-1$ reads $\Gamma_S^2-C_SC_S^{\T}=-1$. So
+$1+\Gamma_S^2=C_SC_S^{\T}$, whose rank is $\operatorname{rank}C_S$ because $C_SC_S^{\T}v=0$ forces
+$\|C_S^{\T}v\|^2=v^{\T}C_SC_S^{\T}v=0$, so $C_SC_S^{\T}$ and $C_S^{\T}$ have the same kernel. With
+$\Gamma_S=O\D(\lambda)O^{\T}$, $1+\Gamma_S^2=O\operatorname{diag}(1-\lambda_j^2,1-\lambda_j^2)_jO^{\T}$
+has rank $2\#\{j:\lambda_j^2\neq1\}=2\#\{j:|\lambda_j|<1\}$. Theorem~\ref{thm:cross-rank}
+gives the bound.
+\end{proof}
+\begin{remark}\label{rem:schmidt}
+\vet{If the reduced state of $S$ is Gaussian (Theorem~\ref{thm:marginal} proves this when $S$
+consists of the first or the last modes; for a general $S$ it is not proved here), then} in the
+normal-form modes of $\Gamma_S$ (the columns of $O$) \vet{it} is a product over modes. A mode with $|\lambda_j|=1$ is in a pure state; a pure factor of the marginal of the pure
+state with covariance $\Gamma_N$ is a tensor factor of that state\revs{ (a standard fact about pure states, not proved here)}, so such a mode is uncorrelated
+with $S^c$. The modes with $|\lambda_j|<1$ are mixed, hence each is entangled with $S^c$; they are
+the \emph{entangled modes} of $S$. The corollary therefore says that a bond of $M$ virtual modes
+lets at most $M$ modes be entangled across it. Since each entangled mode can contribute a factor at most $2$ to the
+Schmidt rank of the cut, one expects the Schmidt rank to be at most $2^{M\,b(S)}$, the counterpart
+of ``Schmidt rank at most the bond dimension'' for matrix product states with bond dimension
+$2^M$; we do not prove this here.
+\end{remark}
+\begin{remark}\label{rem:kitaev-block}
+\revs{The following computation is not formalized.} For the Kitaev chain ($M=P=1$, $\Gamma_N=K_N$) a block $S$ of $k$ consecutive sites,
+$1\leq k\leq N-1$, has exactly one entangled mode, with $\lambda=0$: the $k-1$ pairs
+$(y_i,x_{i+1})$ inside $S$ give modes with $\lambda=\pm1$, while the boundary labels
+$x_{\mathrm{first}}$ and $y_{\mathrm{last}}$ are paired with labels outside $S$, so their rows
+and columns of $\Gamma_S$ vanish and they form one mode with $\lambda=0$. The Kitaev chain does not attain
+the bound $M\,b(S)=2$. \revs{For $M=P=1$, pure on-site covariances drawn at random
+attain it, in the computations named in the Checks paragraph below ($N\leq6$), exactly when the
+block and its complement each contain at least two sites, $N\geq4$ and $2\leq k\leq N-2$. That
+this is necessary is elementary: $C_S$ has $2k$ rows and $2(N-k)$ columns, so by
+Corollary~\ref{cor:ent-rank} at most $\min(k,N-k)$ modes are entangled; that it suffices is
+observed, not proved.} The theorem
+bounds a rank, not a norm: for a single site of a ring with \vet{$N\geq2$}, $b(S)=2$ and the bound
+\vet{$M\,b(S)=2M$ of Corollary~\ref{cor:ent-rank}} may exceed the site's own mode count $P$, in which case it says nothing.
+\end{remark}
+
+\paragraph{Checks.} {\small\sloppy\revs{The statements of Remark~\ref{rem:kitaev-block} are computed in
+exact rational arithmetic by \path{checks/kitaev_block_modes.py}: for the Kitaev chain with
+$N=2,\ldots,9$ and every block of consecutive sites, and for random pure on-site covariances with
+$(M,P)=(1,1)$ and $N=2,\ldots,6$.}}

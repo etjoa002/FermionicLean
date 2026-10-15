@@ -1,0 +1,63 @@
+\clearpage
+\section*{Roadmap}\addcontentsline{toc}{section}{Roadmap}
+
+\noindent\motiv{\revs{The sections are ordered by logical dependence. Part~I is a theory of real
+antisymmetric matrices: no statement or proof in it uses Part~II, which it cites only in unnumbered
+text: to read its matrices as covariances of states, and for the purity of the chain covariance
+(Corollary~\ref{cor:chain-pure}). Part~II builds the states on Fock space and uses Part~I
+throughout; its last three sections return to the chain of Section~\ref{sec:chain} as a state.
+Figure~\ref{fig:roadmap} shows which sections use which.}}
+
+\begin{figure}[!ht]
+\centering
+\begin{tikzpicture}[
+  font=\small,
+  done/.style={draw, rounded corners=2pt, fill=Blue!6, text width=4.1cm, align=center,
+    minimum height=1.05cm, inner sep=3pt},
+  dep/.style={-{Stealth[length=2mm]}, thick},
+  ex/.style={dep, dashed}]
+  \node[done] (s1) at (0,0) {\ref*{sec:majorana}\quad Majorana covariance matrices};
+  \node[done] (s2) at (0,-1.9) {\ref*{sec:contraction}\quad Contraction of covariances};
+  \node[done] (s3) at (0,-3.8) {\ref*{sec:chain}\quad Periodic chains};
+  \node[done] (s4) at (0,-5.7) {\ref*{sec:fourier}\quad Homogeneous chains in momentum space};
+  \node[done] (s5) at (4.9,-1.9) {\ref*{sec:fock}\quad Majorana operators on Fock space};
+  \node[done] (s6) at (4.9,-5.7) {\ref*{sec:examples}\quad Examples};
+  \node[done] (s7) at (4.9,-7.6) {\ref*{sec:hamiltonian}\quad Quadratic Hamiltonians and the realization of covariances};
+  \node[done] (s12) at (4.9,-9.5) {\ref*{sec:entrank}\quad The entanglement rank of a Gaussian fMPS};
+  \node[done] (s8) at (9.8,-7.6) {\ref*{sec:thermal}\quad Thermal states and unitary evolution};
+  \node[done] (s9) at (9.8,-5.7) {\ref*{sec:wick}\quad Wick's theorem and the Gaussian class};
+  \node[done] (s10) at (9.8,-3.8) {\ref*{sec:gaussianmap}\quad The partial trace, the contraction of states, the Gaussian fMPS};
+  \node[done] (s11) at (9.8,-1.9) {\ref*{sec:fmps}\quad Purity of the Gaussian fMPS and the Kitaev ground state};
+  \node[font=\small\bfseries] at (0,1.05) {Part I};
+  \node[font=\small\bfseries] at (7.35,1.05) {Part II};
+  \draw[dep] (s1) -- (s2);
+  \draw[dep] (s2) -- (s3);
+  \draw[dep] (s3) -- (s4);
+  \draw[dep] (s2) -- (s5);
+  \draw[dep] (s4) -- (s6);
+  \draw[dep] (s5) -- (s6);
+  \draw[dep] (s6) -- (s7);
+  \draw[dep] (s7) -- (s8);
+  \draw[dep] (s8) -- (s9);
+  \draw[dep] (s9) -- (s10);
+  \draw[dep] (s10) -- (s11);
+  \draw[dep] (s7) -- (s12);
+  \draw[ex] (s11.east) -- ++(0.45,0) |- (s12.east);
+\end{tikzpicture}
+\caption{\revs{Dependence of the sections. An arrow means that the later section uses the earlier
+one, and arrows implied by chains of solid arrows are omitted; a chain records a possible
+dependence through intermediate sections, not a use of every section on it. The dashed arrow is a
+use in an example only: Corollary~\ref{cor:ent-rank} names the pure on-site covariances of
+Corollary~\ref{cor:chain-pure} as one case of its hypothesis.}}
+\label{fig:roadmap}
+\end{figure}
+
+\noindent\motiv{\revs{Several uses are narrower than the chains suggest. Sections~\ref{sec:hamiltonian}
+to~\ref{sec:wick} use none of Sections~\ref{sec:contraction} to~\ref{sec:fourier}, and
+Section~\ref{sec:hamiltonian} uses Section~\ref{sec:examples} only for Theorems~\ref{thm:gate}
+and~\ref{thm:congruence}, which rest on Section~\ref{sec:fock} alone; Section~\ref{sec:fock} uses
+Section~\ref{sec:contraction} only for Definition~\ref{def:bond}. Section~\ref{sec:gaussianmap}
+uses Section~\ref{sec:chain} for the definitions of the chain and Lemma~\ref{lem:relabel}.
+Theorem~\ref{thm:cross-rank} uses only Sections~\ref{sec:contraction} and~\ref{sec:chain};
+Section~\ref{sec:entrank} uses Section~\ref{sec:hamiltonian} only for the normal form
+(Theorem~\ref{thm:normal-form}) and Section~\ref{sec:examples} only in remarks \vet{and asides}.}}

@@ -1,0 +1,206 @@
+\section{Periodic chains}
+\label{sec:chain}
+\motiv{\rev{A Gaussian fermionic matrix product state on a ring of $N$ sites has, at each
+site, $P$ physical modes and two sets of $M$ virtual modes; neighbouring sites share a
+maximally entangled pair of virtual sets, and projecting every pair gives the state of the
+physical modes (Figure~\ref{fig:ring}). On covariances this is one contraction
+against the bond covariance $\beta$ (Definition~\ref{def:periodic}).}
+The result is admissible whenever the on-site covariances are, since the bond is pure
+(Theorem~\ref{thm:periodic}); we compute a three-site example in closed form
+(Proposition~\ref{prop:three}).}
+
+\revs{The sites of the ring are $i\in\mathbb Z/N$, identified with $\{0,\ldots,N-1\}$ (the empty
+set for $N=0$), with successor $i+1$ read modulo $N$, and the numbers $N,M,P\geq0$ are arbitrary. As in Figure~\ref{fig:ring}, site $i$ carries $M$ left virtual modes
+$A_i$, $M$ right virtual modes $B_i$ and $P$ physical modes $C_i$, with the Majorana labels
+$I_{\mathrm{site}}=(x_A,x_B,x_C,y_A,y_B,y_C)$; a family of labels indexed by (site, site label) is
+ordered \emph{site by site} when all labels of site $0$ come first, then those of site $1$, and so
+on. The pairs (site, mode) form the sets $Q=\{(i,c):i\in\mathbb Z/N,\ c\in\{1,\ldots,P\}\}$ for the
+physical modes and $L=\{(i,a):i\in\mathbb Z/N,\ a\in\{1,\ldots,M\}\}$ for the virtual ones; the bond
+of Definition~\ref{def:bond} will be placed on $L\sqcup L'$ with $L'$ a second copy of $L$, and
+$x^{L}_{(i,a)}$, $x^{L'}_{(i,a)}$ denote the $x$-labels of the two copies.}
+
+\subsection{\rev{The covariance of a periodic chain}}
+\revs{Collecting the labels of all sites into the split $R\sqcup E$ of
+Section~\ref{sec:contraction} reorders them, and one notation records the reordering. For an index
+bijection $e:I\to I'$ and a matrix $\Gamma$ on $I'$, the relabelled matrix $\Gamma^e$ on $I$ has
+entries $(\Gamma^e)_{ab}=\Gamma_{e(a)e(b)}$.}
+\begin{definition}[\rev{On-site covariances and the input matrix}]\label{def:input}
+\rev{The on-site covariances are matrices $\Gamma_i$ on $I_{\mathrm{site}}$, one per site.} The input
+matrix is obtained by stacking them block-diagonally, site by site, and then permuting
+rows and columns so that the physical labels come first and the virtual labels follow,
+grouped as the pairs $(A_i,B_{i-1})$ that the bonds join. In symbols, let
+$R=(x_Q,y_Q)$ and $E=(x_L,x_{L'},y_L,y_{L'})$, and define $e:R\sqcup E\to\bigsqcup_iI_i$ by
+\[
+ e(x_{(i,c)})=x_{C_i,c},\quad e(x_{(i,a)}^{L})=x_{A_i,a},\quad e(x_{(i,a)}^{L'})=x_{B_{i-1},a},
+\]
+and the same with $y$ in place of $x$; $e$ is a bijection. The \emph{\rev{input matrix}}
+is $\Gamma_{\mathrm{in}}=\bigl(\operatorname{diag}(\Gamma_i)_{i}\bigr)^{e}$, a matrix
+on $R\sqcup E$.
+\end{definition}
+$\operatorname{diag}(\Gamma_i)$ is the direct sum over sites, ordered site by site; the
+shift $i-1$ in the $L'$ labels makes $(A_i,B_{i-1})$ the matched pair $(L,L')$ of
+Definition~\ref{def:bond}, $L$ the left virtual set of site $i$ and $L'$ the right
+virtual set of site $i-1$.
+
+\begin{definition}[\rev{Bonds of the chain and its covariance}]\label{def:periodic}
+\rev{The bonds of the chain form the matrix} $\beta_N=\beta$ on $E$, the bond covariance of $L\sqcup L'$:
+$(\beta_N)_{x_{A_i,a}\,x_{B_{i-1},a}}=1$, $(\beta_N)_{y_{A_i,a}\,y_{B_{i-1},a}}=-1$, all
+other entries zero. If $1-D\beta_N$ is invertible, where $D$ is the $E\times E$ block of
+$\Gamma_{\mathrm{in}}$, the \emph{\rev{covariance of the chain}} \rev{with on-site covariances $\Gamma_\bullet$} is
+\[
+ \Gamma_N(\Gamma_\bullet)=\Gamma_{\mathrm{in}}\star\beta_N ,
+\]
+a matrix on $R$.
+\end{definition}
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[scale=0.87,transform shape,
+  blob/.style={draw=black!50,fill=blue!8,thick,ellipse,minimum width=2.6cm,minimum height=1.55cm},
+  virt/.style={circle,fill=blue!60!black,inner sep=2.2pt},
+  phys/.style={circle,fill=red!75!black,inner sep=2.2pt},
+  pair/.style={very thick,black!70},
+  lab/.style={font=\scriptsize}]
+  \foreach \i/\x in {0/0,1/3.6,2/7.2} {
+    \node[blob] (G\i) at (\x,0) {};
+    \node[lab,anchor=south] at (\x,0.85) {$\Gamma_{\i}$};
+    \node[virt] (A\i) at (\x-0.85,0.15) {};
+    \node[virt] (B\i) at (\x+0.85,0.15) {};
+    \node[phys] (C\i) at (\x,-0.4) {};
+    \node[lab,anchor=south] at (A\i.north) {$A_{\i}$};
+    \node[lab,anchor=south] at (B\i.north) {$B_{\i}$};
+    \node[lab,anchor=west] at (C\i.east) {$C_{\i}$};
+  }
+  \draw[pair] (B0) -- node[above,lab] {$\beta$} (A1);
+  \draw[pair] (B1) -- node[above,lab] {$\beta$} (A2);
+  \draw[pair] (B2) -- ++(0.9,0) arc (-90:90:0.7) -- ++(-10.9,0) arc (90:270:0.7) -- (A0);
+  \node[lab] at (3.6,1.85) {$\beta$};
+\end{tikzpicture}
+\caption{The periodic chain for $N=3$, $M=P=1$, drawn as in \cite[Fig.~1]{ksvc}. Dots are
+modes: the virtual modes $A_i,B_i$ (blue) and the physical mode $C_i$ (red). A line joining
+$B_i$ to $A_{i+1}$ is the maximally entangled pair of Theorem~\ref{thm:bondstate}, whose
+covariance is $\beta$ on the ordered pair $(L,L')=(A_{i+1},B_i)$, $\beta_{x_{A_{i+1}}x_{B_i}}=1$.
+The shaded region around site $i$ is the on-site covariance $\Gamma_i$ on $A_i,B_i,C_i$;
+projecting every pair leaves a state of the physical modes, and on covariances this is the
+contraction of Definition~\ref{def:periodic}.}
+\label{fig:ring}
+\end{figure}
+
+\begin{lemma}[Relabelling and direct sums]\label{lem:relabel}
+Let $e:I\to I'$ be a bijection. $\Gamma$ on $I'$ is admissible (pure) if and only if
+$\Gamma^e$ is. If $\Gamma_i$ are matrices on $I_i$, then $\operatorname{diag}(\Gamma_i)_i$ on
+$\bigsqcup_iI_i$ is admissible if and only if every $\Gamma_i$ is.
+\end{lemma}
+\begin{proof}
+\begin{enumerate}
+\item[(a)] $(\Gamma^e)^{\T}=(\Gamma^{\T})^e$, $\Gamma^e\Delta^e=(\Gamma\Delta)^e$,
+$1^e=1$, and $(\Gamma^ev)\cdot(\Gamma^ev)=(\Gamma\tilde v)\cdot(\Gamma\tilde v)$,
+$v\cdot v=\tilde v\cdot\tilde v$ for $\tilde v=v\circ e^{-1}$. Antisymmetry and
+$\Gamma^2=-1$ transfer by the first three identities; the norm form of
+Theorem~\ref{thm:norm-form} transfers by the last two.
+\item[(b)] Transposition of a block-diagonal matrix is blockwise, and
+$(\operatorname{diag}(\Gamma_i)v)\cdot(\operatorname{diag}(\Gamma_i)v)=\sum_i(\Gamma_iv_i)\cdot(\Gamma_iv_i)$,
+$v\cdot v=\sum_iv_i\cdot v_i$ with $v_i$ the restriction of $v$ to $I_i$. The norm
+inequality for $\operatorname{diag}(\Gamma_i)$ follows from those of the blocks by
+summing; conversely $v$ supported on one block isolates that block.
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}[\rev{The chain covariance is admissible}]\label{thm:periodic}
+Let every $\Gamma_i$ be admissible and $1-D\beta_N$ invertible. Then
+$\Gamma_N(\Gamma_\bullet)$ is admissible.
+\end{theorem}
+\begin{proof}
+$\beta_N$ is pure (Theorem~\ref{thm:bond-pure}), hence admissible.
+$\Gamma_{\mathrm{in}}$ is admissible by Lemma~\ref{lem:relabel}. Apply
+Theorem~\ref{thm:contract}.
+\end{proof}
+\begin{remark}\label{rem:small-chains}
+\revf{For $N=1$ the bond joins $B_0$ to $A_0$ within the site.}
+\end{remark}
+
+
+\subsection{\rev{Three sites}}
+Take $N=3$ and $M=P=1$. Then $I_{\mathrm{site}}=(x_A,x_B,x_C,y_A,y_B,y_C)$, $R$ consists of the six
+labels $x_{C_0},x_{C_1},x_{C_2},y_{C_0},y_{C_1},y_{C_2}$, and $E$ of the twelve labels
+$x^{L}_i,\ x^{L'}_i,\ y^{L}_i,\ y^{L'}_i$ ($i\in\mathbb Z/3$, in this order of groups),
+with $x^{L}_i=x_{A_i}$ and $x^{L'}_i=x_{B_{i-1}}$. Let $\Gamma_{\mathrm{seed}}$ be the direct sum of the
+bond covariance $\beta$ on $(A,B)$ (Definition~\ref{def:bond}) and $-\Omega_1$ on $C$, that is
+$(\Gamma_{\mathrm{seed}})_{x_Cy_C}=-1$ (Corollary~\ref{cor:vacuum}), and let $O$ be the rotation with
+$O_{x_Ax_A}=O_{y_Cy_C}=\tfrac35$, $O_{x_Ay_C}=-\tfrac45$, $O_{y_Cx_A}=\tfrac45$ and
+$O=1$ on the other four labels. The on-site covariance at every site is
+\[
+ \Gamma_{\mathrm{site}}=O\,\Gamma_{\mathrm{seed}}\,O^{\T}=\frac15\begin{pmatrix}
+ 0&3&-4&0&0&0\\ -3&0&0&0&0&-4\\ 4&0&0&0&0&-3\\ 0&0&0&0&-5&0\\ 0&0&0&5&0&0\\ 0&4&3&0&0&0
+ \end{pmatrix},
+\]
+pure by Theorem~\ref{thm:orthogonal}.
+
+\begin{proposition}[Three-site chain]\label{prop:three}
+\rev{For the on-site covariances} $\Gamma_i=\Gamma_{\mathrm{site}}$, $i\in\mathbb Z/3$:
+$\det(1-D\beta_3)=(304/125)^2\neq0$, and in the labels $(x_{C_0},x_{C_1},x_{C_2},y_{C_0},y_{C_1},y_{C_2})$
+\[
+ \Gamma_3(\Gamma_\bullet)=\begin{pmatrix}0&-\Theta\\\Theta^{\T}&0\end{pmatrix},\qquad
+ \Theta=\frac1{19}\begin{pmatrix}15&-6&10\\10&15&-6\\-6&10&15\end{pmatrix},
+\]
+which is pure ($\Theta\Theta^{\T}=1$) and translation invariant ($\Theta$ is circulant).
+\end{proposition}
+\begin{proof}
+\begin{enumerate}
+\item[(a)] The blocks of $\Gamma_{\mathrm{in}}$: $A=-\tfrac35\Omega_3$, with $\Omega_3$ as in~\eqref{eq:standard}, from the
+$(x_C,y_C)$ entry of $\Gamma_{\mathrm{site}}$ at each site; $B$ has the entries
+$B_{x_{C_i}x^{L}_i}=\tfrac45$ and $B_{y_{C_i}x^{L'}_{i+1}}=\tfrac45$ (the entries
+$(x_C,x_A)$ and $(y_C,x_B)$ of $\Gamma_{\mathrm{site}}$; the label $x_{B_i}$ is
+$x^{L'}_{i+1}$) and no others; $C=-B^{\T}$; $D$ is the $(x_A,x_B,y_A,y_B)$ block of
+$\Gamma_{\mathrm{site}}$ at each site, relabelled by $e$. \revs{Let $\mathsf S$ be the cyclic shift on $\mathbb Z/3$,
+$\mathsf S_{i,i+1}=1$, so that $\mathsf S^{\T}=\mathsf S^{-1}=\mathsf S^2$. With the eliminated labels in the groups
+$(x^L,x^{L'},y^L,y^{L'})$ and the retained labels in the groups $(x_C,y_C)$,}
+\[\revs{
+ B=\tfrac45\begin{pmatrix}1&0&0&0\\0&\mathsf S&0&0\end{pmatrix},\qquad
+ D=\begin{pmatrix}0&\tfrac35\mathsf S&0&0\\-\tfrac35\mathsf S^{\T}&0&0&0\\0&0&0&-\mathsf S\\0&0&\mathsf S^{\T}&0\end{pmatrix},\qquad
+ \beta_3=\begin{pmatrix}0&1&0&0\\-1&0&0&0\\0&0&0&-1\\0&0&1&0\end{pmatrix}.}
+\]
+\item[(b)] $D$ couples $x^{L}_i=x_{A_i}$ to $x^{L'}_{i+1}=x_{B_i}$ and $\beta_3$ couples
+$x^{L'}_{i+1}$ back to $x^{L}_{i+1}$, and likewise for $y$, so $D\beta_3$ maps each of the
+four label groups $x^{L},x^{L'},y^{L},y^{L'}$ to itself by a circulant matrix. Hence
+$1-D\beta_3$ and its inverse $Y$ are block diagonal in these four groups with circulant
+blocks, and $\det(1-D\beta_3)=(304/125)^2$. \revs{Explicitly,
+$1-D\beta_3=\operatorname{diag}\bigl(1+\tfrac35\mathsf S,\,1+\tfrac35\mathsf S^{\T},\,1+\mathsf S,\,1+\mathsf S^{\T}\bigr)$. Since
+$\mathsf S^3=1$ and the eigenvalues of $\mathsf S$ are the cube roots of unity,
+$\det(1+\tfrac35\mathsf S)=1+(\tfrac35)^3=\tfrac{152}{125}$ and $\det(1+\mathsf S)=2$, the same for
+$\mathsf S^{\T}$, and $(1+\tfrac35\mathsf S)^{-1}=\tfrac{125}{152}(1-\tfrac35\mathsf S+\tfrac9{25}\mathsf S^2)$,
+$(1+\mathsf S)^{-1}=\tfrac12(1-\mathsf S+\mathsf S^2)$. Hence
+$\det(1-D\beta_3)=(152/125)^2\cdot2^2$ and}
+\[\revs{
+ 152\,Y=\operatorname{diag}\bigl(125-75\mathsf S+45\mathsf S^2,\ 125-75\mathsf S^{\T}+45\mathsf S,\ 76(1-\mathsf S+\mathsf S^2),\
+ 76(1-\mathsf S^{\T}+\mathsf S)\bigr).}
+\]
+\item[(c)] $\Gamma_3=A+B\beta_3YC$ is the stated matrix. The blocks of $152Y$ are integer circulant
+matrices, and we evaluate the products blockwise. \revs{Only the $x^L$ and $x^{L'}$ blocks
+$Y_L=(1+\tfrac35\mathsf S)^{-1}$ and $Y_{L'}=(1+\tfrac35\mathsf S^{\T})^{-1}$ of $Y$ enter, and}
+\[\revs{
+ B\beta_3YC=-\tfrac{16}{25}\begin{pmatrix}0&Y_{L'}\mathsf S^{\T}\\-\mathsf SY_L&0\end{pmatrix}
+ =\frac1{95}\begin{pmatrix}0&-(18-30\mathsf S+50\mathsf S^{\T})\\(18-30\mathsf S+50\mathsf S^{\T})^{\T}&0\end{pmatrix}.}
+\]
+\revs{Adding $A=-\tfrac35\Omega_3$ gives $\Theta=\tfrac35+\tfrac1{95}(18-30\mathsf S+50\mathsf S^{\T})=\tfrac1{19}(15-6\mathsf S+10\mathsf S^{\T})$, the
+stated circulant matrix, and $\Theta\Theta^{\T}=\tfrac1{361}\bigl(361+60(\mathsf S+\mathsf S^{\T})-60(\mathsf S^2+(\mathsf S^{\T})^2)\bigr)=1$
+since $\mathsf S^2=\mathsf S^{\T}$.}
+
+{\sloppy\artefact{\revs{In the formalization},
+$5\Gamma_{\mathrm{site}}$, $152Y$ and $19\Theta$ are integer matrices; the identities
+$(1-D\beta_3)(152Y)=152\cdot1$ and $72200\,(A+B\beta_3YC)=72200\,\Gamma_3$ are decided
+over $\mathbb Z$ by evaluation and then divided.}\par}
+\end{enumerate}
+\end{proof}
+The physical modes are correlated: $\Gamma_{x_{C_i}y_{C_{i+1}}}=6/19$ and
+$\Gamma_{x_{C_i}y_{C_{i-1}}}=-10/19$.
+\motiv{For pure on-site covariances $\Gamma_N$ is pure (Corollary~\ref{cor:chain-pure}; \revs{like
+Corollary~\ref{cor:cov-pure}, a fact about the matrices of Part~I whose proof in these notes goes
+through Fock space}), and
+Section~\ref{sec:gaussianmap} constructs the state of the physical modes whose
+covariance is $\Gamma_N$.}
+
+\paragraph{Checks.} {\small\sloppy\revs{Every quantity in the proof of Proposition~\ref{prop:three}, the
+determinant included, is recomputed in exact rational arithmetic by
+\path{checks/three_site_exact.py}, which also prints the full matrices $1-D\beta_3$, $Y$ and
+$B\beta_3YC$.}}

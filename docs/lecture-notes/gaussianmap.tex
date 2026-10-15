@@ -1,0 +1,423 @@
+\section{The partial trace, the contraction of states, and the Gaussian fMPS}
+\label{sec:gaussianmap}
+\motiv{Section~\ref{sec:contraction} defined the contraction $\Gamma\star\beta$ of an input
+covariance with a bond covariance and Section~\ref{sec:chain} built the covariance $\Gamma_N$ of a
+periodic chain from it. This section performs the contraction on Fock space. Tracing the bond
+modes out of $\rho\,(1\otimes\sigma)$, for Gaussian $\rho$ and $\sigma$ \vet{with $1-D\beta$ invertible}, gives a Gaussian state
+whose covariance is $\Gamma(\rho)\star\Gamma(\sigma)$ (Theorem~\ref{thm:state-contract}); the
+periodic chain is therefore a Gaussian state on Fock space with covariance $\Gamma_N$
+(Theorem~\ref{thm:chain-state}). The tool is a single identity satisfied by every Gaussian
+state, $(\G^{\T}v\cdot c)\,\rho=\rho\,(\G v\cdot c)$, which characterizes the class among the
+density operators with vanishing odd moments.}
+
+The conventions of Section~\ref{sec:wick} are in force. Throughout, we split $n+m$ modes into
+the \emph{retained} modes $1,\ldots,n$ and the \emph{eliminated} modes $n+1,\ldots,n+m$; $R$ and $E$
+denote their labels, and a matrix on the labels is written in blocks
+$\Gamma=\begin{psmallmatrix}A&B\\C&D\end{psmallmatrix}$ with $A$ on $R$ and $D$ on $E$. For a
+matrix $\beta$ on $E$ with $1-D\beta$ invertible, $\Gamma\star\beta=A+B\beta(1-D\beta)^{-1}C$
+(Definition~\ref{def:contract}); $1-D\beta$ is invertible iff $1-\beta D$ is, since
+$\det(1-D\beta)=\det(1-\beta D)$. The parity of $n+m$ modes is $\Pi_{n+m}=Z_1\cdots Z_{n+m}$
+(Lemma~\ref{lem:parity}). The blocks are those of Section~\ref{sec:contraction} with the
+eliminated labels placed last; the orientation of the bond covariance $\beta$ is the one fixed
+in Definition~\ref{def:bond}.
+
+\subsection{The partial trace}
+\label{sec:ptrace}
+
+\begin{definition}[Split, tensor product, partial traces]\label{def:ptrace}
+Write a configuration $s\in\{0,1\}^{n+m}$ as $(s_R,s_E)$ with $s_R$ its first $n$ and $s_E$ its last
+$m$ bits, so that a matrix $M$ on $\mathcal F_{n+m}$ has entries $M_{(s_R,s_E),(t_R,t_E)}$. For $X$ on
+$\mathcal F_n$ and $Y$ on $\mathcal F_m$, $(X\otimes Y)_{(s_R,s_E),(t_R,t_E)}=X_{s_Rt_R}Y_{s_Et_E}$.
+The \emph{partial trace over $E$} of $M$ is the matrix on $\mathcal F_n$ with
+$(\ptr{E}M)_{s_Rt_R}=\sum_uM_{(s_R,u),(t_R,u)}$, and the partial trace over $R$ is the matrix on
+$\mathcal F_m$ with $(\ptr{R}M)_{s_Et_E}=\sum_uM_{(u,s_E),(u,t_E)}$.
+\end{definition}
+
+\begin{lemma}[Majorana operators of a split]\label{lem:jw}
+Write $c^{(n)}_a$ and $c^{(m)}_e$ for the Majorana operators of $\mathcal F_n$ and $\mathcal F_m$.
+For a retained label $a$, $c_a=c^{(n)}_a\otimes1$; for an eliminated label $e$ of mode $n+j$,
+$c_e=\Pi_n\otimes c^{(m)}_{e'}$ with $e'$ the label of mode $j$ of $\mathcal F_m$. Consequently,
+for $v\in\C^{2n}$ extended by zero to $\bar v\in\C^{2(n+m)}$, $\bar v\cdot c=(v\cdot c^{(n)})\otimes1$ and
+$\prod_i(\bar v_i\cdot c)=\bigl(\prod_i(v_i\cdot c^{(n)})\bigr)\otimes1$; for $u\in\C^{2m}$
+extended by zero to $\bar u$, $\bar u\cdot c=\Pi_n\otimes(u\cdot c^{(m)})$ and
+$\prod_{i=1}^k(\bar u_i\cdot c)=\Pi_n^{\,k}\otimes\prod_i(u_i\cdot c^{(m)})$; $\Pi_{n+m}=\Pi_n\otimes\Pi_m$;
+and $X\otimes1$ commutes with $1\otimes Y$.
+\end{lemma}
+\begin{proof}
+$X_j$ and $Z_j$ act on bit $j$ alone: for $j\leq n$, $X_j=X^{(n)}_j\otimes1$, $Z_j=Z^{(n)}_j\otimes1$
+and $Z_{<j}=Z^{(n)}_{<j}\otimes1$, so $c_a=c^{(n)}_a\otimes1$ by Definition~\ref{def:majorana}. For
+$j>n$, $X_j=1\otimes X^{(m)}_{j-n}$, $Z_j=1\otimes Z^{(m)}_{j-n}$ and
+$Z_{<j}=Z_1\cdots Z_n\,Z_{n+1}\cdots Z_{j-1}=\Pi_n\otimes Z^{(m)}_{<j-n}$, so
+$c_{x_j}=Z_{<j}X_j=\Pi_n\otimes Z^{(m)}_{<j-n}X^{(m)}_{j-n}=\Pi_n\otimes c^{(m)}_{x_{j-n}}$, and likewise for
+$c_{y_j}$. The products follow from $(X\otimes Y)(X'\otimes Y')=XX'\otimes YY'$ and $\Pi_n^2=1$, the
+parity from $\Pi_{n+m}=Z_1\cdots Z_n\,Z_{n+1}\cdots Z_{n+m}$, and the commutation from
+$(X\otimes1)(1\otimes Y)=X\otimes Y=(1\otimes Y)(X\otimes1)$.
+\end{proof}
+
+\begin{lemma}[Partial-trace calculus]\label{lem:ptrace}
+For matrices $M,M'$ on $\mathcal F_{n+m}$, $X$ on $\mathcal F_n$, and $Y,V$ on $\mathcal F_m$:
+\begin{enumerate}
+\item[(a)] $\ptr{E}$ is linear, $\tr(\ptr{E}M)=\tr M$, $\ptr{E}(X\otimes Y)=(\tr Y)X$,
+$\ptr{E}\bigl((X\otimes1)M\bigr)=X\,\ptr{E}M$, $\ptr{E}\bigl(M(X\otimes1)\bigr)=(\ptr{E}M)X$,
+$\ptr{E}\bigl(M(1\otimes V)\bigr)=\ptr{E}\bigl((1\otimes V)M\bigr)$, and
+$\tr\bigl((\ptr{E}M)X\bigr)=\tr\bigl(M(X\otimes1)\bigr)$.
+\item[(b)] $(\ptr{E}M)^*=\ptr{E}(M^*)$; if $M\succeq0$ then $\ptr{E}M\succeq0$; if $M$ is a density
+operator, so is $\ptr{E}M$.
+\item[(c)] The same for $\ptr{R}$ with the roles of the two factors exchanged.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) Entrywise from Definition~\ref{def:ptrace}:
+\begin{gather*}
+ \textstyle\sum_u(X\otimes Y)_{(s,u),(t,u)}=X_{st}\sum_uY_{uu},\qquad
+ \bigl((X\otimes1)M\bigr)_{(s,u),(t,u)}=\sum_{s'}X_{ss'}M_{(s',u),(t,u)},\\
+ \textstyle\bigl(M(1\otimes V)\bigr)_{(s,u),(t,u)}=\sum_{u'}M_{(s,u),(t,u')}V_{u'u},\qquad
+ \bigl((1\otimes V)M\bigr)_{(s,u),(t,u)}=\sum_{u'}V_{uu'}M_{(s,u'),(t,u)},
+\end{gather*}
+the second summed over $u$, and the last two summed over $u$ both equal
+$\sum_{u,u'}M_{(s,u),(t,u')}V_{u'u}$; finally
+$\tr((\ptr{E}M)X)=\sum_{s,t,u}M_{(s,u),(t,u)}X_{ts}=\tr(M(X\otimes1))$.
+(b) $\overline{(\ptr{E}M)_{ts}}=\sum_u\overline{M_{(t,u),(s,u)}}=\sum_u(M^*)_{(s,u),(t,u)}$. For
+$x\in\C^{2^n}$, $x^*(\ptr{E}M)x=\sum_ux_u^*Mx_u$ with $x_u=x\otimes e_u$, and each term is $\geq0$.
+The trace is preserved by (a).
+\end{proof}
+
+\begin{theorem}[Marginals of a Gaussian state]\label{thm:marginal}
+Let $\rho$ be Gaussian on $n+m$ modes with covariance $\begin{psmallmatrix}A&B\\C&D\end{psmallmatrix}$.
+Then $\ptr{E}\rho$ is Gaussian on $n$ modes with covariance $A$, and $\ptr{R}\rho$ is Gaussian on
+$m$ modes with covariance $D$.
+\end{theorem}
+\begin{proof}
+Both are density operators (Lemma~\ref{lem:ptrace}(b)). For $v_1,\ldots,v_k\in\C^{2n}$ with
+extensions $\bar v_i$, Lemmas~\ref{lem:ptrace}(a) and~\ref{lem:jw} give
+$\tr\bigl(\ptr{E}\rho\prod_i(v_i\cdot c^{(n)})\bigr)=\tr\bigl(\rho\prod_i(\bar v_i\cdot c)\bigr)
+=\W_{\G(\rho)}(\bar v_1,\ldots,\bar v_k)=\W_{1-\ii A}(v_1,\ldots,v_k)$, the last step because
+$\bar v_i^{\T}\G(\rho)\bar v_j=v_i^{\T}(1-\ii A)v_j$ and $\W$ depends on its matrix only through
+these pairings; and $1-\ii A=\G(\ptr{E}\rho)$ by the two-point rule
+(Lemma~\ref{lem:wick-basic}(b)). For $\ptr{R}$ and $u_1,\ldots,u_k\in\C^{2m}$ with extensions
+$\bar u_i$: if $k$ is even, $1\otimes\prod_i(u_i\cdot c^{(m)})=\prod_i(\bar u_i\cdot c)$
+(Lemma~\ref{lem:jw}), so the moment is $\W_{\G(\rho)}(\bar u)=\W_{1-\ii D}(u)$; if $k$ is odd,
+$1\otimes\prod_i(u_i\cdot c^{(m)})=(\Pi_n\otimes1)\prod_i(\bar u_i\cdot c)$, and
+$\Pi_n\otimes1=\prod_{j\leq n}(-\ii\,c_{x_j}c_{y_j})$ is a product of $2n$ retained Majorana
+operators, so the moment is a moment of $\rho$ of odd length $2n+k$, hence $0=\W_{1-\ii D}(u)$.
+\end{proof}
+
+\subsection{The defining relation}
+\label{sec:relation}
+
+\begin{theorem}[The defining relation of a Gaussian state]\label{thm:relation}
+Let $\rho$ be Gaussian with $\G=\G(\rho)$. Then $(\G^{\T}v\cdot c)\,\rho=\rho\,(\G v\cdot c)$ for
+every $v\in\C^{2(n+m)}$, and $\Pi_{n+m}\rho\Pi_{n+m}=\rho$.
+\end{theorem}
+\begin{proof}
+By Corollary~\ref{cor:converse}(a), $\rho=U^*\rho_\lambda U$ with $\Gamma(\rho)=O\D(\lambda)O^{\T}$,
+$OO^{\T}=1$ and $U$ implementing $O$; write $\G_\lambda=1-\ii\D(\lambda)$, so $\G=O\G_\lambda O^{\T}$.
+The two identities of Lemma~\ref{lem:mode} are
+$(\G_\lambda^{\T}e\cdot c)\rho_\lambda=\rho_\lambda(\G_\lambda e\cdot c)$ for $e=e_{x_j},e_{y_j}$, since
+$\D(\lambda)e_{x_j}=-\lambda_je_{y_j}$ and $\D(\lambda)e_{y_j}=\lambda_je_{x_j}$. By linearity in
+$e$, the identity holds for every $v$ in place of $e$. Conjugating,
+$U^*(w\cdot c)\rho_\lambda U=U^*(w\cdot c)U\,U^*\rho_\lambda U=(Ow\cdot c)\rho$
+(Theorem~\ref{thm:transport}, $U^*(w\cdot c)U=(Ow)\cdot c$), so
+$(O\G_\lambda^{\T}v\cdot c)\rho=\rho(O\G_\lambda v\cdot c)$; with $v=O^{\T}v'$ and $O^{\T}O=1$,
+$O\G_\lambda^{\T}O^{\T}v'=\G^{\T}v'$ and $O\G_\lambda O^{\T}v'=\G v'$. Parity: $\Pi_{n+m}\rho\Pi_{n+m}$
+is a density operator with
+$\tr(\Pi_{n+m}\rho\Pi_{n+m}c_S)=\tr(\rho\,\Pi_{n+m}c_S\Pi_{n+m})=(-1)^{|S|}\tr(\rho c_S)=\tr(\rho c_S)$
+for every monomial, the odd moments of $\rho$ vanishing (Lemma~\ref{lem:wick-basic}(a)); so
+$\Pi_{n+m}\rho\Pi_{n+m}=\rho$ by Theorem~\ref{thm:basis}.
+\end{proof}
+\begin{remark}\label{rem:relation}
+For $|\lambda_j|<1$ the relation is the KMS-type relation of Remark~\ref{rem:kms-row}
+solved for $c_a\rho$. If $\G u=0$ then $\G^{\T}u=(2-\G)u=2u$ and the relation reads
+$(u\cdot c)\rho=0$: $u\cdot c$ annihilates the state. The direction of the transposes matters:
+for $n=1$ and $\rho_\lambda=\tfrac12(1-\lambda Z_1)$ with $\lambda\neq0$, the reversed form
+$(\G v\cdot c)\rho=\rho(\G^{\T}v\cdot c)$ subtracted from the relation gives
+$c_{y_1}\rho_\lambda+\rho_\lambda c_{y_1}=0$, whereas $c_{y_1}Z_1=-Z_1c_{y_1}$ gives
+$c_{y_1}\rho_\lambda+\rho_\lambda c_{y_1}=c_{y_1}\neq0$. The relation is a condition on the
+state: for the non-Gaussian density operator $\rho=\tfrac14(1+c_{x_1}c_{y_1}c_{x_2}c_{y_2})$ of
+Remark~\ref{rem:wick-condition}, $\G=1$, so the relation would say that $\rho$ commutes with
+every $c_a$, but $c_{x_1}\rho-\rho c_{x_1}=\tfrac12c_{y_1}c_{x_2}c_{y_2}\neq0$.
+\end{remark}
+
+\begin{theorem}[The relation criterion]\label{thm:criterion}
+Let $\varrho$ be a matrix on $\mathcal F_{n+m}$ with $\tr(\varrho X)=0$ for every product $X$ of an odd
+number of factors $w\cdot c$, and let $\G$ be a matrix on the labels with $\G+\G^{\T}=2$ and
+$(\G^{\T}v\cdot c)\,\varrho=\varrho\,(\G v\cdot c)$ for every $v$. Then
+$\tr\bigl(\varrho\prod_{i=1}^k(v_i\cdot c)\bigr)=(\tr\varrho)\,\W_\G(v_1,\ldots,v_k)$ for every list. In
+particular, a density operator $\rho$ with vanishing odd moments that satisfies the relation with
+$\G=\G(\rho)$ is Gaussian.
+\end{theorem}
+\begin{proof}
+Fix an odd list $w_1,\ldots,w_k$, $X=\prod_i(w_i\cdot c)$, and put $\alpha(v)=\tr(\varrho(v\cdot c)X)$ and
+$p_i=\tr(\varrho X_{\hat\imath})$; $\alpha$ is linear. By the relation and cyclicity,
+$\alpha(\G v)=\tr\bigl((\G^{\T}v\cdot c)\varrho X\bigr)=\tr\bigl(\varrho X(\G^{\T}v\cdot c)\bigr)$, and the
+second identity of Lemma~\ref{lem:move} with $u=\G^{\T}v$ and $k$ odd gives
+$\tr(\varrho X(u\cdot c))=\sum_i(-1)^{i-1}2(u^{\T}w_i)p_i-\alpha(u)$. Hence
+$\alpha(\G v)+\alpha(\G^{\T}v)=2\sum_i(-1)^{i-1}(v^{\T}\G w_i)p_i$, and the left side is
+$\alpha((\G+\G^{\T})v)=2\alpha(v)$. With $v=e_a$ this is the recursion (ii) of
+Lemma~\ref{lem:criterion}, $\tr(\varrho c_aX)=\sum_i(-1)^{i-1}(e_a^{\T}\G w_i)\tr(\varrho X_{\hat\imath})$.
+The induction in the proof of Lemma~\ref{lem:criterion} uses only (i), (ii) and the linearity of
+the trace, so it applies to $\varrho$ and $\G$ and gives
+$\tr(\varrho\prod(v_i\cdot c))=(\tr\varrho)\W_\G(v)$, the factor $\tr\varrho$ entering at the empty list.
+For a density operator, $\tr\rho=1$, and $\G(\rho)+\G(\rho)^{\T}=2$ by antisymmetry of the
+covariance.
+\end{proof}
+
+\subsection{The contraction of states}
+\label{sec:state-contraction}
+
+\begin{definition}[Contraction of states]\label{def:state-contract}
+For a matrix $\rho$ on $\mathcal F_{n+m}$ and a matrix $\sigma$ on $\mathcal F_m$,
+\[
+ \rho\star\sigma=\ptr{E}\bigl(\rho\,(1\otimes\sigma)\bigr),\qquad
+ \mathcal N(\rho,\sigma)=\tr(\rho\star\sigma)=\tr\bigl(\rho\,(1\otimes\sigma)\bigr),
+\]
+a matrix on $\mathcal F_n$ and a number. When $\mathcal N(\rho,\sigma)\neq0$, the
+\emph{contracted state} is $\mathcal N(\rho,\sigma)^{-1}\rho\star\sigma$.
+\end{definition}
+\motiv{For a bond state $\sigma$ on the eliminated modes, $\rho\star\sigma$ is the state of the
+retained modes after we trace the eliminated modes out against $\sigma$. For pure
+$\sigma=|\varphi\rangle\langle\varphi|$ the partial trace gives
+$\rho\star\sigma=(1\otimes\langle\varphi|)\,\rho\,(1\otimes|\varphi\rangle)$, the tensor-network
+contraction of $\rho$ with $\varphi$, and the contracted state is this matrix divided by its
+trace $\mathcal N(\rho,\sigma)$. Theorem~\ref{thm:state-contract} gives the effect of the operation
+on the covariance.}
+
+\begin{lemma}[Positivity]\label{lem:positive}
+If $\rho$ and $\sigma$ are density operators, then $\rho\star\sigma$ is Hermitian and positive
+semidefinite, $\mathcal N(\rho,\sigma)\geq0$, and $\mathcal N(\rho,\sigma)^{-1}\rho\star\sigma$ is a
+density operator when $\mathcal N(\rho,\sigma)\neq0$. If moreover $\Pi_{n+m}\rho\Pi_{n+m}=\rho$ and
+$\Pi_m\sigma\Pi_m=\sigma$, then $\tr\bigl((\rho\star\sigma)X\bigr)=0$ for every product $X$ of an
+odd number of factors $w\cdot c^{(n)}$.
+\end{lemma}
+\begin{proof}
+Let $\sigma^{1/2}\succeq0$ be the positive square root of $\sigma$. By Lemma~\ref{lem:ptrace}(a),
+$\rho\star\sigma=\ptr{E}\bigl((1\otimes\sigma^{1/2})\rho(1\otimes\sigma^{1/2})\bigr)$, the partial
+trace of a positive semidefinite matrix, hence positive semidefinite (Lemma~\ref{lem:ptrace}(b));
+its trace is $\mathcal N(\rho,\sigma)\geq0$. Parity: $\Pi_{n+m}=\Pi_n\otimes\Pi_m$ commutes with
+$1\otimes\sigma$, and $\Pi_n$ anticommutes with each $w\cdot c^{(n)}$, so with $\bar X=X\otimes1$
+and $\Pi=\Pi_{n+m}$,
+$\tr(\rho(1\otimes\sigma)\bar X)=\tr\bigl(\Pi\rho\Pi\,\Pi(1\otimes\sigma)\Pi\,\Pi\bar X\Pi\bigr)
+=-\tr(\rho(1\otimes\sigma)\bar X)$, and by Lemma~\ref{lem:ptrace}(a) the left side is
+$\tr((\rho\star\sigma)X)$.
+\end{proof}
+
+\begin{theorem}[Contraction of Gaussian states]\label{thm:state-contract}
+Let $\rho$ be Gaussian on $n+m$ modes with covariance
+$\Gamma=\begin{psmallmatrix}A&B\\C&D\end{psmallmatrix}$, let $\sigma$ be Gaussian on $m$ modes with
+covariance $\beta$, and let $1-D\beta$ be invertible. Then, with $\varrho=\rho\star\sigma$ and
+$\widetilde\G=1-\ii(\Gamma\star\beta)$,
+\[
+ \tr\Bigl(\varrho\prod_{i=1}^k(v_i\cdot c^{(n)})\Bigr)=\mathcal N(\rho,\sigma)\,\W_{\widetilde\G}(v_1,\ldots,v_k)
+ \qquad\text{for all }v_1,\ldots,v_k\in\C^{2n}.
+\]
+\end{theorem}
+\begin{proof}
+The defining relations of $\rho$ and of $\sigma$ (Theorem~\ref{thm:relation}) each move a
+Majorana factor across $\tilde\rho=\rho(1\otimes\sigma)$; eliminating the two functionals
+supported on the eliminated labels between them leaves the recursion of
+Lemma~\ref{lem:criterion} on retained labels, with the Schur complement $\Gamma\star\beta$ as
+its pairing matrix. \vet{Steps (E1)--(E3) below record the three identities, and (I)--(III) solve
+them for the retained functional.}
+
+Write $\G=\G(\rho)=1-\ii\Gamma$ with blocks $\G_{RR}=1-\ii A$, $\G_{RE}=-\ii B$, $\G_{ER}=-\ii C$,
+$\G_{EE}=1-\ii D$, and $\G_\sigma=1-\ii\beta$; by antisymmetry $\G_{RE}^{\T}=\ii C$,
+$\G_{ER}^{\T}=\ii B$ and $\G_{RR}+\G_{RR}^{\T}=2$. By
+Lemmas~\ref{lem:ptrace}(a) and~\ref{lem:jw},
+$\tr(\varrho\prod_i(v_i\cdot c^{(n)}))=\tr(\tilde\rho\prod_i(\bar v_i\cdot c))$ with $\bar v_i$ the
+extensions by zero; so it suffices to establish for $\tilde\rho$, on retained lists, the two
+hypotheses of the induction of Theorem~\ref{thm:criterion} with the matrix $\widetilde\G$ (extended
+by zero to all labels; $\widetilde\G+\widetilde\G^{\T}=2$ on $R$ by Theorem~\ref{thm:antisym}).
+Odd retained moments of $\tilde\rho$ vanish by Lemma~\ref{lem:positive}, both states being even by
+Theorem~\ref{thm:relation}. It remains to prove the recursion.
+
+Fix a retained label $a$ and an odd list $w_1,\ldots,w_k$ of vectors supported on $R$,
+$X=\prod_i(w_i\cdot c)$, $p_i=\tr(\tilde\rho X_{\hat\imath})$ and $\varkappa_i=(-1)^{i-1}p_i$. Define three
+linear functionals of $v\in\C^{2(n+m)}$,
+\[
+ \alpha(v)=\tr\bigl(\tilde\rho\,(v\cdot c)X\bigr),\qquad
+ b(v)=\tr\bigl(\rho\,(v\cdot c)(1\otimes\sigma)X\bigr),\qquad
+ r(v)=2\sum_i\varkappa_i\,(v^{\T}w_i),
+\]
+and write $\alpha_R,\alpha_E$ and $b_R,b_E$ for their restrictions to vectors supported on $R$
+and on $E$. The relation of $\sigma$ connects $b$ and $\alpha$ on $E$, the relation of $\rho$
+connects them on all labels, and the moving lemma supplies $r$:
+\begin{enumerate}
+\item[(E1)] $b_R=\alpha_R$: a retained $v\cdot c$ commutes with $1\otimes\sigma$ (Lemma~\ref{lem:jw}).
+\item[(E2)] $b(\G_\sigma^{\T}u)=\alpha(\G_\sigma u)$ for $u$ supported on $E$: Theorem~\ref{thm:relation}
+for $\sigma$ gives $(\G_\sigma^{\T}u_E\cdot c^{(m)})\sigma=\sigma(\G_\sigma u_E\cdot c^{(m)})$; tensoring
+with $\Pi_n$ on the left and using Lemma~\ref{lem:jw},
+$(\G_\sigma^{\T}u\cdot c)(1\otimes\sigma)=(1\otimes\sigma)(\G_\sigma u\cdot c)$.
+\item[(E3)] $b(\G v)=r(\G^{\T}v)-\alpha(\G^{\T}v)$ for every $v$: Theorem~\ref{thm:relation} for
+$\rho$ gives $b(\G v)=\tr\bigl((\G^{\T}v\cdot c)\rho(1\otimes\sigma)X\bigr)=\tr\bigl(\tilde\rho X(\G^{\T}v\cdot c)\bigr)$,
+and Lemma~\ref{lem:move} with $u=\G^{\T}v$ and $k$ odd gives
+$\tr(\tilde\rho X(u\cdot c))=\sum_i(-1)^{i-1}2(u^{\T}w_i)p_i-\alpha(u)$, where $u^{\T}w_i=v^{\T}\G w_i$.
+\end{enumerate}
+In (E3) split $v=v_R+v_E$ and use (E1); the cross terms
+$\alpha_R(\G_{RE}v_E)+\alpha_R(\G_{ER}^{\T}v_E)$ cancel since $\G_{RE}+\G_{ER}^{\T}=-\ii B+\ii B=0$.
+The $v_R$-part and the $v_E$-part read
+\begin{gather*}
+ \alpha_R(\G_{RR}v_R)+b_E(\G_{ER}v_R)+\alpha_R(\G_{RR}^{\T}v_R)+\alpha_E(\G_{RE}^{\T}v_R)=2\textstyle\sum_i\varkappa_iv_R^{\T}\G_{RR}w_i,\\
+ b_E(\G_{EE}v_E)+\alpha_E(\G_{EE}^{\T}v_E)=2\textstyle\sum_i\varkappa_iv_E^{\T}\G_{ER}w_i.
+\end{gather*}
+Writing a functional $f$ on $\C^{2m}$ as the row vector with $f(v)=fv$, and putting
+$s=\alpha_E+b_E$, $d=\alpha_E-b_E$:
+\begin{align*}
+ \text{(I)}\quad& \alpha_E\G_{EE}^{\T}+b_E\G_{EE}=2\ii\textstyle\sum_i\varkappa_iw_i^{\T}B,
+ \qquad\text{i.e.}\qquad s+\ii\,dD=2\ii\textstyle\sum_i\varkappa_iw_i^{\T}B;\\
+ \text{(II)}\quad& \alpha_E(1-\ii\beta)=b_E(1+\ii\beta),\qquad\text{i.e.}\qquad d=\ii\,s\beta;\\
+ \text{(III)}\quad& 2\alpha_R=2\textstyle\sum_i\varkappa_iw_i^{\T}\G_{RR}^{\T}-b_E\G_{ER}-\alpha_E\G_{RE}^{\T}
+ =2\sum_i\varkappa_iw_i^{\T}\G_{RR}^{\T}-\ii\,dC,
+\end{align*}
+where (II) is (E2) in row form. Substituting (II) into (I), $s(1-\beta D)=2\ii\sum_i\varkappa_iw_i^{\T}B$;
+since $1-\beta D$ is invertible, $s=2\ii\sum_i\varkappa_iw_i^{\T}B(1-\beta D)^{-1}$ and
+$d=\ii s\beta=-2\sum_i\varkappa_iw_i^{\T}B(1-\beta D)^{-1}\beta$. Then (III) gives
+\[
+ \alpha_R=\sum_i\varkappa_iw_i^{\T}\bigl(\G_{RR}^{\T}+\ii B(1-\beta D)^{-1}\beta C\bigr)
+ =\sum_i\varkappa_iw_i^{\T}\bigl(1+\ii A+\ii B\beta(1-D\beta)^{-1}C\bigr)=\sum_i\varkappa_iw_i^{\T}\widetilde\G^{\T},
+\]
+using $B(1-\beta D)^{-1}\beta=B\beta(1-D\beta)^{-1}$ (Lemma~\ref{lem:push}) and
+$\widetilde\G^{\T}=1+\ii(\Gamma\star\beta)$. Evaluating at $v=e_a$,
+$\tr(\tilde\rho c_aX)=\sum_i(-1)^{i-1}(e_a^{\T}\widetilde\G w_i)\tr(\tilde\rho X_{\hat\imath})$, the recursion on
+retained lists. The induction of Lemma~\ref{lem:criterion} removes one factor at a time and
+never leaves the retained lists, so it applies to $\tilde\rho$ with the retained lists alone and gives
+$\tr(\tilde\rho\prod_i(\bar v_i\cdot c))=(\tr\tilde\rho)\W_{\widetilde\G}(v)$ with $\tr\tilde\rho=\mathcal N(\rho,\sigma)$.
+\end{proof}
+The invertibility of $1-D\beta$ enters once, in solving (I)--(II) for $s$.
+
+\begin{corollary}[The contracted state]\label{cor:contract-state}
+Under the hypotheses of Theorem~\ref{thm:state-contract}, if $\mathcal N(\rho,\sigma)\neq0$ then the
+contracted state $\mathcal N(\rho,\sigma)^{-1}\rho\star\sigma$ is Gaussian with covariance $\Gamma\star\beta$.
+\end{corollary}
+\begin{proof}
+It is a density operator (Lemma~\ref{lem:positive}) with moments $\W_{\widetilde\G}(v)$
+(Theorem~\ref{thm:state-contract}). At $k=2$, $\tr(\mathcal N(\rho,\sigma)^{-1}\varrho\,c_ac_b)=\widetilde\G_{ab}
+=\delta_{ab}-\ii(\Gamma\star\beta)_{ab}$; as $\Gamma\star\beta$ is real antisymmetric
+(Theorem~\ref{thm:antisym}) and $\Gamma(\rho)_{ab}=\Re(\ii\tr(\rho c_ac_b))$ for $a\neq b$
+(Theorem~\ref{thm:reality}), the covariance is $\Gamma\star\beta$, and Wick's rule holds with
+respect to the state's own two-point matrix.
+\end{proof}
+
+\subsection{Positivity of the normalization}
+\label{sec:normalization}
+
+\begin{lemma}[Block elimination]\label{lem:schur}
+Let $D$ be a matrix on $I_1\sqcup I_2$ with blocks $D_{11}$, $D_{12}$, $D_{21}$, $D_{22}$,
+and let $\beta=\beta_1\oplus\beta_2$ be block diagonal with $1-D_{22}\beta_2$ invertible. Then
+\[
+ \det(1-D\beta)=\det(1-D_{22}\beta_2)\,\det\bigl(1-(D\star\beta_2)\beta_1\bigr),\qquad
+ D\star\beta_2=D_{11}+D_{12}\beta_2(1-D_{22}\beta_2)^{-1}D_{21},
+\]
+the contraction of $D$ with $\beta_2$ over $I_2$.
+\end{lemma}
+\begin{proof}
+$1-D\beta=\begin{psmallmatrix}1-D_{11}\beta_1&-D_{12}\beta_2\\-D_{21}\beta_1&1-D_{22}\beta_2\end{psmallmatrix}$,
+and the block determinant formula around the invertible lower-right block gives
+$\det(1-D\beta)=\det(1-D_{22}\beta_2)\det\bigl(1-D_{11}\beta_1-D_{12}\beta_2(1-D_{22}\beta_2)^{-1}D_{21}\beta_1\bigr)$.
+\end{proof}
+
+\begin{lemma}[The kernel of the relations]\label{lem:kernel}
+Let $F$ be a linear map on $\C^{2m}$ with $F\bigl((1-\ii D)v\bigr)=0$ and $F\bigl((1+\ii\beta)u\bigr)=0$
+for all $v,u$, where $1-\beta D$ is invertible. Then $F=0$.
+\end{lemma}
+\begin{proof}
+$F(v)=F(\ii Dv)$ and $F(u)=-F(\ii\beta u)$ for all $v,u$; so
+$F(v)=F(\ii Dv)=-F(\ii\beta\,\ii Dv)=F(\beta Dv)$, that is $F\bigl((1-\beta D)v\bigr)=0$ for all
+$v$, and $1-\beta D$ is onto.
+\end{proof}
+
+\begin{theorem}[Positivity of $\mathcal N$]\label{thm:normalization}
+Under the hypotheses of Theorem~\ref{thm:state-contract}, $\mathcal N(\rho,\sigma)>0$. The
+contracted state
+$\mathcal N(\rho,\sigma)^{-1}\rho\star\sigma$ therefore exists, and it is Gaussian with
+covariance $\Gamma\star\beta$.
+\end{theorem}
+\begin{proof}
+$\mathcal N(\rho,\sigma)\geq0$ by Lemma~\ref{lem:positive}; suppose $\mathcal N(\rho,\sigma)=0$. Put
+$\rho_E=\ptr{R}\rho$, Gaussian with covariance $D$ (Theorem~\ref{thm:marginal}), so that
+$\mathcal N(\rho,\sigma)=\tr(\rho_E\sigma)$ (Lemma~\ref{lem:ptrace}(c)). Both matrices being positive
+semidefinite, $\tr(\rho_E\sigma)=0$ forces $\rho_E\sigma=0$: with the positive square roots
+$\rho_E^{1/2}$ and $\sigma^{1/2}$,
+$\tr(\rho_E\sigma)=\tr\bigl((\rho_E^{1/2}\sigma^{1/2})^*(\rho_E^{1/2}\sigma^{1/2})\bigr)$, so
+$\rho_E^{1/2}\sigma^{1/2}=0$ and $\rho_E\sigma=\rho_E^{1/2}(\rho_E^{1/2}\sigma^{1/2})\sigma^{1/2}=0$.
+
+Claim: $\rho_E\,X\,\sigma=0$ for every product $X$ of factors $w\cdot c$. We argue by induction on the
+number $k$ of factors; $k=0$ is $\rho_E\sigma=0$. For $X=(w\cdot c)Y$ with $Y$ a product of $k-1$
+factors, $F(w)=\rho_E(w\cdot c)Y\sigma$ is linear in $w$ and vanishes on the two ranges of
+Lemma~\ref{lem:kernel}, with $\G(\rho_E)=1-\ii D$ and $\G(\sigma)=1-\ii\beta$. For $w=\G(\rho_E)v$,
+Theorem~\ref{thm:relation} gives $\rho_E(\G(\rho_E)v\cdot c)=(\G(\rho_E)^{\T}v\cdot c)\rho_E$, so
+$F(w)=(\G(\rho_E)^{\T}v\cdot c)\,\rho_EY\sigma=0$ by the induction hypothesis. For
+$w=\G(\sigma)^{\T}u$, the first identity of Lemma~\ref{lem:move} writes
+$(w\cdot c)Y=\sum_i\pm2(w^{\T}y_i)Y_{\hat\imath}+(-1)^{k-1}Y(w\cdot c)$, where
+$\rho_EY_{\hat\imath}\sigma=0$ by the induction hypothesis and
+$\rho_EY(w\cdot c)\sigma=\rho_EY\sigma(\G(\sigma)u\cdot c)=0$ by Theorem~\ref{thm:relation} for
+$\sigma$ and the induction hypothesis. Lemma~\ref{lem:kernel} applies since
+$\det(1-\beta D)=\det(1-D\beta)\neq0$, so $F=0$, which is the claim for $k$.
+
+Hence $\rho_Ec_S\sigma=0$ for every monomial $c_S$, and since the monomials span the matrices
+(Theorem~\ref{thm:basis}), $\rho_EM\sigma=0$ for every $M$. With $M=|s\rangle\langle t|$,
+$(\rho_E)_{is}\,\sigma_{tj}=0$ for all $i,s,t,j$; as $\rho_E\neq0$ this gives $\sigma=0$,
+contradicting $\tr\sigma=1$. The last sentence is Corollary~\ref{cor:contract-state}.
+\end{proof}
+\begin{remark}\label{rem:overlap}
+The closed form $\mathcal N(\rho,\sigma)=2^{-m}\sqrt{\det(1-D\beta)}$, with \revs{the positive square root,
+which is up to sign the Pfaffian of the antisymmetric matrix
+$\begin{psmallmatrix}-\beta&-1\\1&D\end{psmallmatrix}$ on $E\sqcup E$, whose determinant is
+$\det(1-D\beta)$,} is expected; for $n=0$ it is the
+overlap $\tr(\rho\sigma)=2^{-m}\sqrt{\det(1-\Gamma(\rho)\Gamma(\sigma))}$ of two Gaussian
+states~\cite{bravyi}. We verify it numerically for $n+m\leq4$ \revs{(Checks paragraph at the end of this section)} and do not prove it here. One proof
+transports $\sigma$ to a product mixture and eliminates one mode at a time, each mode
+contributing the factor $\tfrac12(1+\lambda_jg_j)$ with $g_j$ the pivot of
+Lemma~\ref{lem:schur}.
+\end{remark}
+
+\subsection{The Gaussian fermionic matrix product state}
+\label{sec:chain-state}
+
+\begin{definition}[Input state, bond state, Gaussian fMPS]\label{def:chain-state}
+In the setting of Definitions~\ref{def:input} and~\ref{def:periodic}: $N$ sites, $P$ physical and
+$2M$ virtual modes per site, on-site covariances $\Gamma_i$, input matrix $\Gamma_{\mathrm{in}}$ on
+$R\sqcup E$ and bonds $\beta_N$ on $E$. Identify $R$ with the labels of $NP$ modes and $E$ with
+the labels of $2NM$ modes (the modes $Q=\mathbb Z/N\times\{1,\ldots,P\}$ and $L\sqcup L'$), and
+$R\sqcup E$ with the labels of $\mathcal F_{NP+2NM}$, retained modes first. When every $\Gamma_i$ is
+admissible, the \emph{input state} $\rho_{\mathrm{in}}$ is the Gaussian state on
+$\mathcal F_{NP+2NM}$ with covariance $\Gamma_{\mathrm{in}}$ and the \emph{bond state} $\sigma_N$ is
+the Gaussian state on $\mathcal F_{2NM}$ with covariance $\beta_N$; both exist and are unique
+(Theorem~\ref{thm:realization}, Corollary~\ref{cor:families}(a), Theorem~\ref{thm:unique}). When
+$1-D\beta_N$ is invertible, with $D$ the $E\times E$ block of $\Gamma_{\mathrm{in}}$, the
+\emph{Gaussian fermionic matrix product state} (Gaussian fMPS)~\cite{ksvc} of the on-site
+states and bonds is $\rho_N=\mathcal N(\rho_{\mathrm{in}},\sigma_N)^{-1}\rho_{\mathrm{in}}\star\sigma_N$.
+\end{definition}
+\revs{The definition admits on-site covariances that are not pure; the Kitaev
+chain of Section~\ref{sec:kitaev} uses one.}
+
+\begin{theorem}[The Gaussian fMPS is a Gaussian state]\label{thm:chain-state}
+Under the hypotheses of Definition~\ref{def:chain-state}, $\mathcal N(\rho_{\mathrm{in}},\sigma_N)>0$ and the
+Gaussian fMPS $\rho_N$ is a Gaussian state on $\mathcal F_{NP}$ with covariance
+$\Gamma_N(\Gamma_\bullet)=\Gamma_{\mathrm{in}}\star\beta_N$.
+\end{theorem}
+\begin{proof}
+$\Gamma_{\mathrm{in}}$ is admissible (Lemma~\ref{lem:relabel}) and $\beta_N$ is pure
+(Theorem~\ref{thm:bond-pure}), so both states exist. Theorem~\ref{thm:normalization} gives
+$\mathcal N(\rho_{\mathrm{in}},\sigma_N)>0$ and Corollary~\ref{cor:contract-state} the rest, once
+we match the labels: a bijection of the labels preserving the split $R\sqcup E$ permutes the
+entries of $A,B,C,D$ and of $\beta$ in the same way, so $\Gamma\star\beta$ relabelled is the
+contraction of the relabelled matrices: a relabelling is conjugation by a permutation matrix,
+which commutes with products, sums and the inverse.
+\end{proof}
+\begin{remark}\label{rem:input}
+\vet{For even on-site states, the tensor product with the modes reordered by a unitary implementing
+the label permutation of Definition~\ref{def:input} has the covariance $\Gamma_{\mathrm{in}}$: this follows
+from Theorem~\ref{thm:congruence} once one knows that a tensor product of even states has the
+direct-sum covariance, which these notes do not prove (permuting the tensor factors alone changes
+the Jordan--Wigner strings and does not suffice).} If that state is Gaussian, it equals
+$\rho_{\mathrm{in}}$ by Theorem~\ref{thm:unique}; these notes do not prove
+that a tensor product of Gaussian states is Gaussian. On one bond the bond state
+is $(|00\rangle+\ii|11\rangle)/\sqrt2$ (Theorem~\ref{thm:bondstate}).
+\end{remark}
+
+\paragraph{Checks.} {\small\sloppy\revs{The closed form of Remark~\ref{rem:overlap} is compared with
+$\mathcal N(\rho,\sigma)$ by \path{checks/normalization_overlap.py} for every $(n,m)$ with
+$n+m\leq4$ and $m\geq1$ (for $m=0$ both sides equal $1$), on $138$ pairs of thermal or ground states of random quadratic
+Hamiltonians and of bond states, in floating point with absolute tolerance $10^{-12}$; the positive
+square root is the one compared, and pairs of pure states of opposite parity give $0$ on both
+sides.}}

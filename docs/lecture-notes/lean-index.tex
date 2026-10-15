@@ -1,0 +1,532 @@
+\clearpage
+\section*{Lean declarations}\addcontentsline{toc}{section}{Lean declarations}
+\noindent The linked \textsf{Lean}\,$\checkmark$ tag marks a theorem whose Lean proof has been checked and whose correspondence with the statement here has been reviewed. It refers to the stated result, not to every surrounding explanation. Definitions and equations are listed for navigation; only marked statements were reviewed. These entries identify the corresponding declarations in FermionicLean.
+\medskip
+
+\noindent\revs{\textbf{Lean names.} For a reader of the library: the labels $x_1,\ldots,x_n,y_1,\ldots,y_n$ are
+\texttt{MajoranaIndex n = Fin n} $\oplus$ \texttt{Fin n} with \texttt{Sum.inl} the $x$ block; the retained and eliminated
+labels $R$, $E$ of a chain are \texttt{Retained N P} and \texttt{Eliminated N M}; the contraction $\star$ is
+\texttt{contract} and the hypothesis ``$1-D\Gamma_p$ invertible'' is \texttt{ContractInvertible};
+admissibility and purity are \texttt{IsAdmissible}, \texttt{IsPure} on \texttt{MajoranaIndex n} and
+\texttt{Admissible}, \texttt{Pure} on an arbitrary finite label type, which coincide on Majorana labels
+(\texttt{isAdmissible\_iff\_admissible}, \texttt{isPure\_iff\_pure}); the covariance of a state is
+\texttt{covariance}, Gaussian is \texttt{IsGaussian}, the energy is \texttt{energy}.}
+\medskip
+
+\noindent\hypertarget{lean:thm:norm-form}{}\textbf{\ref{thm:norm-form}}\quad{\small\texttt{\detokenize{Fermionic.isAdmissible_iff_norm}}}\par
+{\small\noindent\path{FermionicLean/Gaussian/Admissible.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:hermitian-form}{}\textbf{\ref{thm:hermitian-form}}\quad{\small\texttt{\detokenize{Fermionic.isAdmissible_iff_hermitian}}}\par
+{\small\noindent\path{FermionicLean/Gaussian/Admissible.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:purity}{}\textbf{\ref{thm:purity}}\quad{\small\texttt{\detokenize{Fermionic.IsPure.isAdmissible}}}\par
+{\small\noindent\phantom{\ref{thm:purity}}\quad\texttt{\detokenize{Fermionic.IsPure.transpose_mul_self}}}\par
+{\small\noindent\phantom{\ref{thm:purity}}\quad\texttt{\detokenize{Fermionic.IsPure.dotProduct_mulVec}}}\par
+{\small\noindent\path{FermionicLean/Gaussian/Admissible.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:orthogonal}{}\textbf{\ref{thm:orthogonal}}\quad{\small\texttt{\detokenize{Fermionic.isAdmissible_orthogonalCongruence}}}\par
+{\small\noindent\phantom{\ref{thm:orthogonal}}\quad\texttt{\detokenize{Fermionic.isPure_orthogonalCongruence}}}\par
+{\small\noindent\path{FermionicLean/Gaussian/Congruence.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:subsystem}{}\textbf{\ref{thm:subsystem}}\quad{\small\texttt{\detokenize{Fermionic.isAdmissible_subsystem}}}\par
+{\small\noindent\path{FermionicLean/Gaussian/Subsystem.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:sum}{}\textbf{\ref{thm:sum}}\quad{\small\texttt{\detokenize{Fermionic.isAdmissible_directSum_iff}}}\par
+{\small\noindent\phantom{\ref{thm:sum}}\quad\texttt{\detokenize{Fermionic.isPure_directSum_iff}}}\par
+{\small\noindent\path{FermionicLean/Gaussian/DirectSum.lean}}\par\medskip
+\noindent Equation~\eqref{eq:standard}\quad{\small\texttt{\detokenize{Fermionic.standardCovariance}}}\par
+{\small\noindent\phantom{Equation~\eqref{eq:standard}}\quad\texttt{\detokenize{Fermionic.isPure_standardCovariance}}}\par
+{\small\noindent\path{FermionicLean/Gaussian/Examples.lean}}\par
+\medskip
+\noindent\hypertarget{lean:prop:one-mode}{}\textbf{\ref{prop:one-mode}}\quad{\small\texttt{\detokenize{Fermionic.oneMode_eq_smul}}}\par
+{\small\noindent\phantom{\ref{prop:one-mode}}\quad\texttt{\detokenize{Fermionic.isAdmissible_oneMode_iff}}}\par
+{\small\noindent\phantom{\ref{prop:one-mode}}\quad\texttt{\detokenize{Fermionic.isPure_oneMode_iff}}}\par
+{\small\noindent\path{FermionicLean/Gaussian/Examples.lean}}\par\medskip
+\noindent Definition~\ref{def:contract}\quad{\small\texttt{\detokenize{Fermionic.contract}}, \texttt{\detokenize{Fermionic.ContractInvertible}}}\par
+{\small\noindent\phantom{Definition~\ref{def:contract}}\quad\texttt{\detokenize{Fermionic.Admissible}}, \texttt{\detokenize{Fermionic.Pure}} (index-generic conditions)}\par
+{\small\noindent\path{FermionicLean/Contraction/Defs.lean}, \path{FermionicLean/Contraction/Admissible.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:push}{}\textbf{\ref{lem:push}}\quad{\small\texttt{\detokenize{Fermionic.isUnit_det_one_sub_mul_comm}}}\par
+{\small\noindent\phantom{\ref{lem:push}}\quad\texttt{\detokenize{Fermionic.mul_inv_one_sub_mul_comm}}}\par
+{\small\noindent\path{FermionicLean/Contraction/Basic.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:antisym}{}\textbf{\ref{thm:antisym}}\quad{\small\texttt{\detokenize{Fermionic.contract_transpose}}}\par
+{\small\noindent\path{FermionicLean/Contraction/Basic.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:contract}{}\textbf{\ref{thm:contract}}\quad{\small\texttt{\detokenize{Fermionic.contract_admissible}}}\par
+{\small\noindent\phantom{\ref{thm:contract}}\quad\texttt{\detokenize{Fermionic.contract_mulVec}}}\par
+{\small\noindent\phantom{\ref{thm:contract}}\quad\texttt{\detokenize{Fermionic.contract_dotProduct_le}}}\par
+{\small\noindent\path{FermionicLean/Contraction/Basic.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:pure-bond}{}\textbf{\ref{thm:pure-bond}}\quad{\small\texttt{\detokenize{Fermionic.contractInvertible_iff_of_pure}}}\par
+{\small\noindent\phantom{\ref{thm:pure-bond}}\quad\texttt{\detokenize{Fermionic.contract_eq_schur_of_pure}}}\par
+{\small\noindent\path{FermionicLean/Contraction/Basic.lean}}\par\medskip
+\noindent Definition~\ref{def:bond}\quad{\small\texttt{\detokenize{Fermionic.bond}}, \texttt{\detokenize{Fermionic.pairing}}}\par
+{\small\noindent\path{FermionicLean/Contraction/Bond.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:bond-pure}{}\textbf{\ref{thm:bond-pure}}\quad{\small\texttt{\detokenize{Fermionic.pure_bond}}}\par
+{\small\noindent\path{FermionicLean/Contraction/Bond.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:teleport}{}\textbf{\ref{thm:teleport}}\quad{\small\texttt{\detokenize{Fermionic.contract_teleportInput}}}\par
+{\small\noindent\phantom{\ref{thm:teleport}}\quad\texttt{\detokenize{Fermionic.teleportInput_contractInvertible}}}\par
+{\small\noindent\phantom{\ref{thm:teleport}}\quad\texttt{\detokenize{Fermionic.teleportInput_eq_submatrix}}}\par
+{\small\noindent\path{FermionicLean/Contraction/Bond.lean}}\par\medskip
+\noindent Definition~\ref{def:input}\quad{\small\texttt{\detokenize{Fermionic.periodicInput}}, \texttt{\detokenize{Fermionic.chainEquiv}}, \texttt{\detokenize{Fermionic.siteMajorEquiv}}}\par
+{\small\noindent\phantom{Definition~\ref{def:input}}\quad\texttt{\detokenize{Fermionic.Site}}, \texttt{\detokenize{Fermionic.SiteLabel}}, \texttt{\detokenize{Fermionic.Retained}}, \texttt{\detokenize{Fermionic.Eliminated}}}\par
+{\small\noindent\path{FermionicLean/Chain/Periodic.lean}}\par\medskip
+\noindent Definition~\ref{def:periodic}\quad{\small\texttt{\detokenize{Fermionic.periodicBond}}, \texttt{\detokenize{Fermionic.periodicCovariance}}}\par
+{\small\noindent\path{FermionicLean/Chain/Periodic.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:relabel}{}\textbf{\ref{lem:relabel}}\quad{\small\texttt{\detokenize{Fermionic.admissible_submatrix_equiv_iff}}}\par
+{\small\noindent\phantom{\ref{lem:relabel}}\quad\texttt{\detokenize{Fermionic.pure_submatrix_equiv_iff}}}\par
+{\small\noindent\phantom{\ref{lem:relabel}}\quad\texttt{\detokenize{Fermionic.admissible_blockDiagonal_iff}}}\par
+{\small\noindent\path{FermionicLean/Chain/Periodic.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:periodic}{}\textbf{\ref{thm:periodic}}\quad{\small\texttt{\detokenize{Fermionic.periodicCovariance_admissible}}}\par
+{\small\noindent\phantom{\ref{thm:periodic}}\quad\texttt{\detokenize{Fermionic.admissible_periodicInput_iff}}}\par
+{\small\noindent\path{FermionicLean/Chain/Periodic.lean}}\par\medskip
+\noindent\hypertarget{lean:prop:three}{}\textbf{\ref{prop:three}}\quad{\small\texttt{\detokenize{Fermionic.pure_threeSiteLocal}}}\par
+{\small\noindent\phantom{\ref{prop:three}}\quad\texttt{\detokenize{Fermionic.threeSite_contractInvertible}}}\par
+{\small\noindent\phantom{\ref{prop:three}}\quad\texttt{\detokenize{Fermionic.threeSite_det}}}\par
+{\small\noindent\phantom{\ref{prop:three}}\quad\texttt{\detokenize{Fermionic.periodicCovariance_threeSite}}}\par
+{\small\noindent\path{FermionicLean/Chain/ThreeSite.lean}, \path{FermionicLean/Chain/ThreeSiteDet.lean}}\par\medskip
+\noindent Definition~\ref{def:twist}\quad{\small \texttt{\detokenize{Fermionic.character}}, \texttt{\detokenize{Fermionic.sitePhase}}, \texttt{\detokenize{Fermionic.twist}}}\par
+{\small\noindent\phantom{Definition~\ref{def:twist}}\quad \texttt{\detokenize{Fermionic.twistedLocal}}}\par
+{\small\noindent\path{FermionicLean/Chain/Fourier.lean}}\par\medskip
+\noindent Definition~\ref{def:symbol}\quad{\small \texttt{\detokenize{Fermionic.momentumCovariance}}, \texttt{\detokenize{Fermionic.contractC}}, \texttt{\detokenize{Fermionic.twistedSplit}}}\par
+{\small\noindent\phantom{Definition~\ref{def:symbol}}\quad \texttt{\detokenize{Fermionic.siteSplit}}, \texttt{\detokenize{Fermionic.bondC}}}\par
+{\small\noindent\path{FermionicLean/Chain/Fourier.lean}}\par\medskip
+\noindent Definition~\ref{def:fourier}\quad{\small \texttt{\detokenize{Fermionic.fourierEntry}}, \texttt{\detokenize{Fermionic.homogeneousCovariance}}, \texttt{\detokenize{Fermionic.retained}}}\par
+{\small\noindent\path{FermionicLean/Chain/Fourier.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:input-blocks}{}\textbf{\ref{lem:input-blocks}}\quad{\small\texttt{\detokenize{Fermionic.dft_bondPairs}}}\par
+{\small\noindent\phantom{\ref{lem:input-blocks}}\quad\texttt{\detokenize{Fermionic.dft_inputPairs_11}}}\par
+{\small\noindent\phantom{\ref{lem:input-blocks}}\quad\texttt{\detokenize{Fermionic.dft_inputPairs_12}}}\par
+{\small\noindent\phantom{\ref{lem:input-blocks}}\quad\texttt{\detokenize{Fermionic.dft_inputPairs_21}}}\par
+{\small\noindent\phantom{\ref{lem:input-blocks}}\quad\texttt{\detokenize{Fermionic.dft_inputPairs_22}}}\par
+{\small\noindent\phantom{\ref{lem:input-blocks}}\quad\texttt{\detokenize{Fermionic.dft_mul_shiftDiagonal_mul_dftInv}}}\par
+{\small\noindent\phantom{\ref{lem:input-blocks}}\quad\texttt{\detokenize{Fermionic.periodicInput_chainSplit}}}\par
+{\small\noindent\path{FermionicLean/Chain/Fourier.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:contract-conj}{}\textbf{\ref{lem:contract-conj}}\quad{\small\texttt{\detokenize{Fermionic.contractC_conj}}}\par
+{\small\noindent\phantom{\ref{lem:contract-conj}}\quad\texttt{\detokenize{Fermionic.contractC_blockDiagonal}}}\par
+{\small\noindent\phantom{\ref{lem:contract-conj}}\quad\texttt{\detokenize{Fermionic.det_one_sub_blockDiagonal_mul}}}\par
+{\small\noindent\path{FermionicLean/Chain/Fourier.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:det-factor}{}\textbf{\ref{thm:det-factor}}\quad{\small\texttt{\detokenize{Fermionic.det_one_sub_periodic_eq_prod}}}\par
+{\small\noindent\phantom{\ref{thm:det-factor}}\quad\texttt{\detokenize{Fermionic.momentum_isUnit_det_of_contractInvertible}}}\par
+{\small\noindent\path{FermionicLean/Chain/Fourier.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:diagonal}{}\textbf{\ref{thm:diagonal}}\quad{\small\texttt{\detokenize{Fermionic.homogeneousCovariance_translation}}}\par
+{\small\noindent\phantom{\ref{thm:diagonal}}\quad\texttt{\detokenize{Fermionic.fourierEntry_eq}}}\par
+{\small\noindent\phantom{\ref{thm:diagonal}}\quad\texttt{\detokenize{Fermionic.dft_covariancePairs}}}\par
+{\small\noindent\path{FermionicLean/Chain/Fourier.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:reconstruct}{}\textbf{\ref{thm:reconstruct}}\quad{\small\texttt{\detokenize{Fermionic.homogeneousCovariance_reconstruct}}}\par
+{\small\noindent\path{FermionicLean/Chain/Fourier.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:blocks}{}\textbf{\ref{thm:blocks}}\quad{\small\texttt{\detokenize{Fermionic.momentumCovariance_neg}}}\par
+{\small\noindent\phantom{\ref{thm:blocks}}\quad\texttt{\detokenize{Fermionic.momentumCovariance_conjTranspose}}}\par
+{\small\noindent\phantom{\ref{thm:blocks}}\quad\texttt{\detokenize{Fermionic.momentumCovariance_posSemidef}}}\par
+{\small\noindent\path{FermionicLean/Chain/Fourier.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:pauli}{}\textbf{\ref{lem:pauli}}\quad{\small\texttt{\detokenize{Fermionic.pauliX_mul_self}}, \texttt{\detokenize{pauliZ_mul_self}}, \texttt{\detokenize{jwString_mul_self}}}\par
+{\small\noindent\phantom{\ref{lem:pauli}}\quad\texttt{\detokenize{Fermionic.pauliX_conjTranspose}}, \texttt{\detokenize{pauliZ_conjTranspose}}, \texttt{\detokenize{jwString_conjTranspose}}}\par
+{\small\noindent\phantom{\ref{lem:pauli}}\quad\texttt{\detokenize{Fermionic.pauliX_mul_pauliX_comm}}, \texttt{\detokenize{pauliX_mul_pauliX_apply_self}}, \texttt{\detokenize{pauliX_mul_diagonal}}}\par
+{\small\noindent\phantom{\ref{lem:pauli}}\quad\texttt{\detokenize{Fermionic.pauliX_mul_pauliZ}}, \texttt{\detokenize{pauliX_mul_pauliZ_of_ne}}, \texttt{\detokenize{pauliX_mul_jwString}}}\par
+{\small\noindent\path{FermionicLean/Fock/Pauli.lean}, \path{FermionicLean/Fock/Occupation.lean}}\par\medskip
+\noindent Equation~\eqref{eq:signed-flip}\quad{\small\texttt{\detokenize{Fermionic.majorana_eq_diagonal_mul}}, \texttt{\detokenize{Fermionic.majoranaSign}}}\par
+{\small\noindent\path{FermionicLean/Fock/Majorana.lean}}\par\medskip
+\noindent Equation~\eqref{eq:product}\quad{\small\texttt{\detokenize{Fermionic.diagonal_mul_pauliX_mul_diagonal_mul_pauliX}}}\par
+{\small\noindent\path{FermionicLean/Fock/Majorana.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:car}{}\textbf{\ref{thm:car}}\quad{\small\texttt{\detokenize{Fermionic.majorana_anticommute}}}\par
+{\small\noindent\phantom{\ref{thm:car}}\quad\texttt{\detokenize{Fermionic.majorana_conjTranspose}}}\par
+{\small\noindent\path{FermionicLean/Fock/Majorana.lean}}\par\medskip
+\noindent Definition~\ref{def:density}\quad{\small\texttt{\detokenize{Fermionic.IsDensity}}, \texttt{\detokenize{Fermionic.covariance}}}\par
+{\small\noindent\path{FermionicLean/Fock/Covariance.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:reality}{}\textbf{\ref{thm:reality}}\quad{\small\texttt{\detokenize{Fermionic.covariance_im_eq_zero}}}\par
+{\small\noindent\phantom{\ref{thm:reality}}\quad\texttt{\detokenize{Fermionic.covariance_transpose}}, \texttt{\detokenize{covariance_diag}}, \texttt{\detokenize{covariance_of_ne}}}\par
+{\small\noindent\path{FermionicLean/Fock/Covariance.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:admissible}{}\textbf{\ref{thm:admissible}}\quad{\small\texttt{\detokenize{Fermionic.IsDensity.isAdmissible_covariance}}}\par
+{\small\noindent\path{FermionicLean/Fock/Covariance.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:occupation}{}\textbf{\ref{thm:occupation}}\quad{\small\texttt{\detokenize{Fermionic.isDensity_occupation}}}\par
+{\small\noindent\phantom{\ref{thm:occupation}}\quad\texttt{\detokenize{Fermionic.covariance_occupation}}}\par
+{\small\noindent\path{FermionicLean/Fock/Occupation.lean}}\par\medskip
+\noindent\hypertarget{lean:cor:vacuum}{}\textbf{\ref{cor:vacuum}}\quad{\small\texttt{\detokenize{Fermionic.covariance_vacuum}}}\par
+{\small\noindent\phantom{\ref{cor:vacuum}}\quad\texttt{\detokenize{Fermionic.isPure_covariance_occupation}}}\par
+{\small\noindent\path{FermionicLean/Fock/Occupation.lean}}\par
+\medskip
+\noindent\hypertarget{lean:thm:bondstate}{}\textbf{\ref{thm:bondstate}}\quad{\small\texttt{\detokenize{Fermionic.isDensity_bondState}}}\par
+{\small\noindent\phantom{\ref{thm:bondstate}}\quad\texttt{\detokenize{Fermionic.covariance_bondState}}}\par
+{\small\noindent\path{FermionicLean/Fock/BondState.lean}}\par\medskip
+\noindent\hypertarget{lean:prop:M0}{}\textbf{\ref{prop:M0}}\quad{\small\texttt{\detokenize{Fermionic.contractInvertible_zero}}}\par
+{\small\noindent\phantom{\ref{prop:M0}}\quad\texttt{\detokenize{Fermionic.periodicCovariance_zero}}}\par
+{\small\noindent\phantom{\ref{prop:M0}}\quad\texttt{\detokenize{Fermionic.periodicCovariance_zero_apply}}}\par
+{\small\noindent\phantom{\ref{prop:M0}}\quad\texttt{\detokenize{Fermionic.admissible_periodicCovariance_zero_iff}}}\par
+{\small\noindent\phantom{\ref{prop:M0}}\quad\texttt{\detokenize{Fermionic.pure_periodicCovariance_zero_iff}}}\par
+{\small\noindent\path{FermionicLean/Chain/Product.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:product}{}\textbf{\ref{thm:product}}\quad{\small\texttt{\detokenize{Fermionic.covariance_occupation_eq_periodic}}}\par
+{\small\noindent\phantom{\ref{thm:product}}\quad\texttt{\detokenize{Fermionic.covariance_vacuum_eq_periodic}}}\par
+{\small\noindent\phantom{\ref{thm:product}}\quad\texttt{\detokenize{Fermionic.occupationLocal}}}\par
+{\small\noindent\phantom{\ref{thm:product}}\quad\texttt{\detokenize{Fermionic.siteModeEquiv}}}\par
+{\small\noindent\phantom{\ref{thm:product}}\quad\texttt{\detokenize{Fermionic.retainedModeEquiv}}}\par
+{\small\noindent\path{FermionicLean/Chain/Product.lean}}\par\medskip
+\noindent Definition~\ref{def:kitaev}\quad{\small \texttt{\detokenize{Fermionic.kitaevLocal}}}\par
+{\small\noindent\path{FermionicLean/Chain/Kitaev.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:kitaev-adm}{}\textbf{\ref{lem:kitaev-adm}}\quad{\small\texttt{\detokenize{Fermionic.admissible_kitaevLocal}}}\par
+{\small\noindent\phantom{\ref{lem:kitaev-adm}}\quad\texttt{\detokenize{Fermionic.not_pure_kitaevLocal}}}\par
+{\small\noindent\path{FermionicLean/Chain/Kitaev.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:kitaev}{}\textbf{\ref{thm:kitaev}}\quad{\small\texttt{\detokenize{Fermionic.periodicCovariance_kitaev}}}\par
+{\small\noindent\phantom{\ref{thm:kitaev}}\quad\texttt{\detokenize{Fermionic.det_one_sub_kitaev}}}\par
+{\small\noindent\phantom{\ref{thm:kitaev}}\quad\texttt{\detokenize{Fermionic.kitaev_contractInvertible}}}\par
+{\small\noindent\phantom{\ref{thm:kitaev}}\quad\texttt{\detokenize{Fermionic.pure_kitaevChain}}}\par
+{\small\noindent\phantom{\ref{thm:kitaev}}\quad\texttt{\detokenize{Fermionic.kitaevChain_translation}}}\par
+{\small\noindent\phantom{\ref{thm:kitaev}}\quad\texttt{\detokenize{Fermionic.momentumCovariance_kitaev}}}\par
+{\small\noindent\phantom{\ref{thm:kitaev}}\quad\texttt{\detokenize{Fermionic.kitaevChain}}}\par
+{\small\noindent\phantom{\ref{thm:kitaev}}\quad\texttt{\detokenize{Fermionic.kitaevSymbol}}}\par
+{\small\noindent\path{FermionicLean/Chain/Kitaev.lean}}\par\medskip
+\noindent\hypertarget{lean:prop:loop}{}\textbf{\ref{prop:loop}}\quad{\small\texttt{\detokenize{Fermionic.pure_kitaevPure}}}\par
+{\small\noindent\phantom{\ref{prop:loop}}\quad\texttt{\detokenize{Fermionic.det_one_sub_kitaevPure_eq}}}\par
+{\small\noindent\phantom{\ref{prop:loop}}\quad\texttt{\detokenize{Fermionic.det_one_sub_kitaevPure}}}\par
+{\small\noindent\phantom{\ref{prop:loop}}\quad\texttt{\detokenize{Fermionic.prod_one_add_sitePhase}}}\par
+{\small\noindent\phantom{\ref{prop:loop}}\quad\texttt{\detokenize{Fermionic.periodicCovariance_kitaevPure_of_odd}}}\par
+{\small\noindent\phantom{\ref{prop:loop}}\quad\texttt{\detokenize{Fermionic.kitaevPure}}}\par
+{\small\noindent\path{FermionicLean/Chain/Kitaev.lean}}\par\medskip
+\noindent Definition~\ref{def:gate}\quad{\small \texttt{\detokenize{Fermionic.hoppingGate}}, \texttt{\detokenize{Fermionic.hoppingRotation}}, \texttt{\detokenize{Fermionic.planeRotation}}}\par
+{\small\noindent\phantom{Definition~\ref{def:gate}}\quad \texttt{\detokenize{Fermionic.rotFactor}}, \texttt{\detokenize{Fermionic.pairGen}}}\par
+{\small\noindent\path{FermionicLean/Fock/Gate.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:gate}{}\textbf{\ref{thm:gate}}\quad{\small\texttt{\detokenize{Fermionic.hoppingGate_mul_conjTranspose}}}\par
+{\small\noindent\phantom{\ref{thm:gate}}\quad\texttt{\detokenize{Fermionic.conjTranspose_mul_hoppingGate}}}\par
+{\small\noindent\phantom{\ref{thm:gate}}\quad\texttt{\detokenize{Fermionic.hoppingGate_conj}}}\par
+{\small\noindent\path{FermionicLean/Fock/Gate.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:congruence}{}\textbf{\ref{thm:congruence}}\quad{\small\texttt{\detokenize{Fermionic.orthogonal_of_conjugatesMajorana}}}\par
+{\small\noindent\phantom{\ref{thm:congruence}}\quad\texttt{\detokenize{Fermionic.covariance_conj}}}\par
+{\small\noindent\phantom{\ref{thm:congruence}}\quad\texttt{\detokenize{Fermionic.ConjugatesMajorana}}}\par
+{\small\noindent\path{FermionicLean/Fock/Gate.lean}}\par\medskip
+\noindent\hypertarget{lean:cor:gate-example}{}\textbf{\ref{cor:gate-example}}\quad{\small\texttt{\detokenize{Fermionic.covariance_gate_occ10}}}\par
+{\small\noindent\phantom{\ref{cor:gate-example}}\quad\texttt{\detokenize{Fermionic.covariance_gate_vacuum}}}\par
+{\small\noindent\phantom{\ref{cor:gate-example}}\quad\texttt{\detokenize{Fermionic.gateExample}}}\par
+{\small\noindent\phantom{\ref{cor:gate-example}}\quad\texttt{\detokenize{Fermionic.occ10}}}\par
+{\small\noindent\path{FermionicLean/Fock/Gate.lean}}\par\medskip
+\noindent Definition~\ref{def:block}\quad{\small \texttt{\detokenize{Fermionic.blockForm}}, \texttt{\detokenize{Fermionic.isAdmissible_blockForm_iff}}}\par
+{\small\noindent\phantom{Definition~\ref{def:block}}\quad \texttt{\detokenize{Fermionic.isPure_blockForm_iff}}}\par
+{\small\noindent\phantom{Definition~\ref{def:block}}\quad \texttt{\detokenize{Fermionic.standardCovariance_eq_blockForm}}}\par
+{\small\noindent\phantom{Definition~\ref{def:block}}\quad \texttt{\detokenize{Fermionic.covariance_occupation_eq_blockForm}}}\par
+{\small\noindent\path{FermionicLean/Gaussian/BlockForm.lean}}\par\medskip
+\noindent Definition~\ref{def:ham}\quad{\small \texttt{\detokenize{Fermionic.quadHam}}, \texttt{\detokenize{Fermionic.energy}}}\par
+{\small\noindent\path{FermionicLean/Fock/Hamiltonian.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:energy}{}\textbf{\ref{lem:energy}}\quad{\small\texttt{\detokenize{Fermionic.quadHam_conjTranspose}}}\par
+{\small\noindent\phantom{\ref{lem:energy}}\quad\texttt{\detokenize{Fermionic.trace_mul_quadHam}}}\par
+{\small\noindent\phantom{\ref{lem:energy}}\quad\texttt{\detokenize{Fermionic.energy_eq}}}\par
+{\small\noindent\phantom{\ref{lem:energy}}\quad\texttt{\detokenize{Fermionic.conj_quadHam}}}\par
+{\small\noindent\path{FermionicLean/Fock/Hamiltonian.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:diagonal}{}\textbf{\ref{lem:diagonal}}\quad{\small\texttt{\detokenize{Fermionic.quadHam_blockForm}}}\par
+{\small\noindent\phantom{\ref{lem:diagonal}}\quad\texttt{\detokenize{Fermionic.I_smul_majorana_x_mul_y}}}\par
+{\small\noindent\path{FermionicLean/Fock/Hamiltonian.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:diag-min}{}\textbf{\ref{lem:diag-min}}\quad{\small\texttt{\detokenize{Fermionic.trace_mul_diagonal_ge}}}\par
+{\small\noindent\phantom{\ref{lem:diag-min}}\quad\texttt{\detokenize{Fermionic.eq_occupation_of_trace_mul_diagonal_eq}}}\par
+{\small\noindent\path{FermionicLean/Fock/GroundState.lean}}\par\medskip
+\noindent Definition~\ref{def:ground}\quad{\small \texttt{\detokenize{Fermionic.groundConfig}}, \texttt{\detokenize{Fermionic.groundEnergy}}}\par
+{\small\noindent\phantom{Definition~\ref{def:ground}}\quad \texttt{\detokenize{Fermionic.sgn'}}}\par
+{\small\noindent\phantom{Definition~\ref{def:ground}}\quad \texttt{\detokenize{Fermionic.covariance_occupation_groundConfig}}}\par
+{\small\noindent\path{FermionicLean/Fock/GroundState.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:block-gs}{}\textbf{\ref{thm:block-gs}}\quad{\small\texttt{\detokenize{Fermionic.groundEnergy_le_energy_blockForm}}}\par
+{\small\noindent\phantom{\ref{thm:block-gs}}\quad\texttt{\detokenize{Fermionic.energy_blockForm_groundConfig}}}\par
+{\small\noindent\phantom{\ref{thm:block-gs}}\quad\texttt{\detokenize{Fermionic.eq_occupation_of_energy_blockForm_eq}}}\par
+{\small\noindent\path{FermionicLean/Fock/GroundState.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:rotated-gs}{}\textbf{\ref{thm:rotated-gs}}\quad{\small\texttt{\detokenize{Fermionic.groundState}}}\par
+{\small\noindent\phantom{\ref{thm:rotated-gs}}\quad\texttt{\detokenize{Fermionic.groundEnergy_le_energy}}}\par
+{\small\noindent\phantom{\ref{thm:rotated-gs}}\quad\texttt{\detokenize{Fermionic.isDensity_groundState}}}\par
+{\small\noindent\phantom{\ref{thm:rotated-gs}}\quad\texttt{\detokenize{Fermionic.energy_groundState}}}\par
+{\small\noindent\phantom{\ref{thm:rotated-gs}}\quad\texttt{\detokenize{Fermionic.covariance_groundState}}}\par
+{\small\noindent\phantom{\ref{thm:rotated-gs}}\quad\texttt{\detokenize{Fermionic.eq_groundState_of_energy_eq}}}\par
+{\small\noindent\path{FermionicLean/Fock/GroundState.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:rotated-form}{}\textbf{\ref{lem:rotated-form}}\quad{\small\texttt{\detokenize{Fermionic.rotatedFrame}}}\par
+{\small\noindent\path{FermionicLean/Fock/GroundState.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:variational}{}\textbf{\ref{thm:variational}}\quad{\small\texttt{\detokenize{Fermionic.energyForm}}}\par
+{\small\noindent\phantom{\ref{thm:variational}}\quad\texttt{\detokenize{Fermionic.groundEnergy_le_energyForm}}}\par
+{\small\noindent\phantom{\ref{thm:variational}}\quad\texttt{\detokenize{Fermionic.energyForm_eq_groundEnergy_iff}}}\par
+{\small\noindent\path{FermionicLean/Fock/GroundState.lean}}\par\medskip
+\noindent Definition~\ref{def:mixture}\quad{\small \texttt{\detokenize{Fermionic.bernoulli}}, \texttt{\detokenize{Fermionic.productWeight}}}\par
+{\small\noindent\phantom{Definition~\ref{def:mixture}}\quad \texttt{\detokenize{Fermionic.productMixture}}}\par
+{\small\noindent\path{FermionicLean/Fock/Mixture.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:mixture}{}\textbf{\ref{thm:mixture}}\quad{\small\texttt{\detokenize{Fermionic.isDensity_productMixture}}}\par
+{\small\noindent\phantom{\ref{thm:mixture}}\quad\texttt{\detokenize{Fermionic.covariance_productMixture}}}\par
+{\small\noindent\phantom{\ref{thm:mixture}}\quad\texttt{\detokenize{Fermionic.productMixture_of_abs_eq_one}}}\par
+{\small\noindent\path{FermionicLean/Fock/Mixture.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:normal-form}{}\textbf{\ref{thm:normal-form}}\quad{\small\texttt{\detokenize{Fermionic.exists_normalForm}}}\par
+{\small\noindent\phantom{\ref{thm:normal-form}}\quad\texttt{\detokenize{Fermionic.exists_normalForm_special}}}\par
+{\small\noindent\phantom{\ref{thm:normal-form}}\quad\texttt{\detokenize{Fermionic.abs_le_one_of_isAdmissible_normalForm}}}\par
+{\small\noindent\phantom{\ref{thm:normal-form}}\quad\texttt{\detokenize{Fermionic.abs_eq_one_of_isPure_normalForm}}}\par
+{\small\noindent\path{FermionicLean/Gaussian/NormalForm.lean}}\par\medskip
+\noindent Definition~\ref{def:plane}\quad{\small \texttt{\detokenize{Fermionic.planeRot}}, \texttt{\detokenize{Fermionic.IsRotProduct}}}\par
+{\small\noindent\phantom{Definition~\ref{def:plane}}\quad \texttt{\detokenize{Fermionic.planeRot_transpose}}}\par
+{\small\noindent\phantom{Definition~\ref{def:plane}}\quad \texttt{\detokenize{Fermionic.planeRot_mul_transpose}}}\par
+{\small\noindent\phantom{Definition~\ref{def:plane}}\quad \texttt{\detokenize{Fermionic.det_planeRot}}}\par
+{\small\noindent\phantom{Definition~\ref{def:plane}}\quad \texttt{\detokenize{Fermionic.IsRotProduct.mul}}}\par
+{\small\noindent\phantom{Definition~\ref{def:plane}}\quad \texttt{\detokenize{Fermionic.IsRotProduct.transpose}}}\par
+{\small\noindent\phantom{Definition~\ref{def:plane}}\quad \texttt{\detokenize{Fermionic.IsRotProduct.mul_transpose_self}}}\par
+{\small\noindent\phantom{Definition~\ref{def:plane}}\quad \texttt{\detokenize{Fermionic.IsRotProduct.det}}}\par
+{\small\noindent\path{FermionicLean/Gaussian/Rotation.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:givens}{}\textbf{\ref{thm:givens}}\quad{\small\texttt{\detokenize{Fermionic.isRotProduct_of_special_orthogonal}}}\par
+{\small\noindent\phantom{\ref{thm:givens}}\quad\texttt{\detokenize{Fermionic.isRotProduct_fin}}}\par
+{\small\noindent\phantom{\ref{thm:givens}}\quad\texttt{\detokenize{Fermionic.isRotProduct_option}}}\par
+{\small\noindent\phantom{\ref{thm:givens}}\quad\texttt{\detokenize{Fermionic.exists_zero_coord}}}\par
+{\small\noindent\path{FermionicLean/Gaussian/Rotation.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:factor}{}\textbf{\ref{lem:factor}}\quad{\small\texttt{\detokenize{Fermionic.conjugatesMajorana_rotFactor}}}\par
+{\small\noindent\phantom{\ref{lem:factor}}\quad\texttt{\detokenize{Fermionic.exists_angle_of_sq_add_sq}}}\par
+{\small\noindent\phantom{\ref{lem:factor}}\quad\texttt{\detokenize{Fermionic.conjugatesMajorana_one}}}\par
+{\small\noindent\phantom{\ref{lem:factor}}\quad\texttt{\detokenize{Fermionic.conjugatesMajorana_mul}}}\par
+{\small\noindent\path{FermionicLean/Fock/Spin.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:implement}{}\textbf{\ref{thm:implement}}\quad{\small\texttt{\detokenize{Fermionic.exists_unitary_conjugatesMajorana}}}\par
+{\small\noindent\phantom{\ref{thm:implement}}\quad\texttt{\detokenize{Fermionic.exists_unitary_of_isRotProduct}}}\par
+{\small\noindent\path{FermionicLean/Fock/Spin.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:realization}{}\textbf{\ref{thm:realization}}\quad{\small\texttt{\detokenize{Fermionic.exists_isDensity_covariance_eq}}}\par
+{\small\noindent\phantom{\ref{thm:realization}}\quad\texttt{\detokenize{Fermionic.isDensity_realization_and_covariance}}}\par
+{\small\noindent\phantom{\ref{thm:realization}}\quad\texttt{\detokenize{Fermionic.exists_pure_state_of_isPure}}}\par
+{\small\noindent\phantom{\ref{thm:realization}}\quad\texttt{\detokenize{Fermionic.realization}}}\par
+{\small\noindent\path{FermionicLean/Fock/Realization.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:ground-state}{}\textbf{\ref{thm:ground-state}}\quad{\small\texttt{\detokenize{Fermionic.exists_normalForm_unitary}}}\par
+{\small\noindent\phantom{\ref{thm:ground-state}}\quad\texttt{\detokenize{Fermionic.groundState_of_normalForm}}}\par
+{\small\noindent\phantom{\ref{thm:ground-state}}\quad\texttt{\detokenize{Fermionic.groundState_unique_of_normalForm}}}\par
+{\small\noindent\phantom{\ref{thm:ground-state}}\quad\texttt{\detokenize{Fermionic.exists_groundState}}}\par
+{\small\noindent\path{FermionicLean/Fock/Realization.lean}}\par\medskip
+\noindent\hypertarget{lean:cor:pure-determines}{}\textbf{\ref{cor:pure-determines}}\quad{\small\texttt{\detokenize{Fermionic.eq_of_covariance_eq_pure_normalForm}}}\par
+{\small\noindent\phantom{\ref{cor:pure-determines}}\quad\texttt{\detokenize{Fermionic.eq_of_covariance_eq_of_isPure}}}\par
+{\small\noindent\path{FermionicLean/Fock/Realization.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:block-exp}{}\textbf{\ref{lem:block-exp}}\quad{\small\texttt{\detokenize{Fermionic.exp_neg_quadHam_blockForm}}}\par
+{\small\noindent\phantom{\ref{lem:block-exp}}\quad\texttt{\detokenize{Fermionic.partitionFunction_blockForm}}}\par
+{\small\noindent\phantom{\ref{lem:block-exp}}\quad\texttt{\detokenize{Fermionic.gaussianState_blockForm}}}\par
+{\small\noindent\phantom{\ref{lem:block-exp}}\quad\texttt{\detokenize{Fermionic.isDensity_gaussianState_blockForm}}}\par
+{\small\noindent\phantom{\ref{lem:block-exp}}\quad\texttt{\detokenize{Fermionic.covariance_gaussianState_blockForm}}}\par
+{\small\noindent\path{FermionicLean/Fock/Thermal.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:thermal}{}\textbf{\ref{thm:thermal}}\quad{\small\texttt{\detokenize{Fermionic.partitionFunction_conj}}}\par
+{\small\noindent\phantom{\ref{thm:thermal}}\quad\texttt{\detokenize{Fermionic.gaussianState_conj}}}\par
+{\small\noindent\phantom{\ref{thm:thermal}}\quad\texttt{\detokenize{Fermionic.isDensity_gaussianState_conj}}}\par
+{\small\noindent\phantom{\ref{thm:thermal}}\quad\texttt{\detokenize{Fermionic.covariance_gaussianState}}}\par
+{\small\noindent\phantom{\ref{thm:thermal}}\quad\texttt{\detokenize{Fermionic.energy_gaussianState}}}\par
+{\small\noindent\phantom{\ref{thm:thermal}}\quad\texttt{\detokenize{Fermionic.exists_partitionFunction_eq}}}\par
+{\small\noindent\phantom{\ref{thm:thermal}}\quad\texttt{\detokenize{Fermionic.isDensity_gaussianState}}}\par
+{\small\noindent\phantom{\ref{thm:thermal}}\quad\texttt{\detokenize{Fermionic.exists_covariance_gaussianState}}}\par
+{\small\noindent\path{FermionicLean/Fock/Thermal.lean}}\par\medskip
+\noindent\hypertarget{lean:cor:beta}{}\textbf{\ref{cor:beta}}\quad{\small\texttt{\detokenize{Fermionic.isDensity_thermalState}}}\par
+{\small\noindent\phantom{\ref{cor:beta}}\quad\texttt{\detokenize{Fermionic.covariance_thermalState}}}\par
+{\small\noindent\phantom{\ref{cor:beta}}\quad\texttt{\detokenize{Fermionic.energy_thermalState}}}\par
+{\small\noindent\phantom{\ref{cor:beta}}\quad\texttt{\detokenize{Fermionic.partitionFunction_zero}}}\par
+{\small\noindent\phantom{\ref{cor:beta}}\quad\texttt{\detokenize{Fermionic.gaussianState_zero}}}\par
+{\small\noindent\phantom{\ref{cor:beta}}\quad\texttt{\detokenize{Fermionic.covariance_gaussianState_zero}}}\par
+{\small\noindent\path{FermionicLean/Fock/Thermal.lean}}\par\medskip
+\noindent\hypertarget{lean:prop:strict}{}\textbf{\ref{prop:strict}}\quad{\small\texttt{\detokenize{Fermionic.isStrictlyAdmissible_covariance_gaussianState}}}\par
+{\small\noindent\phantom{\ref{prop:strict}}\quad\texttt{\detokenize{Fermionic.not_isPure_covariance_gaussianState}}}\par
+{\small\noindent\phantom{\ref{prop:strict}}\quad\texttt{\detokenize{Fermionic.isStrictlyAdmissible_orthogonalCongruence}}}\par
+{\small\noindent\phantom{\ref{prop:strict}}\quad\texttt{\detokenize{Fermionic.isStrictlyAdmissible_blockForm_iff}}}\par
+{\small\noindent\path{FermionicLean/Fock/Thermal.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:exp-realization}{}\textbf{\ref{thm:exp-realization}}\quad{\small\texttt{\detokenize{Fermionic.covariance_gaussianState_artanh}}}\par
+{\small\noindent\phantom{\ref{thm:exp-realization}}\quad\texttt{\detokenize{Fermionic.exists_gaussianState_covariance_eq}}}\par
+{\small\noindent\phantom{\ref{thm:exp-realization}}\quad\texttt{\detokenize{Fermionic.eq_of_covariance_gaussianState_eq}}}\par
+{\small\noindent\path{FermionicLean/Fock/Thermal.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:unitary}{}\textbf{\ref{lem:unitary}}\quad{\small\texttt{\detokenize{Fermionic.evolution_conjTranspose}}}\par
+{\small\noindent\phantom{\ref{lem:unitary}}\quad\texttt{\detokenize{Fermionic.evolution_mul_conjTranspose}}}\par
+{\small\noindent\phantom{\ref{lem:unitary}}\quad\texttt{\detokenize{Fermionic.conjTranspose_mul_evolution}}}\par
+{\small\noindent\phantom{\ref{lem:unitary}}\quad\texttt{\detokenize{Fermionic.evolution_add}}}\par
+{\small\noindent\phantom{\ref{lem:unitary}}\quad\texttt{\detokenize{Fermionic.evolution_zero}}}\par
+{\small\noindent\path{FermionicLean/Fock/Evolution.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:block-rot}{}\textbf{\ref{lem:block-rot}}\quad{\small\texttt{\detokenize{Fermionic.exp_blockForm}}}\par
+{\small\noindent\phantom{\ref{lem:block-rot}}\quad\texttt{\detokenize{Fermionic.exp_neg_smul_blockForm}}}\par
+{\small\noindent\phantom{\ref{lem:block-rot}}\quad\texttt{\detokenize{Fermionic.blockRotation_mul_transpose}}}\par
+{\small\noindent\phantom{\ref{lem:block-rot}}\quad\texttt{\detokenize{Fermionic.blockRotation_transpose}}}\par
+{\small\noindent\path{FermionicLean/Gaussian/BlockRotation.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:block-evolution}{}\textbf{\ref{lem:block-evolution}}\quad{\small\texttt{\detokenize{Fermionic.evolution_blockForm}}}\par
+{\small\noindent\phantom{\ref{lem:block-evolution}}\quad\texttt{\detokenize{Fermionic.conjugatesMajorana_evolution_blockForm}}}\par
+{\small\noindent\path{FermionicLean/Fock/Evolution.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:evolution}{}\textbf{\ref{thm:evolution}}\quad{\small\texttt{\detokenize{Fermionic.conjugatesMajorana_evolution}}}\par
+{\small\noindent\phantom{\ref{thm:evolution}}\quad\texttt{\detokenize{Fermionic.evolution_conj}}}\par
+{\small\noindent\phantom{\ref{thm:evolution}}\quad\texttt{\detokenize{Fermionic.exp_neg_smul_conj}}}\par
+{\small\noindent\phantom{\ref{thm:evolution}}\quad\texttt{\detokenize{Fermionic.conjTranspose_mul_majorana_mul_evolution}}}\par
+{\small\noindent\phantom{\ref{thm:evolution}}\quad\texttt{\detokenize{Fermionic.covariance_evolution}}}\par
+{\small\noindent\phantom{\ref{thm:evolution}}\quad\texttt{\detokenize{Fermionic.I_smul_commutator_quadHam}}}\par
+{\small\noindent\path{FermionicLean/Fock/Evolution.lean}}\par\medskip
+\noindent\hypertarget{lean:cor:stationary}{}\textbf{\ref{cor:stationary}}\quad{\small\texttt{\detokenize{Fermionic.evolution_mul_gaussianState_comm}}}\par
+{\small\noindent\phantom{\ref{cor:stationary}}\quad\texttt{\detokenize{Fermionic.evolution_conj_gaussianState}}}\par
+{\small\noindent\phantom{\ref{cor:stationary}}\quad\texttt{\detokenize{Fermionic.covariance_gaussianState_evolution_invariant}}}\par
+{\small\noindent\path{FermionicLean/Fock/Evolution.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:wick-basic}{}\textbf{\ref{lem:wick-basic}}\quad{\small\texttt{\detokenize{Fermionic.wick_odd}}}\par
+{\small\noindent\phantom{\ref{lem:wick-basic}}\quad\texttt{\detokenize{Fermionic.wick_add_head}}}\par
+{\small\noindent\phantom{\ref{lem:wick-basic}}\quad\texttt{\detokenize{Fermionic.wick_smul_head}}}\par
+{\small\noindent\phantom{\ref{lem:wick-basic}}\quad\texttt{\detokenize{Fermionic.wick_pair}}}\par
+{\small\noindent\phantom{\ref{lem:wick-basic}}\quad\texttt{\detokenize{Fermionic.trace_mul_lincomb_mul_lincomb}}}\par
+{\small\noindent\phantom{\ref{lem:wick-basic}}\quad\texttt{\detokenize{Fermionic.momentList_nil}}}\par
+{\small\noindent\phantom{\ref{lem:wick-basic}}\quad\texttt{\detokenize{Fermionic.momentList_pair}}}\par
+{\small\noindent\phantom{\ref{lem:wick-basic}}\quad\texttt{\detokenize{Fermionic.lincomb_anticommute}}}\par
+{\small\noindent\path{FermionicLean/Fock/Wick.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:transport}{}\textbf{\ref{thm:transport}}\quad{\small\texttt{\detokenize{Fermionic.conj_lincomb}}}\par
+{\small\noindent\phantom{\ref{thm:transport}}\quad\texttt{\detokenize{Fermionic.wick_map_transpose}}}\par
+{\small\noindent\phantom{\ref{thm:transport}}\quad\texttt{\detokenize{Fermionic.twoPoint_conj}}}\par
+{\small\noindent\phantom{\ref{thm:transport}}\quad\texttt{\detokenize{Fermionic.isGaussian_conj}}}\par
+{\small\noindent\path{FermionicLean/Fock/Wick.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:move}{}\textbf{\ref{lem:move}}\quad{\small\texttt{\detokenize{Fermionic.lincomb_mul_prod}}}\par
+{\small\noindent\phantom{\ref{lem:move}}\quad\texttt{\detokenize{Fermionic.prod_mul_lincomb}}}\par
+{\small\noindent\path{FermionicLean/Fock/Wick.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:criterion}{}\textbf{\ref{lem:criterion}}\quad{\small\texttt{\detokenize{Fermionic.isGaussian_of_recursion}}}\par
+{\small\noindent\path{FermionicLean/Fock/Wick.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:parity}{}\textbf{\ref{lem:parity}}\quad{\small\texttt{\detokenize{Fermionic.parity_mul_self}}}\par
+{\small\noindent\phantom{\ref{lem:parity}}\quad\texttt{\detokenize{Fermionic.parity_mul_majorana_mul_parity}}}\par
+{\small\noindent\phantom{\ref{lem:parity}}\quad\texttt{\detokenize{Fermionic.parity_mul_list_prod_mul_parity}}}\par
+{\small\noindent\phantom{\ref{lem:parity}}\quad\texttt{\detokenize{Fermionic.trace_mul_list_prod_eq_zero_of_odd}}}\par
+{\small\noindent\phantom{\ref{lem:parity}}\quad\texttt{\detokenize{Fermionic.parity_mul_productMixture}}}\par
+{\small\noindent\phantom{\ref{lem:parity}}\quad\texttt{\detokenize{Fermionic.momentList_productMixture_eq_zero_of_odd}}}\par
+{\small\noindent\path{FermionicLean/Fock/Parity.lean, FermionicLean/Fock/Gaussian.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:mode}{}\textbf{\ref{lem:mode}}\quad{\small\texttt{\detokenize{Fermionic.productWeight_flip}}}\par
+{\small\noindent\phantom{\ref{lem:mode}}\quad\texttt{\detokenize{Fermionic.majorana_x_relation_productMixture}}}\par
+{\small\noindent\phantom{\ref{lem:mode}}\quad\texttt{\detokenize{Fermionic.majorana_y_relation_productMixture}}}\par
+{\small\noindent\phantom{\ref{lem:mode}}\quad\texttt{\detokenize{Fermionic.twoPoint_productMixture_mulVec_x}}}\par
+{\small\noindent\phantom{\ref{lem:mode}}\quad\texttt{\detokenize{Fermionic.twoPoint_productMixture_mulVec_y}}}\par
+{\small\noindent\path{FermionicLean/Fock/Gaussian.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:mixture-gaussian}{}\textbf{\ref{thm:mixture-gaussian}}\quad{\small\texttt{\detokenize{Fermionic.recursion_of_relation}}}\par
+{\small\noindent\phantom{\ref{thm:mixture-gaussian}}\quad\texttt{\detokenize{Fermionic.isGaussian_productMixture}}}\par
+{\small\noindent\path{FermionicLean/Fock/Gaussian.lean}}\par\medskip
+\noindent\hypertarget{lean:cor:families}{}\textbf{\ref{cor:families}}\quad{\small\texttt{\detokenize{Fermionic.isGaussian_realization}}}\par
+{\small\noindent\phantom{\ref{cor:families}}\quad\texttt{\detokenize{Fermionic.isGaussian_gaussianState}}}\par
+{\small\noindent\phantom{\ref{cor:families}}\quad\texttt{\detokenize{Fermionic.isGaussian_thermalState}}}\par
+{\small\noindent\phantom{\ref{cor:families}}\quad\texttt{\detokenize{Fermionic.isGaussian_occupation}}}\par
+{\small\noindent\phantom{\ref{cor:families}}\quad\texttt{\detokenize{Fermionic.isGaussian_pure}}}\par
+{\small\noindent\path{FermionicLean/Fock/Gaussian.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:monomial-trace}{}\textbf{\ref{lem:monomial-trace}}\quad{\small\texttt{\detokenize{Fermionic.trace_monomial_eq_zero}}}\par
+{\small\noindent\phantom{\ref{lem:monomial-trace}}\quad\texttt{\detokenize{Fermionic.majorana_mul_monomial}}}\par
+{\small\noindent\phantom{\ref{lem:monomial-trace}}\quad\texttt{\detokenize{Fermionic.monomial_mul_monomial}}}\par
+{\small\noindent\phantom{\ref{lem:monomial-trace}}\quad\texttt{\detokenize{Fermionic.conjTranspose_monomial_mul_monomial}}}\par
+{\small\noindent\phantom{\ref{lem:monomial-trace}}\quad\texttt{\detokenize{Fermionic.conjTranspose_monomial}}}\par
+{\small\noindent\phantom{\ref{lem:monomial-trace}}\quad\texttt{\detokenize{Fermionic.trace_conjTranspose_monomial_mul_monomial}}}\par
+{\small\noindent\path{FermionicLean/Fock/Monomial.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:basis}{}\textbf{\ref{thm:basis}}\quad{\small\texttt{\detokenize{Fermionic.linearIndependent_monomial}}}\par
+{\small\noindent\phantom{\ref{thm:basis}}\quad\texttt{\detokenize{Fermionic.monomialBasis}}}\par
+{\small\noindent\phantom{\ref{thm:basis}}\quad\texttt{\detokenize{Fermionic.eq_sum_trace_mul_conjTranspose_monomial_smul}}}\par
+{\small\noindent\phantom{\ref{thm:basis}}\quad\texttt{\detokenize{Fermionic.eq_of_trace_mul_monomial_eq}}}\par
+{\small\noindent\path{FermionicLean/Fock/Monomial.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:unique}{}\textbf{\ref{thm:unique}}\quad{\small\texttt{\detokenize{Fermionic.IsGaussian.eq_of_covariance_eq}}}\par
+{\small\noindent\path{FermionicLean/Fock/Gaussian.lean}}\par\medskip
+\noindent\hypertarget{lean:cor:converse}{}\textbf{\ref{cor:converse}}\quad{\small\texttt{\detokenize{Fermionic.IsGaussian.exists_realization_eq}}}\par
+{\small\noindent\phantom{\ref{cor:converse}}\quad\texttt{\detokenize{Fermionic.IsGaussian.exists_pure_eq_of_isPure}}}\par
+{\small\noindent\phantom{\ref{cor:converse}}\quad\texttt{\detokenize{Fermionic.IsGaussian.mul_self_of_isPure}}}\par
+{\small\noindent\phantom{\ref{cor:converse}}\quad\texttt{\detokenize{Fermionic.IsGaussian.exists_gaussianState_eq_of_isStrictlyAdmissible}}}\par
+{\small\noindent\phantom{\ref{cor:converse}}\quad\texttt{\detokenize{Fermionic.gaussianState_eq_of_covariance_eq}}}\par
+{\small\noindent\path{FermionicLean/Fock/Gaussian.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:jw}{}\textbf{\ref{lem:jw}}\quad{\small\texttt{\detokenize{Fermionic.majorana_embedR}}}\par
+{\small\noindent\phantom{\ref{lem:jw}}\quad\texttt{\detokenize{Fermionic.majorana_embedE}}}\par
+{\small\noindent\phantom{\ref{lem:jw}}\quad\texttt{\detokenize{Fermionic.lincomb_extendR}}}\par
+{\small\noindent\phantom{\ref{lem:jw}}\quad\texttt{\detokenize{Fermionic.lincomb_extendE}}}\par
+{\small\noindent\phantom{\ref{lem:jw}}\quad\texttt{\detokenize{Fermionic.prod_lincomb_extendR}}}\par
+{\small\noindent\phantom{\ref{lem:jw}}\quad\texttt{\detokenize{Fermionic.prod_lincomb_extendE_even}}}\par
+{\small\noindent\phantom{\ref{lem:jw}}\quad\texttt{\detokenize{Fermionic.prod_lincomb_extendE_odd}}}\par
+{\small\noindent\phantom{\ref{lem:jw}}\quad\texttt{\detokenize{Fermionic.parity_split}}}\par
+{\small\noindent\phantom{\ref{lem:jw}}\quad\texttt{\detokenize{Fermionic.tensor_one_mul_tensor_one_comm}}}\par
+{\small\noindent\path{FermionicLean/Fock/PartialTrace.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:ptrace}{}\textbf{\ref{lem:ptrace}}\quad{\small\texttt{\detokenize{Fermionic.ptraceE_add}}}\par
+{\small\noindent\phantom{\ref{lem:ptrace}}\quad\texttt{\detokenize{Fermionic.ptraceE_smul}}}\par
+{\small\noindent\phantom{\ref{lem:ptrace}}\quad\texttt{\detokenize{Fermionic.trace_ptraceE}}}\par
+{\small\noindent\phantom{\ref{lem:ptrace}}\quad\texttt{\detokenize{Fermionic.ptraceE_tensor}}}\par
+{\small\noindent\phantom{\ref{lem:ptrace}}\quad\texttt{\detokenize{Fermionic.ptraceE_tensor_one_mul}}}\par
+{\small\noindent\phantom{\ref{lem:ptrace}}\quad\texttt{\detokenize{Fermionic.ptraceE_mul_tensor_one}}}\par
+{\small\noindent\phantom{\ref{lem:ptrace}}\quad\texttt{\detokenize{Fermionic.ptraceE_mul_one_tensor_comm}}}\par
+{\small\noindent\phantom{\ref{lem:ptrace}}\quad\texttt{\detokenize{Fermionic.trace_ptraceE_mul}}}\par
+{\small\noindent\phantom{\ref{lem:ptrace}}\quad\texttt{\detokenize{Fermionic.ptraceE_conjTranspose}}}\par
+{\small\noindent\phantom{\ref{lem:ptrace}}\quad\texttt{\detokenize{Fermionic.ptraceE_posSemidef}}}\par
+{\small\noindent\phantom{\ref{lem:ptrace}}\quad\texttt{\detokenize{Fermionic.isDensity_ptraceE}}}\par
+{\small\noindent\phantom{\ref{lem:ptrace}}\quad\texttt{\detokenize{Fermionic.trace_ptraceR}}}\par
+{\small\noindent\phantom{\ref{lem:ptrace}}\quad\texttt{\detokenize{Fermionic.ptraceR_tensor}}}\par
+{\small\noindent\phantom{\ref{lem:ptrace}}\quad\texttt{\detokenize{Fermionic.trace_ptraceR_mul}}}\par
+{\small\noindent\phantom{\ref{lem:ptrace}}\quad\texttt{\detokenize{Fermionic.ptraceR_conjTranspose}}}\par
+{\small\noindent\phantom{\ref{lem:ptrace}}\quad\texttt{\detokenize{Fermionic.ptraceR_posSemidef}}}\par
+{\small\noindent\phantom{\ref{lem:ptrace}}\quad\texttt{\detokenize{Fermionic.isDensity_ptraceR}}}\par
+{\small\noindent\path{FermionicLean/Fock/PartialTrace.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:marginal}{}\textbf{\ref{thm:marginal}}\quad{\small\texttt{\detokenize{Fermionic.wick_map_of_dotProduct}}}\par
+{\small\noindent\phantom{\ref{thm:marginal}}\quad\texttt{\detokenize{Fermionic.covariance_ptraceE}}}\par
+{\small\noindent\phantom{\ref{thm:marginal}}\quad\texttt{\detokenize{Fermionic.covariance_ptraceR}}}\par
+{\small\noindent\phantom{\ref{thm:marginal}}\quad\texttt{\detokenize{Fermionic.isGaussian_ptraceE}}}\par
+{\small\noindent\phantom{\ref{thm:marginal}}\quad\texttt{\detokenize{Fermionic.isGaussian_ptraceR}}}\par
+{\small\noindent\path{FermionicLean/Fock/PartialTrace.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:relation}{}\textbf{\ref{thm:relation}}\quad{\small\texttt{\detokenize{Fermionic.relation_productMixture}}}\par
+{\small\noindent\phantom{\ref{thm:relation}}\quad\texttt{\detokenize{Fermionic.conjTranspose_mul_lincomb_mul}}}\par
+{\small\noindent\phantom{\ref{thm:relation}}\quad\texttt{\detokenize{Fermionic.IsGaussian.relation}}}\par
+{\small\noindent\phantom{\ref{thm:relation}}\quad\texttt{\detokenize{Fermionic.IsGaussian.parity_conj}}}\par
+{\small\noindent\path{FermionicLean/Fock/Relation.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:criterion}{}\textbf{\ref{thm:criterion}}\quad{\small\texttt{\detokenize{Fermionic.momentList_eq_trace_mul_wick_of_recursion}}}\par
+{\small\noindent\phantom{\ref{thm:criterion}}\quad\texttt{\detokenize{Fermionic.recursion_of_relation'}}}\par
+{\small\noindent\phantom{\ref{thm:criterion}}\quad\texttt{\detokenize{Fermionic.momentList_eq_trace_mul_wick_of_relation}}}\par
+{\small\noindent\phantom{\ref{thm:criterion}}\quad\texttt{\detokenize{Fermionic.isGaussian_of_relation}}}\par
+{\small\noindent\path{FermionicLean/Fock/Relation.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:positive}{}\textbf{\ref{lem:positive}}\quad{\small\texttt{\detokenize{Fermionic.contractRaw_posSemidef}}}\par
+{\small\noindent\phantom{\ref{lem:positive}}\quad\texttt{\detokenize{Fermionic.normalization_nonneg}}}\par
+{\small\noindent\phantom{\ref{lem:positive}}\quad\texttt{\detokenize{Fermionic.isDensity_contractState}}}\par
+{\small\noindent\phantom{\ref{lem:positive}}\quad\texttt{\detokenize{Fermionic.parity_mul_mul_tensor_one}}}\par
+{\small\noindent\phantom{\ref{lem:positive}}\quad\texttt{\detokenize{Fermionic.momentList_contractRaw_eq_zero_of_odd}}}\par
+{\small\noindent\path{FermionicLean/Fock/GaussianMap.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:state-contract}{}\textbf{\ref{thm:state-contract}}\quad{\small\texttt{\detokenize{Fermionic.row_system_solution}}}\par
+{\small\noindent\phantom{\ref{thm:state-contract}}\quad\texttt{\detokenize{Fermionic.recursion_contractRaw}}}\par
+{\small\noindent\phantom{\ref{thm:state-contract}}\quad\texttt{\detokenize{Fermionic.momentList_contractRaw_eq_wick}}}\par
+{\small\noindent\path{FermionicLean/Contraction/RowSolve.lean, FermionicLean/Fock/GaussianMap.lean}}\par\medskip
+\noindent\hypertarget{lean:cor:contract-state}{}\textbf{\ref{cor:contract-state}}\quad{\small\texttt{\detokenize{Fermionic.covariance_contractState}}}\par
+{\small\noindent\phantom{\ref{cor:contract-state}}\quad\texttt{\detokenize{Fermionic.isGaussian_contractState}}}\par
+{\small\noindent\path{FermionicLean/Fock/GaussianMap.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:schur}{}\textbf{\ref{lem:schur}}\quad{\small\texttt{\detokenize{Fermionic.det_one_sub_mul_fromBlocks}}}\par
+{\small\noindent\path{FermionicLean/Contraction/BlockDet.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:kernel}{}\textbf{\ref{lem:kernel}}\quad{\small\texttt{\detokenize{Fermionic.linearMap_eq_zero_of_ranges}}}\par
+{\small\noindent\path{FermionicLean/Fock/GaussianMap.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:normalization}{}\textbf{\ref{thm:normalization}}\quad{\small\texttt{\detokenize{Fermionic.mul_eq_zero_of_trace_mul_eq_zero}}}\par
+{\small\noindent\phantom{\ref{thm:normalization}}\quad\texttt{\detokenize{Fermionic.mul_prod_mul_eq_zero}}}\par
+{\small\noindent\phantom{\ref{thm:normalization}}\quad\texttt{\detokenize{Fermionic.normalization_ne_zero}}}\par
+{\small\noindent\phantom{\ref{thm:normalization}}\quad\texttt{\detokenize{Fermionic.normalization_pos}}}\par
+{\small\noindent\phantom{\ref{thm:normalization}}\quad\texttt{\detokenize{Fermionic.isGaussian_contractState'}}}\par
+{\small\noindent\path{FermionicLean/Fock/GaussianMap.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:chain-state}{}\textbf{\ref{thm:chain-state}}\quad{\small\texttt{\detokenize{Fermionic.contractCov_inputCov_bondCov}}}\par
+{\small\noindent\phantom{\ref{thm:chain-state}}\quad\texttt{\detokenize{Fermionic.normalization_chain_pos}}}\par
+{\small\noindent\phantom{\ref{thm:chain-state}}\quad\texttt{\detokenize{Fermionic.isGaussian_chainState}}}\par
+{\small\noindent\phantom{\ref{thm:chain-state}}\quad\texttt{\detokenize{Fermionic.covariance_chainState}}}\par
+{\small\noindent\path{FermionicLean/Chain/State.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:rank-one}{}\textbf{\ref{lem:rank-one}}\quad{\small\texttt{\detokenize{Fermionic.partialInner}}}\par
+{\small\noindent\phantom{\ref{lem:rank-one}}\quad\texttt{\detokenize{Fermionic.contractRaw_vecMulVec}}}\par
+{\small\noindent\phantom{\ref{lem:rank-one}}\quad\texttt{\detokenize{Fermionic.normalization_vecMulVec}}}\par
+{\small\noindent\path{FermionicLean/Fock/Pure.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:idempotent}{}\textbf{\ref{thm:idempotent}}\quad{\small\texttt{\detokenize{Fermionic.abs_eq_one_of_productMixture_mul_self}}}\par
+{\small\noindent\phantom{\ref{thm:idempotent}}\quad\texttt{\detokenize{Fermionic.IsGaussian.isPure_covariance_of_mul_self}}}\par
+{\small\noindent\phantom{\ref{thm:idempotent}}\quad\texttt{\detokenize{Fermionic.IsGaussian.mul_self_iff_isPure}}}\par
+{\small\noindent\path{FermionicLean/Fock/Pure.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:pure-contract}{}\textbf{\ref{thm:pure-contract}}\quad{\small\texttt{\detokenize{Fermionic.conjTranspose_mul_occupation_mul_eq_vecMulVec}}}\par
+{\small\noindent\phantom{\ref{thm:pure-contract}}\quad\texttt{\detokenize{Fermionic.IsGaussian.exists_vecMulVec_eq_of_isPure}}}\par
+{\small\noindent\phantom{\ref{thm:pure-contract}}\quad\texttt{\detokenize{Fermionic.contractState_mul_self_of_isPure}}}\par
+{\small\noindent\path{FermionicLean/Fock/Pure.lean}}\par\medskip
+\noindent\hypertarget{lean:cor:cov-pure}{}\textbf{\ref{cor:cov-pure}}\quad{\small\texttt{\detokenize{Fermionic.isPure_contractCov_of_isPure}}}\par
+{\small\noindent\path{FermionicLean/Fock/Pure.lean}}\par\medskip
+\noindent\hypertarget{lean:cor:chain-pure}{}\textbf{\ref{cor:chain-pure}}\quad{\small\texttt{\detokenize{Fermionic.pure_periodicInput_iff}}}\par
+{\small\noindent\phantom{\ref{cor:chain-pure}}\quad\texttt{\detokenize{Fermionic.isPure_inputCov}}}\par
+{\small\noindent\phantom{\ref{cor:chain-pure}}\quad\texttt{\detokenize{Fermionic.isPure_bondCov}}}\par
+{\small\noindent\phantom{\ref{cor:chain-pure}}\quad\texttt{\detokenize{Fermionic.chainState_mul_self_of_forall_pure}}}\par
+{\small\noindent\phantom{\ref{cor:chain-pure}}\quad\texttt{\detokenize{Fermionic.pure_periodicCovariance_of_forall_pure}}}\par
+{\small\noindent\path{FermionicLean/Chain/Pure.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:pure-ground}{}\textbf{\ref{thm:pure-ground}}\quad{\small\texttt{\detokenize{Fermionic.groundEnergy_of_abs_eq_one}}}\par
+{\small\noindent\phantom{\ref{thm:pure-ground}}\quad\texttt{\detokenize{Fermionic.blockForm_neg_sgn_of_abs_eq_one}}}\par
+{\small\noindent\phantom{\ref{thm:pure-ground}}\quad\texttt{\detokenize{Fermionic.groundState_of_isPure}}}\par
+{\small\noindent\phantom{\ref{thm:pure-ground}}\quad\texttt{\detokenize{Fermionic.eq_of_energy_neg_eq_of_isPure}}}\par
+{\small\noindent\phantom{\ref{thm:pure-ground}}\quad\texttt{\detokenize{Fermionic.energy_neg_eq_of_isPure}}}\par
+{\small\noindent\path{FermionicLean/Fock/PureGround.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:gap}{}\textbf{\ref{thm:gap}}\quad{\small\texttt{\detokenize{Fermionic.diag_conj_eq_trace_mul}}}\par
+{\small\noindent\phantom{\ref{thm:gap}}\quad\texttt{\detokenize{Fermionic.groundEnergy_add_one_le_blockEnergy}}}\par
+{\small\noindent\phantom{\ref{thm:gap}}\quad\texttt{\detokenize{Fermionic.blockEnergy_update_groundConfig}}}\par
+{\small\noindent\phantom{\ref{thm:gap}}\quad\texttt{\detokenize{Fermionic.energy_neg_ge_of_trace_mul_eq_zero}}}\par
+{\small\noindent\phantom{\ref{thm:gap}}\quad\texttt{\detokenize{Fermionic.exists_trace_mul_eq_zero_and_energy_neg_eq}}}\par
+{\small\noindent\path{FermionicLean/Fock/Gap.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:kitaev-explicit}{}\textbf{\ref{lem:kitaev-explicit}}\quad{\small\texttt{\detokenize{Fermionic.kitaevCov}}}\par
+{\small\noindent\phantom{\ref{lem:kitaev-explicit}}\quad\texttt{\detokenize{Fermionic.isPure_kitaevCov}}}\par
+{\small\noindent\phantom{\ref{lem:kitaev-explicit}}\quad\texttt{\detokenize{Fermionic.kitaevHam}}}\par
+{\small\noindent\phantom{\ref{lem:kitaev-explicit}}\quad\texttt{\detokenize{Fermionic.kitaevHam_eq}}}\par
+{\small\noindent\path{FermionicLean/Chain/KitaevState.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:kitaev-ground}{}\textbf{\ref{thm:kitaev-ground}}\quad{\small\texttt{\detokenize{Fermionic.kitaevState}}}\par
+{\small\noindent\phantom{\ref{thm:kitaev-ground}}\quad\texttt{\detokenize{Fermionic.covariance_kitaevState}}}\par
+{\small\noindent\phantom{\ref{thm:kitaev-ground}}\quad\texttt{\detokenize{Fermionic.isGaussian_kitaevState}}}\par
+{\small\noindent\phantom{\ref{thm:kitaev-ground}}\quad\texttt{\detokenize{Fermionic.kitaevState_mul_self}}}\par
+{\small\noindent\phantom{\ref{thm:kitaev-ground}}\quad\texttt{\detokenize{Fermionic.energy_kitaevState}}}\par
+{\small\noindent\phantom{\ref{thm:kitaev-ground}}\quad\texttt{\detokenize{Fermionic.energy_kitaevState'}}}\par
+{\small\noindent\phantom{\ref{thm:kitaev-ground}}\quad\texttt{\detokenize{Fermionic.energy_kitaevHam_ge}}}\par
+{\small\noindent\phantom{\ref{thm:kitaev-ground}}\quad\texttt{\detokenize{Fermionic.eq_kitaevState_of_energy_eq}}}\par
+{\small\noindent\path{FermionicLean/Chain/KitaevState.lean}}\par\medskip
+\noindent\hypertarget{lean:cor:kitaev-gap}{}\textbf{\ref{cor:kitaev-gap}}\quad{\small\texttt{\detokenize{Fermionic.energy_kitaevHam_ge_of_trace_mul_eq_zero}}}\par
+{\small\noindent\phantom{\ref{cor:kitaev-gap}}\quad\texttt{\detokenize{Fermionic.exists_trace_mul_kitaevState_eq_zero_and_energy_eq}}}\par
+{\small\noindent\path{FermionicLean/Chain/KitaevGap.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:nullity}{}\textbf{\ref{lem:nullity}}\quad{\small\texttt{\detokenize{Fermionic.finrank_ker_toBlocks12_le_inv}}}\par
+{\small\noindent\phantom{\ref{lem:nullity}}\quad\texttt{\detokenize{Fermionic.rank_toBlocks12_inv}}}\par
+{\small\noindent\path{FermionicLean/Gaussian/Nullity.lean}}\par\medskip
+\noindent\hypertarget{lean:lem:pure-inverse}{}\textbf{\ref{lem:pure-inverse}}\quad{\small\texttt{\detokenize{Fermionic.isUnit_det_add_of_pure}}}\par
+{\small\noindent\phantom{\ref{lem:pure-inverse}}\quad\texttt{\detokenize{Fermionic.mul_inv_one_sub_mul_eq_neg_inv_add_of_pure}}}\par
+{\small\noindent\path{FermionicLean/Contraction/PureInverse.lean}}\par\medskip
+\noindent\hypertarget{lean:thm:cross-rank}{}\textbf{\ref{thm:cross-rank}}\quad{\small\texttt{\detokenize{Fermionic.siteOf}}}\par
+{\small\noindent\phantom{\ref{thm:cross-rank}}\quad\texttt{\detokenize{Fermionic.cutBonds}}}\par
+{\small\noindent\phantom{\ref{thm:cross-rank}}\quad\texttt{\detokenize{Fermionic.crossBlock}}}\par
+{\small\noindent\phantom{\ref{thm:cross-rank}}\quad\texttt{\detokenize{Fermionic.periodicInput_apply_of_siteOf_ne}}}\par
+{\small\noindent\phantom{\ref{thm:cross-rank}}\quad\texttt{\detokenize{Fermionic.crossBlock_mul_mul_eq}}}\par
+{\small\noindent\phantom{\ref{thm:cross-rank}}\quad\texttt{\detokenize{Fermionic.rank_toBlocks12_periodicBond_submatrix_le}}}\par
+{\small\noindent\phantom{\ref{thm:cross-rank}}\quad\texttt{\detokenize{Fermionic.rank_crossBlock_periodicCovariance_le}}}\par
+{\small\noindent\path{FermionicLean/Chain/Cut.lean}}\par\medskip
+\noindent\hypertarget{lean:cor:ent-rank}{}\textbf{\ref{cor:ent-rank}}\quad{\small\texttt{\detokenize{Fermionic.one_add_blockCov_sq_eq}}}\par
+{\small\noindent\phantom{\ref{cor:ent-rank}}\quad\texttt{\detokenize{Fermionic.rank_one_add_blockCov_sq_le}}}\par
+{\small\noindent\phantom{\ref{cor:ent-rank}}\quad\texttt{\detokenize{Fermionic.rank_one_add_sq_normalForm}}}\par
+{\small\noindent\path{FermionicLean/Chain/Cut.lean}}\par\medskip

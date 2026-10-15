@@ -1,0 +1,25 @@
+name = "FermionicLean"
+version = "0.1.0"
+keywords = ["math", "quantum", "fermionic"]
+defaultTargets = ["FermionicLean"]
+
+[leanOptions]
+pp.unicode.fun = true
+relaxedAutoImplicit = false
+weak.linter.mathlibStandardSet = true
+maxSynthPendingDepth = 3
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.35.0-rc3"
+
+[[lean_lib]]
+name = "FermionicLean"
+moreLeanArgs = ["-j1"]
+
+# The sealed statements and their proofs (verify/); `lake comparator` reads both modules.
+[[lean_lib]]
+name = "Verify"
+srcDir = "verify"
+roots = ["Challenge", "Solution"]

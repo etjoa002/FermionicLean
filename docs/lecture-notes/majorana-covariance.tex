@@ -1,0 +1,217 @@
+\section{Majorana covariance matrices}
+\label{sec:majorana}
+For $n\geq0$, use coordinates $(x_1,\ldots,x_n,y_1,\ldots,y_n)$ on $\R^{2n}$; for
+each mode $j$ we label its two Majorana operators $x_j$ and $y_j$. All matrices are
+real unless stated otherwise, and $\|v\|^2=v^{\T}v$ is the squared Euclidean norm.
+For a real symmetric matrix $A$, the notation $A\succeq0$ means $v^{\T}Av\geq0$ for
+every real column vector $v$. For a complex matrix $H$, $H\succeq0$ means that
+$H=H^*$ and $z^*Hz\geq0$ for every complex column vector $z$, where $H^*$ is the
+conjugate transpose. We regard real matrices as complex matrices when they enter
+the complex inequality. The case $n=0$ is included throughout: the empty matrix
+satisfies every condition below.
+
+\motiv{The two conditions of Definition~\ref{def:admissible} are the ones a state imposes. If
+$c_1,\ldots,c_{2n}$ are Hermitian operators with $c_jc_k+c_kc_j=2\delta_{jk}$ and
+$\rho$ is a density operator, the numbers $\Gamma_{jk}=\tfrac{\ii}{2}\tr(\rho[c_j,c_k])$
+are real and antisymmetric, and $1+\ii\Gamma\succeq0$ is exactly the statement
+$\tr(\rho A^*A)\geq0$ for the operators $A=\sum_j\overline{z_j}\,c_j$. Section~\ref{sec:fock}
+proves both facts (Theorems~\ref{thm:reality} and~\ref{thm:admissible});
+this section derives only what follows from the matrix conditions.}
+
+\begin{definition}[Admissible covariance]\label{def:admissible}
+A real $2n\times2n$ matrix $\Gamma$ is called \emph{admissible} (a physical covariance) if
+\begin{equation}\label{eq:admissibility}
+ \Gamma^{\T}=-\Gamma,\qquad 1-\Gamma^{\T}\Gamma\succeq0 .
+\end{equation}
+\end{definition}
+The matrix $1-\Gamma^{\T}\Gamma$ is symmetric for every $\Gamma$, so the second
+condition is the real positive semidefiniteness of a symmetric matrix.
+
+\motiv{\revs{A second condition singles out the covariances of pure states: for a Gaussian state,
+$\Gamma^2=-1$ holds exactly when the state is pure~\cite[Sec.~2]{bravyi}
+(Theorem~\ref{thm:idempotent} in Section~\ref{sec:fmps}). Here the condition is taken as the
+definition.}}
+
+\begin{definition}[Pure covariance]\label{def:pure}
+A real $2n\times2n$ matrix $\Gamma$ is called \emph{pure} if
+$\Gamma^{\T}=-\Gamma$ and $\Gamma^2=-1$.
+\end{definition}
+\revs{A pure covariance is orthogonal, since $\Gamma^{\T}\Gamma=-\Gamma^2=1$, and it is a complex
+structure on $\R^{2n}$: since $(\Gamma-\ii)(\Gamma+\ii)=\Gamma^2+1=0$, $\Gamma$ is diagonalizable
+over $\C$ with eigenvalues $\pm\ii$ (a matrix annihilated by a polynomial with distinct roots is
+diagonalizable), and complex conjugation maps the $\ii$-eigenspace onto the $-\ii$-eigenspace
+because $\Gamma$ is real, so each has dimension $n$.}
+
+For any real matrix $A$ and real vector $v$, $v^{\T}Av=v^{\T}A^{\T}v$; hence
+$v^{\T}\Gamma v=0$ when $\Gamma$ is antisymmetric, and $a^{\T}\Gamma b=-b^{\T}\Gamma a$
+for all real $a,b$. For any real matrix $O$ and real symmetric $A\succeq0$, the
+congruence $OAO^{\T}$ is symmetric and
+$v^{\T}OAO^{\T}v=(O^{\T}v)^{\T}A(O^{\T}v)\geq0$, so $OAO^{\T}\succeq0$.
+
+\subsection{Equivalent forms of admissibility}
+
+\begin{theorem}[Norm form]\label{thm:norm-form}
+Let $\Gamma^{\T}=-\Gamma$. Then $\Gamma$ is admissible if and only if
+$\|\Gamma v\|\leq\|v\|$ for every $v\in\R^{2n}$.
+\end{theorem}
+\begin{proof}
+For real $v$, $v^{\T}(1-\Gamma^{\T}\Gamma)v=\|v\|^2-\|\Gamma v\|^2$.
+\end{proof}
+
+\motiv{The real form is the one the
+operations of Section~\ref{subsec:operations} preserve
+(Theorems~\ref{thm:orthogonal}--\ref{thm:sum}); the Hermitian form is the one a state
+delivers, since $z^*(1+\ii\Gamma)z=\tr(\rho A^*A)$ for $A=\sum_j\overline{z_j}c_j$
+(Theorem~\ref{thm:admissible}).}
+
+\begin{theorem}[Hermitian form]\label{thm:hermitian-form}
+Let $\Gamma^{\T}=-\Gamma$. Then $\Gamma$ is admissible if and only if
+$1+\ii\Gamma\succeq0$ as a complex matrix.
+\end{theorem}
+\begin{proof}
+The matrix $1+\ii\Gamma$ is Hermitian, since
+$(\ii\Gamma)^*=-\ii\Gamma^{\T}=\ii\Gamma$. Write $z=a+\ii b$ with $a,b$ real.
+Then $z^*=a^{\T}-\ii b^{\T}$ and
+\[
+ z^*(1+\ii\Gamma)z
+ =(a^{\T}-\ii b^{\T})(a+\ii b)+\ii(a^{\T}-\ii b^{\T})\Gamma(a+\ii b)
+ =\|a\|^2+\|b\|^2+\ii\bigl(\ii\,a^{\T}\Gamma b-\ii\,b^{\T}\Gamma a\bigr),
+\]
+using $a^{\T}\Gamma a=b^{\T}\Gamma b=0$. With $a^{\T}\Gamma b=-b^{\T}\Gamma a$ this gives
+\begin{equation}\label{eq:hermitian-form}
+ z^*(1+\ii\Gamma)z=\|a\|^2+\|b\|^2+2\,b^{\T}\Gamma a .
+\end{equation}
+Suppose $\|\Gamma a\|\leq\|a\|$ for all $a$. Expanding $0\leq\|b+\Gamma a\|^2$ gives
+$2\,b^{\T}\Gamma a\geq-\|b\|^2-\|\Gamma a\|^2$, so the right side of
+\eqref{eq:hermitian-form} is at least $\|a\|^2-\|\Gamma a\|^2\geq0$. Conversely, if
+the right side is nonnegative for all $a,b$, the choice $b=-\Gamma a$ gives
+$\|a\|^2-\|\Gamma a\|^2\geq0$. Theorem~\ref{thm:norm-form} completes both directions.
+\end{proof}
+\begin{remark}\label{rem:bosonic}
+For bosonic covariances the corresponding condition is $\gamma-\ii\Omega_n\succeq0$
+with $\Omega_n$ the symplectic form on the quadratures; for fermions the identity and
+the symplectic form exchange roles. The coordinates $x_j,y_j$ of these notes label the
+two Majorana operators of a mode and are not quadratures.
+\end{remark}
+
+\begin{theorem}[Purity]\label{thm:purity}
+Every pure covariance is admissible, satisfies $\Gamma^{\T}\Gamma=1$, and is an
+isometry: $\|\Gamma v\|=\|v\|$ for all $v$.
+\end{theorem}
+\begin{proof}
+$\Gamma^{\T}\Gamma=-\Gamma^2=1$, so $1-\Gamma^{\T}\Gamma=0\succeq0$, and
+$\|\Gamma v\|^2=v^{\T}\Gamma^{\T}\Gamma v=\|v\|^2$.
+\end{proof}
+
+\subsection{Changes of basis, subsystems and direct sums}
+\label{subsec:operations}
+\noindent A unitary $U$ that maps each Majorana operator to a real linear combination,
+$Uc_jU^*=\sum_kO_{jk}c_k$ with $O$ real, has $O$ orthogonal, because the images again
+satisfy $c_jc_k+c_kc_j=2\delta_{jk}$; the state $U^*\rho U$ then has covariance
+$O\Gamma O^{\T}$~\cite[Sec.~2]{bravyi} ($U$ implements $O$ in the terminology of
+Section~\ref{sec:hamiltonian}). Admissibility and purity survive this congruence
+(Theorem~\ref{thm:orthogonal}). Discarding modes restricts $\Gamma$ to the remaining
+coordinates; admissibility survives (Theorem~\ref{thm:subsystem}), purity need not
+(Remark~\ref{rem:purity-subsystem}). Preparing two systems independently gives the direct
+sum of their covariances, and admissibility and purity are decided blockwise
+(Theorem~\ref{thm:sum}). We build matrix product states from these three operations
+and a fourth, contraction (Section~\ref{sec:contraction}).
+
+\begin{theorem}[Orthogonal congruence]\label{thm:orthogonal}
+Let $O$ be a real $2n\times2n$ matrix with $OO^{\T}=1$. If $\Gamma$ is admissible,
+then $O\Gamma O^{\T}$ is admissible; if $\Gamma$ is pure, then $O\Gamma O^{\T}$ is pure.
+\end{theorem}
+\begin{proof}
+Since $O$ is square, $OO^{\T}=1$ makes $O$ invertible with inverse $O^{\T}$, so
+$O^{\T}O=1$ as well. Antisymmetry:
+$(O\Gamma O^{\T})^{\T}=O\Gamma^{\T}O^{\T}=-O\Gamma O^{\T}$. Inserting $O^{\T}O=1$,
+$(O\Gamma O^{\T})^{\T}(O\Gamma O^{\T})=O\Gamma^{\T}\Gamma O^{\T}$, hence
+$1-(O\Gamma O^{\T})^{\T}(O\Gamma O^{\T})=O(1-\Gamma^{\T}\Gamma)O^{\T}\succeq0$
+by the congruence fact above. For purity,
+$(O\Gamma O^{\T})^2=O\Gamma^2O^{\T}=-OO^{\T}=-1$.
+\end{proof}
+
+To select a subsystem, we take both Majorana coordinates of each chosen mode
+together. An injective map $e:\{1,\ldots,m\}\to\{1,\ldots,n\}$ lists $m$ distinct
+modes; write $\bar e(x_a)=x_{e(a)}$ and $\bar e(y_a)=y_{e(a)}$ for the induced map on
+coordinates.
+
+\begin{theorem}[Mode selection]\label{thm:subsystem}
+Let $e$ be injective and let $\Gamma$ be admissible. Then the $2m\times2m$ matrix
+$\Gamma'_{\alpha\beta}=\Gamma_{\bar e(\alpha)\bar e(\beta)}$ is admissible. The empty
+selection $m=0$ is included.
+\end{theorem}
+\begin{proof}
+Antisymmetry passes to the restriction, since
+$\Gamma'_{\beta\alpha}=\Gamma_{\bar e(\beta)\bar e(\alpha)}=-\Gamma_{\bar e(\alpha)\bar e(\beta)}$.
+For $v\in\R^{2m}$ let $\tilde v\in\R^{2n}$ have $\tilde v_{\bar e(\alpha)}=v_\alpha$ and
+all other entries zero; this is well defined because $\bar e$ is injective, and
+$\|\tilde v\|=\|v\|$. For each $\alpha$,
+$(\Gamma'v)_\alpha=\sum_\beta\Gamma_{\bar e(\alpha)\bar e(\beta)}v_\beta=(\Gamma\tilde v)_{\bar e(\alpha)}$.
+A sum of squares over the coordinates $\bar e(\alpha)$ is at most the sum over all
+coordinates, so
+$\|\Gamma'v\|^2\leq\|\Gamma\tilde v\|^2\leq\|\tilde v\|^2=\|v\|^2$ by
+Theorem~\ref{thm:norm-form}, which then also gives admissibility of $\Gamma'$.
+\end{proof}
+\begin{remark}\label{rem:purity-subsystem}
+Purity does not pass to subsystems: the reduced covariance of an entangled pure
+state is not pure.
+\end{remark}
+
+For $\Gamma_1$ of size $2n_1$ and $\Gamma_2$ of size $2n_2$, the
+\emph{direct sum} $\Gamma_1\oplus\Gamma_2$ (the covariance of two uncorrelated systems) is the $2(n_1+n_2)$ matrix with
+entries $(\Gamma_1)$ on the coordinates of the first $n_1$ modes, $(\Gamma_2)$ on
+those of the last $n_2$ modes, and zero cross entries, in the $(x,y)$ ordering of
+the composite system.
+
+\begin{theorem}[Independent sums]\label{thm:sum}
+$\Gamma_1\oplus\Gamma_2$ is admissible if and only if $\Gamma_1$ and $\Gamma_2$ are
+admissible, and pure if and only if both are pure.
+\end{theorem}
+\begin{proof}
+Conjugation by the permutation matrix that groups the coordinates of each subsystem
+together carries $\Gamma_1\oplus\Gamma_2$ to $\operatorname{diag}(\Gamma_1,\Gamma_2)$.
+This conjugation is a ring isomorphism of matrices that commutes with
+transposition and fixes $1$; it therefore carries antisymmetry,
+$1-\Gamma^{\T}\Gamma$ and $\Gamma^2$ to the corresponding block-diagonal
+quantities, and it preserves $\succeq0$ by the congruence fact with $O$ the
+permutation matrix or its transpose. It remains to decide each property blockwise.
+Transposition and products of block-diagonal matrices are blockwise, so
+$\operatorname{diag}(\Gamma_1,\Gamma_2)$ is antisymmetric, or squares to $-1$,
+exactly when both blocks do. For $v=(v_1,v_2)$,
+\[
+ v^{\T}\operatorname{diag}(A_1,A_2)v=v_1^{\T}A_1v_1+v_2^{\T}A_2v_2,
+\]
+so $\operatorname{diag}(A_1,A_2)\succeq0$ when both blocks are, and conversely
+taking $v_2=0$ or $v_1=0$ isolates each block. Apply this with
+$A_i=1-\Gamma_i^{\T}\Gamma_i$.
+\end{proof}
+
+\subsection{The standard covariance and one mode}
+Let
+\begin{equation}\label{eq:standard}
+ \Omega_n=\begin{pmatrix}0&1_n\\-1_n&0\end{pmatrix}
+\end{equation}
+in the coordinates $(x,y)$. It is antisymmetric and $\Omega_n^2=-1$, so $\Omega_n$
+is pure. On Fock
+space, $\Omega_n$ is the covariance of the state with every mode occupied and $-\Omega_n$
+that of the vacuum (Corollary~\ref{cor:vacuum}).
+\motiv{The covariance of every state with a definite occupation in each mode is
+$\Omega_n$ with the sign of each mode's $2\times2$ block chosen independently
+(Theorem~\ref{thm:occupation}); Proposition~\ref{prop:one-mode} shows that these signed
+blocks are the only pure one-mode covariances.}
+
+\begin{proposition}[One mode]\label{prop:one-mode}
+Every real antisymmetric $2\times2$ matrix has the form
+$\Gamma_\lambda=\lambda\Omega_1$ with $\lambda\in\R$. $\Gamma_\lambda$ is admissible
+if and only if $|\lambda|\leq1$, and pure if and only if $|\lambda|=1$.
+\end{proposition}
+\begin{proof}
+Antisymmetry forces zero diagonal entries and opposite off-diagonal entries, which
+is the stated form with $\lambda$ the $(x_1,y_1)$ entry. Then
+$\Gamma_\lambda^{\T}\Gamma_\lambda=\lambda^2\cdot1$ and
+$\Gamma_\lambda^2=-\lambda^2\cdot1$. For a real number $c$, the matrix $c\cdot1$
+satisfies $c\cdot1\succeq0$ exactly when $c\geq0$, since $v^{\T}(c\cdot1)v=c\|v\|^2$;
+with $c=1-\lambda^2$ this gives admissibility exactly when $\lambda^2\leq1$. Purity
+is $-\lambda^2\cdot1=-1$, that is $\lambda^2=1$.
+\end{proof}

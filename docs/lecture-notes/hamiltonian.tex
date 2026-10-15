@@ -1,0 +1,436 @@
+\section{Quadratic Hamiltonians and the realization of covariances}
+\label{sec:hamiltonian}
+\motiv{Every admissible matrix is the covariance of a density operator
+(Theorem~\ref{thm:realization}), the converse of Theorem~\ref{thm:admissible}, and every
+quadratic Hamiltonian has a Gaussian ground state (Theorem~\ref{thm:ground-state} \vet{and
+Corollary~\ref{cor:families}(c)}). Both rest
+on one matrix fact, the normal form $\Gamma=O\,\D(\varepsilon)\,O^{\T}$ of a real
+antisymmetric matrix (Theorem~\ref{thm:normal-form}), and on one Fock-space fact, that every
+rotation $O$ is implemented by a unitary (Theorem~\ref{thm:implement}).}
+
+Throughout, $n$ modes carry the labels $x_1,\ldots,x_n,y_1,\ldots,y_n$, vectors of $\R^{2n}$
+are indexed by the labels, $e_a$ is the unit vector of the label $a$, $u\cdot v$ is the
+Euclidean inner product, and $\langle u,v\rangle=\sum_a\overline{u_a}v_a$ is the inner product of
+$\C^{2n}$, conjugate-linear in the first argument. For a function $d$ on the configurations $s\in\{0,1\}^n$,
+$\operatorname{diag}(d)$ is the matrix on $\mathcal F_n$ with $d(s)$ at the position $(s,s)$
+and zero elsewhere. The Majorana operators $c_a$ are those of Definition~\ref{def:majorana},
+$\rho$ is a density operator and $\Gamma(\rho)$ its covariance (Definition~\ref{def:density}).
+A unitary $U$ \emph{implements} a real matrix $O$ when
+$Uc_aU^*=\sum_bO_{ab}c_b$ for every label $a$ ($U$ is the Gaussian unitary, or Bogoliubov
+transformation, of the rotation $O$; Theorem~\ref{thm:congruence}); then
+$OO^{\T}=1$, $U^*c_aU=\sum_bO_{ba}c_b$, $U^*$ implements $O^{\T}$, and
+$\Gamma(U\rho U^*)=O^{\T}\Gamma(\rho)O$, $\Gamma(U^*\rho U)=O\,\Gamma(\rho)\,O^{\T}$.
+
+\subsection{The canonical form and the energy of a quadratic Hamiltonian}
+\label{sec:blockform}
+
+\begin{definition}[Canonical form]\label{def:block}
+For $\varepsilon\in\R^n$, $\D(\varepsilon)$ is the matrix on the labels with
+\[
+ \D(\varepsilon)_{x_jy_j}=\varepsilon_j,\qquad \D(\varepsilon)_{y_jx_j}=-\varepsilon_j,
+\]
+and every other entry $0$; in $(x,y)$ blocks,
+$\D(\varepsilon)=\begin{pmatrix}0&\operatorname{diag}(\varepsilon)\\-\operatorname{diag}(\varepsilon)&0\end{pmatrix}$.
+\end{definition}
+The covariances of Section~\ref{sec:fock} are of this form: $\Omega_n=\D(1,\ldots,1)$
+(equation~\eqref{eq:standard}), the vacuum has $\D(-1,\ldots,-1)$, and the occupation state $|s\rangle\langle s|$ has $\D(\nu(s))$ with
+$\nu_j(s)=-1$ for $s_j=0$ and $+1$ for $s_j=1$ (Theorem~\ref{thm:occupation}). Since
+$\D(\varepsilon)^{\T}\D(\varepsilon)=\operatorname{diag}(\varepsilon^2,\varepsilon^2)$,
+$\D(\varepsilon)$ is admissible if and only if $|\varepsilon_j|\leq1$ for all $j$ and pure if and
+only if $|\varepsilon_j|=1$ for all $j$.
+
+\begin{definition}[Quadratic Hamiltonian]\label{def:ham}
+For a real matrix $h$ on the labels,
+\[
+ H_h=\frac\ii4\sum_{a,b}h_{ab}\,c_ac_b ,
+\]
+a matrix on $\mathcal F_n$. The results below assume $h^{\T}=-h$.
+\end{definition}
+For one mode and $h=\D(\varepsilon)$, $H_h=\tfrac\ii4\varepsilon(c_xc_y-c_yc_x)=\tfrac\ii2\varepsilon\,c_xc_y$;
+with $c_x=X$ and $c_y=\ii XZ$ (Definition~\ref{def:majorana}, $n=1$) this is
+$-\tfrac12\varepsilon Z=\operatorname{diag}(-\tfrac\varepsilon2,\tfrac\varepsilon2)$ on
+$(|0\rangle,|1\rangle)$: the empty mode has energy $-\varepsilon/2$, the filled mode
+$+\varepsilon/2$. Lemma~\ref{lem:diagonal} is this computation for $n$ modes.
+
+\begin{lemma}[Hermiticity, energy, conjugation]\label{lem:energy}
+Let $h^{\T}=-h$.
+\begin{enumerate}
+\item[(a)] $H_h^*=H_h$.
+\item[(b)] For every Hermitian $\rho$,
+$\tr(\rho H_h)=\tfrac14\sum_{a,b}h_{ab}\,\Gamma(\rho)_{ab}$, a real number.
+\item[(c)] If the unitary $U$ implements $O$, then $UH_hU^*=H_{O^{\T}hO}$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) $(c_ac_b)^*=c_bc_a$, so
+$H_h^*=-\tfrac\ii4\sum_{ab}h_{ab}c_bc_a=-\tfrac\ii4\sum_{ab}h_{ba}c_ac_b=H_h$.
+(b) By Theorem~\ref{thm:car}, $c_ac_b=\delta_{ab}+\tfrac12[c_a,c_b]$; the diagonal terms
+carry $h_{aa}=0$, so $\tr(\rho H_h)=\tfrac\ii8\sum_{ab}h_{ab}\tr(\rho[c_a,c_b])
+=\tfrac14\sum_{ab}h_{ab}\Gamma(\rho)_{ab}$, real by Theorem~\ref{thm:reality}.
+(c) $Uc_ac_bU^*=(Uc_aU^*)(Uc_bU^*)=\sum_{c,d}O_{ac}O_{bd}\,c_cc_d$, hence
+$UH_hU^*=\tfrac\ii4\sum_{c,d}\bigl(\sum_{a,b}O_{ac}h_{ab}O_{bd}\bigr)c_cc_d=H_{O^{\T}hO}$.
+\end{proof}
+
+\begin{lemma}[The Hamiltonian of a canonical form is diagonal]\label{lem:diagonal}
+Let $n_j=\operatorname{diag}(s\mapsto s_j)$ be the number operator of mode $j$. Then
+$\ii\,c_{x_j}c_{y_j}=2n_j-1$, and for every $\varepsilon\in\R^n$
+\[
+ H_{\D(\varepsilon)}=\sum_j\varepsilon_j\bigl(n_j-\tfrac12\bigr)
+ =\operatorname{diag}\Bigl(s\mapsto\sum_j\varepsilon_j\bigl(s_j-\tfrac12\bigr)\Bigr).
+\]
+\end{lemma}
+\begin{proof}
+$Z_{<j}$ commutes with $X_j$ (Lemma~\ref{lem:pauli}), so
+$c_{x_j}c_{y_j}=\ii\,Z_{<j}X_jZ_{<j}X_jZ_j=\ii Z_j$ and
+$\ii c_{x_j}c_{y_j}=-Z_j=\operatorname{diag}(-(-1)^{s_j})=2n_j-1$. The only nonzero entries of
+$\D(\varepsilon)$ are $\varepsilon_j$ at $(x_j,y_j)$ and $-\varepsilon_j$ at $(y_j,x_j)$, so
+$H_{\D(\varepsilon)}=\tfrac\ii4\sum_j\varepsilon_j(c_{x_j}c_{y_j}-c_{y_j}c_{x_j})
+=\tfrac\ii2\sum_j\varepsilon_jc_{x_j}c_{y_j}=\tfrac12\sum_j\varepsilon_j(2n_j-1)$.
+\end{proof}
+\revs{Write $d_\varepsilon(s)=\sum_j\varepsilon_j(s_j-\tfrac12)$ for the diagonal entry of
+$H_{\D(\varepsilon)}$ at the configuration $s$.}
+
+\subsection{Ground states of a canonical form}
+\label{sec:groundstate}
+
+\begin{lemma}[Ground state of a diagonal operator]\label{lem:diag-min}
+Let $d:\{0,1\}^n\to\R$, $D=\operatorname{diag}(d)$, and let $s^\star$ satisfy
+$d(s)\geq d(s^\star)$ for all $s$. For every density operator $\rho$,
+$\tr(\rho D)=\sum_sd(s)\rho_{ss}\geq d(s^\star)$. If moreover $d(s)>d(s^\star)$ for every
+$s\neq s^\star$, then $\tr(\rho D)=d(s^\star)$ implies $\rho=|s^\star\rangle\langle s^\star|$.
+\end{lemma}
+\begin{proof}
+$\rho_{ss}\geq0$ and $\sum_s\rho_{ss}=1$, so
+$\tr(\rho D)-d(s^\star)=\sum_s\bigl(d(s)-d(s^\star)\bigr)\rho_{ss}\geq0$. Under the strict
+gaps, equality forces $\rho_{ss}=0$ for $s\neq s^\star$. For $\rho\succeq0$ a vanishing
+diagonal entry $\rho_{ss}$ forces the row and column $s$ to vanish: the $2\times2$ principal
+submatrix on $\{s,t\}$ is positive semidefinite, so $\rho_{ss}\rho_{tt}-|\rho_{st}|^2\geq0$,
+that is $\rho_{st}=0$. Hence $\rho=\rho_{s^\star s^\star}|s^\star\rangle\langle s^\star|$, and
+$\tr\rho=1$ gives $\rho_{s^\star s^\star}=1$.
+\end{proof}
+
+\begin{definition}[Ground configuration and energy of a canonical form]\label{def:ground}
+For $\varepsilon\in\R^n$ let $s^\varepsilon\in\{0,1\}^n$ have $s^\varepsilon_j=1$ if
+$\varepsilon_j<0$ and $s^\varepsilon_j=0$ otherwise, and let
+$\mathcal E_{\mathrm{gs}}(\varepsilon)=-\tfrac12\sum_j|\varepsilon_j|$. With the convention $\sgn0=1$,
+$\nu(s^\varepsilon)=-\sgn\varepsilon$ entrywise.
+\end{definition}
+
+\begin{theorem}[Ground states of a canonical form]\label{thm:block-gs}
+Let $\varepsilon\in\R^n$.
+\begin{enumerate}
+\item[(a)] For every density operator $\rho$, $\tr(\rho H_{\D(\varepsilon)})\geq \mathcal E_{\mathrm{gs}}(\varepsilon)$,
+with equality for $\rho=|s^\varepsilon\rangle\langle s^\varepsilon|$, whose covariance is
+$\D(-\sgn\varepsilon)$.
+\item[(b)] If $\varepsilon_j\neq0$ for all $j$, then $\tr(\rho H_{\D(\varepsilon)})=\mathcal E_{\mathrm{gs}}(\varepsilon)$
+implies $\rho=|s^\varepsilon\rangle\langle s^\varepsilon|$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+By Lemma~\ref{lem:diagonal}, $H_{\D(\varepsilon)}=\operatorname{diag}(d)$ with
+$d(s)=\sum_j\varepsilon_j(s_j-\tfrac12)$. For each $j$, $\varepsilon_j(s_j-s^\varepsilon_j)$
+equals $|\varepsilon_j|$ if $s_j\neq s^\varepsilon_j$ and $0$ otherwise. Hence
+$d(s)-d(s^\varepsilon)=\sum_{j:\,s_j\neq s^\varepsilon_j}|\varepsilon_j|\geq0$ and
+$d(s^\varepsilon)=-\tfrac12\sum_j|\varepsilon_j|$. (a) is Lemma~\ref{lem:diag-min} with
+$s^\star=s^\varepsilon$, and the covariance is Theorem~\ref{thm:occupation}. (b) When every
+$\varepsilon_j\neq0$ the gap $d(s)-d(s^\varepsilon)$ is positive for $s\neq s^\varepsilon$.
+\end{proof}
+
+\begin{theorem}[Ground states of a rotated canonical form]\label{thm:rotated-gs}
+Let $h=O\,\D(\varepsilon)\,O^{\T}$ with $OO^{\T}=1$, and let the unitary $U$ implement $O$.
+\begin{enumerate}
+\item[(a)] For every density operator $\rho$, $\tr(\rho H_h)\geq \mathcal E_{\mathrm{gs}}(\varepsilon)$.
+\item[(b)] Equality holds for the pure state
+$\rho_{\mathrm{gs}}=U^*|s^\varepsilon\rangle\langle s^\varepsilon|U$, and
+$\Gamma(\rho_{\mathrm{gs}})=O\,\D(-\sgn\varepsilon)\,O^{\T}$.
+\item[(c)] If $\varepsilon_j\neq0$ for all $j$, then $\tr(\rho H_h)=\mathcal E_{\mathrm{gs}}(\varepsilon)$ implies
+$\rho=\rho_{\mathrm{gs}}$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+By Lemma~\ref{lem:energy}(c) and $O^{\T}O=1$, $UH_hU^*=H_{\D(\varepsilon)}$, so
+$\tr(\rho H_h)=\tr\bigl((U\rho U^*)H_{\D(\varepsilon)}\bigr)$ with $U\rho U^*$ a density operator
+(Theorem~\ref{thm:congruence}). (a) is Theorem~\ref{thm:block-gs}(a) for $U\rho U^*$.
+(b) $U\rho_{\mathrm{gs}}U^*=|s^\varepsilon\rangle\langle s^\varepsilon|$ attains $\mathcal E_{\mathrm{gs}}(\varepsilon)$, and
+$\Gamma(U^*\rho U)=O\,\Gamma(\rho)\,O^{\T}$ with
+$\Gamma(|s^\varepsilon\rangle\langle s^\varepsilon|)=\D(-\sgn\varepsilon)$. (c)
+Theorem~\ref{thm:block-gs}(b) gives $U\rho U^*=|s^\varepsilon\rangle\langle s^\varepsilon|$.
+\end{proof}
+
+The energy $\tfrac14\sum_{ab}h_{ab}\Gamma_{ab}$ of Lemma~\ref{lem:energy}(b) is a function of
+the covariance alone, and in the frame of $O$ it is a weighted sum of the $(x_j,y_j)$ entries.
+\begin{lemma}[Energy in the rotated frame]\label{lem:rotated-form}
+Let $h=O\,\D(\varepsilon)\,O^{\T}$ with $OO^{\T}=1$, let $\Gamma^{\T}=-\Gamma$, and put
+$\Gamma'=O^{\T}\Gamma O$.
+\begin{enumerate}
+\item[(a)] $(\Gamma')^{\T}=-\Gamma'$, and $\Gamma'$ is admissible (pure) if and only if $\Gamma$ is.
+\item[(b)] $\tfrac14\sum_{a,b}h_{ab}\Gamma_{ab}=\tfrac12\sum_j\varepsilon_j\Gamma'_{x_jy_j}$.
+\item[(c)] If $\Gamma=O\,\D(\lambda)\,O^{\T}$, then $\Gamma'=\D(\lambda)$ and
+$\tfrac14\sum_{a,b}h_{ab}\Gamma_{ab}=\tfrac12\sum_j\varepsilon_j\lambda_j$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) $(O^{\T}\Gamma O)^{\T}=O^{\T}\Gamma^{\T}O=-\Gamma'$; admissibility and purity transfer
+by Theorem~\ref{thm:orthogonal} in both directions, since $\Gamma=O\Gamma'O^{\T}$.
+(b) $\sum_{ab}h_{ab}\Gamma_{ab}=\tr(h^{\T}\Gamma)=\tr(O\D(\varepsilon)^{\T}O^{\T}\Gamma)
+=\tr(\D(\varepsilon)^{\T}\Gamma')=\sum_{cd}\D(\varepsilon)_{cd}\Gamma'_{cd}
+=\sum_j\varepsilon_j(\Gamma'_{x_jy_j}-\Gamma'_{y_jx_j})=2\sum_j\varepsilon_j\Gamma'_{x_jy_j}$.
+(c) $O^{\T}O=1$ gives $\Gamma'=\D(\lambda)$, whose $(x_j,y_j)$ entry is $\lambda_j$.
+\end{proof}
+
+\begin{theorem}[The variational bound on covariances]\label{thm:variational}
+Let $h=O\,\D(\varepsilon)\,O^{\T}$ with $OO^{\T}=1$, and let $\Gamma$ be admissible. Then
+\[
+ \tfrac14\sum_{a,b}h_{ab}\Gamma_{ab}\;\geq\;\mathcal E_{\mathrm{gs}}(\varepsilon).
+\]
+If $\varepsilon_j\neq0$ for all $j$, equality holds if and only if
+$\Gamma=O\,\D(-\sgn\varepsilon)\,O^{\T}$.
+\end{theorem}
+\begin{proof}
+Put $\Gamma'=O^{\T}\Gamma O$; by Lemma~\ref{lem:rotated-form}, $\Gamma'$ is admissible and
+$\tfrac14\sum h_{ab}\Gamma_{ab}=\tfrac12\sum_j\varepsilon_j\Gamma'_{x_jy_j}$.
+Every entry of an admissible matrix has modulus at most $1$, since
+$|\Gamma'_{ab}|\leq\|\Gamma'e_b\|\leq1$ (Theorem~\ref{thm:norm-form}). Hence
+$\tfrac12\sum_j\varepsilon_j\Gamma'_{x_jy_j}\geq-\tfrac12\sum_j|\varepsilon_j|$,
+with equality if and only if $\Gamma'_{x_jy_j}=-\sgn\varepsilon_j$ for every $j$ with
+$\varepsilon_j\neq0$. Suppose all $\varepsilon_j\neq0$ and equality holds. Fix $j$. The
+column $\Gamma'e_{y_j}$ has norm at most $1$ and the entry $-\sgn\varepsilon_j$ at $x_j$, so
+all its other entries vanish; by antisymmetry $\Gamma'_{y_jx_j}=\sgn\varepsilon_j$, and the
+same argument on the column $\Gamma'e_{x_j}$ leaves only that entry. Doing this for every
+$j$ pins every column of $\Gamma'$, including the entries between different modes, and
+gives $\Gamma'=\D(-\sgn\varepsilon)$, that is $\Gamma=O\,\D(-\sgn\varepsilon)\,O^{\T}$.
+Conversely this matrix is admissible and has $\Gamma'_{x_jy_j}=-\sgn\varepsilon_j$
+(Lemma~\ref{lem:rotated-form}(a),(c)).
+\end{proof}
+
+The covariance is linear in the state, so a mode that is occupied with probability
+$\tfrac12(1+\lambda_j)$ and empty otherwise contributes the entry $\lambda_j$; a product of
+such one-mode mixtures realizes every admissible canonical form.
+\begin{definition}[Product mixture]\label{def:mixture}
+For $\lambda\in[-1,1]^n$ put $p_j(0)=\tfrac12(1-\lambda_j)$, $p_j(1)=\tfrac12(1+\lambda_j)$,
+and $\rho_\lambda=\sum_{s\in\{0,1\}^n}\bigl(\prod_jp_j(s_j)\bigr)|s\rangle\langle s|$.
+\end{definition}
+
+\begin{theorem}[Canonical forms are realized by product mixtures]\label{thm:mixture}
+For $\lambda\in[-1,1]^n$, $\rho_\lambda$ is a density operator with
+$\Gamma(\rho_\lambda)=\D(\lambda)$. If $|\lambda_j|=1$ for all $j$, then
+$\rho_\lambda=|s\rangle\langle s|$ with $s_j=1$ if $\lambda_j=1$ and $s_j=0$ if $\lambda_j=-1$.
+\end{theorem}
+\begin{proof}
+The weights are nonnegative and $\sum_s\prod_jp_j(s_j)=\prod_j\bigl(p_j(0)+p_j(1)\bigr)=1$;
+a convex combination of density operators is a density operator. The covariance is linear
+in $\rho$, so $\Gamma(\rho_\lambda)=\D\bigl(\sum_sp(s)\nu(s)\bigr)$ with $j$-th entry
+$\bigl(\sum_bp_j(b)\nu(b)\bigr)\prod_{k\neq j}\bigl(\sum_bp_k(b)\bigr)=-p_j(0)+p_j(1)=\lambda_j$.
+If $|\lambda_j|=1$ then $p_j$ is concentrated on one bit and the sum has one term.
+\end{proof}
+
+\subsection{The normal form}
+\label{sec:normalform}
+\motiv{Theorems~\ref{thm:rotated-gs} and~\ref{thm:variational} assume $h$ is a rotation of a
+canonical form. Every real antisymmetric matrix is one (Theorem~\ref{thm:normal-form}): the Hermitian
+matrix $\ii\Gamma$ has an orthonormal eigenbasis whose real and imaginary parts pair the
+labels.}
+
+\begin{theorem}[Real antisymmetric normal form]\label{thm:normal-form}
+Let $\Gamma\in\R^{2n\times2n}$ with $\Gamma^{\T}=-\Gamma$. There exist $O$ with $OO^{\T}=1$ and
+$\varepsilon\in\R^n$ with $\varepsilon_j\geq0$ such that $\Gamma=O\,\D(\varepsilon)\,O^{\T}$.
+\begin{enumerate}
+\item[(a)] There also exist such $O,\varepsilon$ with $\det O=1$, one entry of $\varepsilon$
+possibly negative.
+\item[(b)] For every decomposition $\Gamma=O\D(\varepsilon)O^{\T}$ with $OO^{\T}=1$: if
+$\Gamma$ is admissible then $|\varepsilon_j|\leq1$ for all $j$, and if $\Gamma$ is pure
+then $|\varepsilon_j|=1$ for all $j$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+$M=\ii\Gamma$ is Hermitian with $\overline M=-M$. Let $v_1,\ldots,v_{2n}$ be an orthonormal
+eigenbasis of $\C^{2n}$, $Mv_k=\mu_kv_k$, $\mu_k\in\R$. Conjugating, $M\overline{v_k}=-\mu_k\overline{v_k}$,
+so $\overline{v_k}$ is an eigenvector for $-\mu_k$, and eigenvectors for different eigenvalues
+are orthogonal. Let $\mathcal P=\{k:\mu_k>0\}$, and for $k\in\mathcal P$ let $p_k=\sqrt2\,\mathrm{Re}\,v_k$ and
+$q_k=-\sqrt2\,\mathrm{Im}\,v_k$, so that $v_k=(p_k-\ii q_k)/\sqrt2$.
+\begin{enumerate}
+\item[(i)] Pairing. The real and imaginary parts of $\ii\Gamma(p_k-\ii q_k)=\mu_k(p_k-\ii q_k)$
+give $\Gamma q_k=\mu_kp_k$ and $\Gamma p_k=-\mu_kq_k$.
+\item[(ii)] Orthonormality. For $j,k\in\mathcal P$, $\langle v_j,v_k\rangle=\delta_{jk}$ and
+$\langle\overline{v_j},v_k\rangle=0$. In real terms,
+$2\langle v_j,v_k\rangle=(p_j\cdot p_k+q_j\cdot q_k)+\ii(q_j\cdot p_k-p_j\cdot q_k)$ and
+$2\langle\overline{v_j},v_k\rangle=(p_j\cdot p_k-q_j\cdot q_k)-\ii(p_j\cdot q_k+q_j\cdot p_k)$;
+adding and subtracting, $p_j\cdot p_k=q_j\cdot q_k=\delta_{jk}$ and $p_j\cdot q_k=0$. So
+$\{p_k,q_k\}_{k\in\mathcal P}$ is orthonormal in $\R^{2n}$ and $|\mathcal P|\leq n$.
+\item[(iii)] Completion. Choose an injection $\phi:\mathcal P\to\{1,\ldots,n\}$, place $p_k$ at the
+label $x_{\phi(k)}$ and $q_k$ at $y_{\phi(k)}$, and extend to an orthonormal basis
+$(b_\ell)_\ell$ of $\R^{2n}$ indexed by the labels.
+\item[(iv)] Kernel. Let $x\in\R^{2n}$ be orthogonal to every $p_k,q_k$, $k\in\mathcal P$. Then
+$\langle v_k,x\rangle=0$ and $\langle\overline{v_k},x\rangle=0$ for $k\in\mathcal P$. For $\mu_l<0$,
+expanding $\overline{v_l}$ in the eigenbasis gives
+$\langle\overline{v_l},x\rangle=\sum_k\langle\overline{v_l},v_k\rangle\langle v_k,x\rangle$
+with only $k\in\mathcal P$ contributing, so $\langle\overline{v_l},x\rangle=0$ and
+$\langle v_l,x\rangle=\overline{\langle\overline{v_l},x\rangle}=0$ ($x$ is real). Hence
+$Mx=\sum_l\mu_l\langle v_l,x\rangle v_l=0$, that is $\Gamma x=0$; this applies to every
+$b_\ell$ at a label outside the image of $\phi$.
+\item[(v)] The matrix. Let $O$ have the columns $b_\ell$, so $OO^{\T}=1$, and let
+$\varepsilon_j=\mu_k$ if $j=\phi(k)$ and $\varepsilon_j=0$ otherwise. The entry
+$(O^{\T}\Gamma O)_{\ell\ell'}=b_\ell\cdot\Gamma b_{\ell'}$ is determined by the column
+$\ell'$: for a kernel label it vanishes by (iv); for $\ell'=y_{\phi(k)}$, $\Gamma b_{\ell'}=\mu_kp_k$
+by (i), and $b_\ell\cdot p_k=[\ell=x_{\phi(k)}]$ by the orthonormality of the basis; for
+$\ell'=x_{\phi(k)}$, $\Gamma b_{\ell'}=-\mu_kq_k$ and $b_\ell\cdot q_k=[\ell=y_{\phi(k)}]$. Every
+label $\ell'$ is of one of the three kinds, so $O^{\T}\Gamma O=\D(\varepsilon)$ entry by entry.
+\end{enumerate}
+(a) For $n=0$, $O=1$. For $n\geq1$ and $\det O=-1$, let $\mathcal R$ be the reflection of the
+label $y_1$; then $O\mathcal R$ is orthogonal with determinant $1$,
+$\mathcal R\D(\varepsilon)\mathcal R=\D(\varepsilon')$ with $\varepsilon'_1=-\varepsilon_1$ and
+$\varepsilon'_j=\varepsilon_j$ otherwise, and $\Gamma=(O\mathcal R)\D(\varepsilon')(O\mathcal R)^{\T}$.
+(b) $\D(\varepsilon)=O^{\T}\Gamma O$ is admissible (pure) with $\Gamma$
+(Theorem~\ref{thm:orthogonal}), and the criterion after Definition~\ref{def:block} gives the
+bounds.
+\end{proof}
+For one mode, $\Gamma=\begin{pmatrix}0&\gamma\\-\gamma&0\end{pmatrix}$ and
+$\ii\Gamma$ has the eigenvectors $v=(1,-\ii)/\sqrt2$ with eigenvalue $\gamma$ and $\bar v$
+with eigenvalue $-\gamma$; for $\gamma>0$ the vectors $p=\sqrt2\,\mathrm{Re}\,v=(1,0)$ and
+$q=-\sqrt2\,\mathrm{Im}\,v=(0,1)$ give $O=1$, $\varepsilon=\gamma$; for $\gamma<0$ the
+eigenvector for the positive eigenvalue $-\gamma$ is $\bar v=(1,\ii)/\sqrt2$, so $p=(1,0)$,
+$q=(0,-1)$, $O=\operatorname{diag}(1,-1)$ and $\varepsilon=-\gamma$; this $O$ has determinant
+$-1$, and (a) restores $\det O=1$ by reflecting $y_1$, which returns $O=1$, $\varepsilon=\gamma$.
+
+\subsection{Rotations are implemented by Gaussian unitaries}
+\label{sec:rotation}
+\motiv{Theorem~\ref{thm:gate} implemented the rotations of two hopping gates. Every rotation
+in $SO(2n)$ is a product of plane rotations (Theorem~\ref{thm:givens}), and each plane
+rotation is implemented by one factor $\cos\varphi+\sin\varphi\,c_ac_b$
+(Lemma~\ref{lem:factor}); hence every rotation is implemented (Theorem~\ref{thm:implement}).}
+
+\begin{definition}[Plane rotations]\label{def:plane}
+For labels $a\neq b$ and $(p,q)\in\R^2$ with $p^2+q^2=1$, $\Rot_{ab}(p,q)$ is the matrix on the
+labels equal to the identity except for the rows $a$ and $b$, which are $(p,-q)$ and $(q,p)$
+on the columns $(a,b)$ (a Givens rotation). A \emph{rotation product} is a finite product of
+plane rotations, the empty product being $1$.
+\end{definition}
+$\Rot_{ab}(p,q)$ is orthogonal with determinant $1$ and $\Rot_{ab}(p,q)^{\T}=\Rot_{ab}(p,-q)$, so
+rotation products form a group; a plane rotation of the labels other than $i$, extended by
+the identity on $i$, is a plane rotation of all labels. We state the definition and
+Theorem~\ref{thm:givens} for an arbitrary finite set of labels, of size $m$.
+
+\begin{theorem}[$SO(m)$ is generated by plane rotations]\label{thm:givens}
+Let $O$ be a real matrix on a finite label set of size $m$ with $OO^{\T}=1$ and
+$\det O=1$. Then $O$ is a rotation product.
+\end{theorem}
+\begin{proof}
+Induction on $m$. For $m=0$, $O=1$; for $m=1$, $O=(\det O)=(1)$. Let $m\geq2$ and fix a
+label $i$.
+
+\emph{Sweep.} For every unit vector $v$ there is a rotation product $W$ of plane rotations
+in planes $(a,i)$, $a\neq i$, with $Wv=e_i$. For a set $S$ of labels not containing $i$,
+we build a rotation product $W_S$ with $(W_Sv)_a=0$ for all $a\in S$ and, if $S\neq\emptyset$,
+$(W_Sv)_i\geq0$, one label at a time: $W_\emptyset=1$; given $W_S$ and a label
+$a\notin S\cup\{i\}$, put $w=W_Sv$ and $r=\sqrt{w_a^2+w_i^2}$; if $r=0$ keep $W_S$,
+otherwise $W_{S\cup\{a\}}=\Rot_{ai}(w_i/r,\,w_a/r)\,W_S$, since $\Rot_{ai}(w_i/r,w_a/r)$ sends
+$(w_a,w_i)$ to $(0,r)$ and fixes the other coordinates. With $S$ the set of all labels
+other than $i$, $W_Sv$ has zeros outside $i$, norm $1$ and $(W_Sv)_i\geq0$, so $W_Sv=e_i$.
+
+\emph{Reduction.} Apply the sweep to $v=Oe_i$. Then $\tilde O=WO$ is orthogonal with $\tilde Oe_i=e_i$,
+so its column $i$ is $e_i$; the rows of an orthogonal matrix are orthonormal too, and the
+row $i$ has $\tilde O_{ii}=1$, so $\tilde O_{ia}=0$ for $a\neq i$. Hence $\tilde O=O'\oplus1$ with $O'$
+orthogonal on the labels other than $i$ and $\det O'=\det \tilde O=\det W\,\det O=1$.
+
+\emph{Induction.} By the induction hypothesis $O'$ is a rotation product on $m-1$ labels,
+hence so is $\tilde O=O'\oplus1$, and $O=W^{\T}\tilde O$ is a rotation product, $W^{\T}$ being the
+product of the transposed plane rotations in reverse order.
+\end{proof}
+
+\begin{lemma}[One factor implements one plane rotation]\label{lem:factor}
+Let $a\neq b$ and $\varphi\in\R$. The unitary $V=\cos\varphi+\sin\varphi\,c_ac_b$ implements
+$\Rot_{ab}(\cos2\varphi,\sin2\varphi)$. For every $(p,q)$ with $p^2+q^2=1$ there is $\varphi$
+with $(\cos2\varphi,\sin2\varphi)=(p,q)$. If $U$ implements $O$ and $V$ implements $O'$,
+then $UV$ implements $O'O$; the identity implements $1$.
+\end{lemma}
+\begin{proof}
+The conjugation formulas of Theorem~\ref{thm:gate}'s proof, which use only the
+anticommutation relations of two distinct labels, are the rows of
+$\Rot_{ab}(\cos2\varphi,\sin2\varphi)$: row $a$ is $(\cos2\varphi,-\sin2\varphi)$ on $(a,b)$,
+row $b$ is $(\sin2\varphi,\cos2\varphi)$, every other row is a unit vector. For the angle take
+$\theta=\arccos p$ if $q\geq0$ and $\theta=-\arccos p$ otherwise, so that $\cos\theta=p$,
+$\sin\theta=\pm\sqrt{1-p^2}=q$, and $\varphi=\theta/2$. Product rule:
+$(UV)c_a(UV)^*=U\bigl(\sum_bO'_{ab}c_b\bigr)U^*=\sum_d(O'O)_{ad}c_d$.
+\end{proof}
+
+\begin{theorem}[Every rotation is implemented by a Gaussian unitary]\label{thm:implement}
+For every real matrix $O$ on the Majorana labels with $OO^{\T}=1$ and $\det O=1$ there is a
+unitary $U$, a product of factors $\cos\varphi+\sin\varphi\,c_ac_b$, that implements $O$.
+\end{theorem}
+\begin{proof}
+By Theorem~\ref{thm:givens}, $O=\Rot_1\Rot_2\cdots\Rot_T$ with plane rotations $\Rot_t$; by
+Lemma~\ref{lem:factor} choose $U_t$ implementing $\Rot_t$; then $U_T\cdots U_2U_1$ implements
+$\Rot_1\Rot_2\cdots\Rot_T$ by the product rule.
+\end{proof}
+\begin{remark}\label{rem:reflections}
+We do not implement reflections ($\det O=-1$) here; Theorem~\ref{thm:normal-form}(a) supplies
+a decomposition with $\det O=1$.
+\end{remark}
+
+\subsection{Realization and ground states}
+\label{sec:realization}
+
+\begin{theorem}[Realization of admissible covariances]\label{thm:realization}
+Let $\Gamma$ be admissible. Write $\Gamma=O\D(\varepsilon)O^{\T}$ with $\det O=1$ and
+$|\varepsilon_j|\leq1$ (Theorem~\ref{thm:normal-form}), and let $U$ implement $O$
+(Theorem~\ref{thm:implement}). Then $\rho=U^*\rho_\varepsilon U$ (Definition~\ref{def:mixture})
+is a density operator with $\Gamma(\rho)=\Gamma$. If $\Gamma$ is pure then
+$\rho=U^*|s\rangle\langle s|U$ with $s_j=1$ if $\varepsilon_j=1$ and $s_j=0$ if
+$\varepsilon_j=-1$, a pure state.
+\end{theorem}
+\begin{proof}
+By Theorem~\ref{thm:mixture}, $\rho_\varepsilon$ is a density operator with covariance
+$\D(\varepsilon)$; $U^*$ implements $O^{\T}$, so $U^*\rho_\varepsilon U$ is a density operator
+with covariance $O\,\D(\varepsilon)\,O^{\T}=\Gamma$ (Theorem~\ref{thm:congruence}). If
+$\Gamma$ is pure then $|\varepsilon_j|=1$ and $\rho_\varepsilon=|s\rangle\langle s|$.
+\end{proof}
+With Theorem~\ref{thm:admissible}: the covariances of density operators on $n$ modes are
+exactly the admissible matrices on $2n$ labels, and every pure covariance is the covariance
+of a pure state.
+
+\begin{theorem}[Ground state of a quadratic Hamiltonian]\label{thm:ground-state}
+Let $h^{\T}=-h$. There exist $O$ with $OO^{\T}=1$, $\det O=1$, $\varepsilon\in\R^n$ with
+$h=O\D(\varepsilon)O^{\T}$, and a unitary $U$ implementing $O$; for every such choice
+Theorems~\ref{thm:rotated-gs} and~\ref{thm:variational} hold. In particular:
+\begin{enumerate}
+\item[(a)] $\min\{\tr(\rho H_h):\rho\text{ a density operator}\}$ exists, equals
+$-\tfrac12\sum_j|\varepsilon_j|$, and is attained by the pure state
+$\rho_{\mathrm{gs}}=U^*|s^\varepsilon\rangle\langle s^\varepsilon|U$, whose covariance
+$O\D(-\sgn\varepsilon)O^{\T}$ is pure.
+\item[(b)] If $\varepsilon_j\neq0$ for all $j$, the minimizer is unique, and among admissible
+matrices the minimizer of $\Gamma\mapsto\tfrac14\sum_{ab}h_{ab}\Gamma_{ab}$ is unique and
+equals $\Gamma(\rho_{\mathrm{gs}})$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Theorem~\ref{thm:normal-form}(a) and Theorem~\ref{thm:implement} supply $O,\varepsilon,U$;
+Theorems~\ref{thm:rotated-gs} and~\ref{thm:variational} give (a) and (b).
+\end{proof}
+For a Hermitian matrix $M$ write $\sgn(M)$ for the Hermitian matrix with the eigenvectors of
+$M$ and the signs of its eigenvalues. When all $\varepsilon_j\neq0$, the ground covariance is
+$\Gamma(\rho_{\mathrm{gs}})=\ii\,\sgn(\ii h)$: $\ii h=O\,(\ii\D(\varepsilon))\,O^{\T}$ with $O$ real
+orthogonal, so $\sgn(\ii h)=O\,\sgn(\ii\D(\varepsilon))\,O^{\T}$; on the labels of mode $j$,
+$(\ii\D(\varepsilon))^2=\varepsilon_j^2\,1$, so $\sgn(\ii\D(\varepsilon))=\ii\D(\sgn\varepsilon)
+=-\ii\D(-\sgn\varepsilon)$, and $\sgn(\ii h)=-\ii\,O\D(-\sgn\varepsilon)O^{\T}=-\ii\,\Gamma(\rho_{\mathrm{gs}})$.
+The sign in this formula is that of the covariance convention of Definition~\ref{def:density};
+with $\Gamma$ defined with the opposite sign, the ground covariance is $-\ii\,\sgn(\ii h)$.
+
+\begin{corollary}[A pure covariance determines the state]\label{cor:pure-determines}
+Let $\rho$ be a density operator whose covariance is pure. Write
+$\Gamma(\rho)=O\D(\eta)O^{\T}$ with $\det O=1$, $\eta_j=\pm1$ (Theorem~\ref{thm:normal-form}(a),(b)),
+and let $U$ implement $O$ (Theorem~\ref{thm:implement}).
+Then $\rho=U^*|s\rangle\langle s|U$ with $s_j=1$ if $\eta_j=1$ and $s_j=0$ otherwise. In
+particular two density operators with the same pure covariance are equal.
+\end{corollary}
+\begin{proof}
+Let $h=O\D(-\eta)O^{\T}$, so $\varepsilon=-\eta$ has no zero entry, $s^\varepsilon=s$ and
+$-\sgn\varepsilon=\eta$. By Lemma~\ref{lem:energy}(b) and Lemma~\ref{lem:rotated-form}(c)
+with $\Gamma(\rho)=O\D(\eta)O^{\T}$,
+$\tr(\rho H_h)=\tfrac12\sum_j(-\eta_j)\eta_j=-\tfrac n2=\mathcal E_{\mathrm{gs}}(\varepsilon)$, and
+Theorem~\ref{thm:rotated-gs}(c) gives $\rho=U^*|s\rangle\langle s|U$.
+\end{proof}
+\begin{remark}\label{rem:mixed-not-determined}
+A covariance that is not pure does not determine the state: for $n=1$, every
+$\rho=\tfrac12(1+tX)$ with $|t|\leq1$ has $\Gamma(\rho)=0$, since $c_xc_y=\ii Z$ and
+$\tr Z=\tr(XZ)=0$.
+\end{remark}

@@ -1,0 +1,196 @@
+\section{Homogeneous chains in momentum space}
+\label{sec:fourier}
+\motiv{When every site of the periodic chain of Section~\ref{sec:chain} carries the same
+on-site covariance $\Gamma$, the chain covariance commutes with the shift of sites, and
+the discrete Fourier transform over sites splits it into $N$ blocks of size $2P\times2P$,
+one per momentum $k$. Each block is again a contraction (Definition~\ref{def:contract}),
+now of a single site against a single bond, with the shift of the right virtual modes
+turned into a phase, and the inverse transform recovers $\Gamma_N$ from its blocks;
+antisymmetry and admissibility of $\Gamma$ pass to every block.}
+
+Throughout this section $N\geq1$ and $M,P\geq0$; the on-site covariances are
+$\Gamma_i=\Gamma$ for every site, a fixed real matrix on $I_{\mathrm{site}}=(x_A,x_B,x_C,y_A,y_B,y_C)$, and
+$\Gamma_N=\Gamma_N(\Gamma,\ldots,\Gamma)$ is the covariance of the chain
+(Definition~\ref{def:periodic}), with $D$ the $E\times E$ block of $\Gamma_{\mathrm{in}}$.
+We write retained labels as $(i,a)$ with $i\in\mathbb Z/N$ the site and
+$a\in R_0=(x_C,y_C)$ one of the $2P$ physical labels of a site. The site labels split as
+$I_{\mathrm{site}}=R_0\sqcup E_0$ with $E_0=(x_A,x_B,y_A,y_B)$; $\beta_M$ is the real bond covariance of
+$E_0$ (Definition~\ref{def:bond} with $L=A$, $L'=B$ and the index set $\{1,\ldots,M\}$).
+For a complex matrix $X$, $X^*$ is the conjugate transpose, $\overline X$ the entrywise
+conjugate, and $X^{-1}$ the inverse of an invertible $X$.
+
+\subsection{Twisted on-site covariances}
+\begin{definition}[Characters and the twisted on-site covariance]\label{def:twist}
+For $k,i\in\mathbb Z/N$ let $\chi_k(i)=e^{-2\pi\ii\,ki/N}$ and $\omega_k=\chi_k(1)$.
+The \emph{twist} $t_k:I_{\mathrm{site}}\to\C$ is $t_k(u)=\omega_k$ for $u\in\{x_B,y_B\}$ and
+$t_k(u)=1$ otherwise, and the \emph{twisted on-site covariance} at momentum $k$ (the on-site covariance conjugated by
+the momentum phase on the right virtual modes) is
+\[
+ \Gamma^{(k)}=\operatorname{diag}(t_k)\,\Gamma\,\operatorname{diag}(t_k)^*,\qquad
+ \Gamma^{(k)}_{uv}=t_k(u)\,\Gamma_{uv}\,\overline{t_k(v)} .
+\]
+\end{definition}
+With this sign of $\chi_k$, Theorem~\ref{thm:reconstruct} expands $\Gamma_N$ in
+$e^{+2\pi\ii\,k(i-j)/N}\,\Sigma(k)$. \vet{The opposite convention expands in} $e^{-2\pi\ii\,k(i-j)/N}$, and
+in that convention the block at momentum $k$ is $\Sigma(-k)=\overline{\Sigma(k)}$
+(Theorem~\ref{thm:blocks}(a)).
+
+\begin{definition}[Momentum-space covariance]\label{def:symbol}
+Write $\Gamma^{(k)}=\begin{pmatrix}A_k&B_k\\C_k&D_k\end{pmatrix}$ in the split
+$I_{\mathrm{site}}=R_0\sqcup E_0$. The \emph{momentum-space covariance} at $k$ (the symbol of the
+block-circulant matrix $\Gamma_N$) is the complex $R_0\times R_0$ matrix
+\[
+ \Sigma(k)=A_k+B_k\,\beta_M\,(1-D_k\beta_M)^{-1}\,C_k ,
+\]
+the contraction formula of Definition~\ref{def:contract} applied over $\C$ to $\Gamma^{(k)}$
+and the bond of one site.
+\end{definition}
+\artefact{When $1-D_k\beta_M$ is singular, we read $\Sigma(k)$ with $(1-D_k\beta_M)^{-1}=0$,
+the value of the formalization's inverse on singular matrices; only
+Theorem~\ref{thm:blocks}(a) uses $\Sigma(k)$ in that case.}
+
+\begin{definition}[Fourier coefficients of the chain]\label{def:fourier}
+For $k,l\in\mathbb Z/N$ and $a,b\in R_0$,
+\[
+ \widehat{\Gamma}_N(k,l)_{ab}=\frac1N\sum_{i,j\in\mathbb Z/N}\chi_k(i)\,(\Gamma_N)_{(i,a)(j,b)}\,\overline{\chi_l(j)} .
+\]
+\end{definition}
+
+\subsection{The Fourier transform of the chain}
+Let $\Phi_N$ be the $N\times N$ matrix with entries $(\Phi_N)_{ki}=\chi_k(i)/\sqrt N$; by the
+orthogonality of characters, $\sum_i\chi_k(i)\overline{\chi_l(i)}=N\delta_{kl}$, it is
+unitary. Identify the retained labels with pairs, $R\cong(\mathbb Z/N)\times R_0$ by
+$(i,a)$, and the eliminated labels likewise, $E\cong(\mathbb Z/N)\times E_0$ by
+$x^{L}_{(i,a)}\mapsto(i,x_{A,a})$, $x^{L'}_{(i,a)}\mapsto(i,x_{B,a})$ and the same for $y$;
+a label $(i,u)$ with $u\in\{x_B,y_B\}$ is thus the right virtual mode of site $i-1$
+(Definition~\ref{def:input}). Let $\Phi_R=\Phi_N\otimes1_{R_0}$,
+$\Phi_E=\Phi_N\otimes1_{E_0}$ and $\Phi=\Phi_R\oplus\Phi_E$ on $R\sqcup E$.
+
+\begin{lemma}[Block diagonalization of the input]\label{lem:input-blocks}
+$\Phi_E\beta_N\Phi_E^*=\beta_N$, and $\Phi\Gamma_{\mathrm{in}}\Phi^*=\bigoplus_{k}\Gamma^{(k)}$ in the
+split $R\sqcup E$, that is, the four blocks of $\Phi\Gamma_{\mathrm{in}}\Phi^*$ are
+$\bigoplus_kA_k$, $\bigoplus_kB_k$, $\bigoplus_kC_k$, $\bigoplus_kD_k$.
+\end{lemma}
+\begin{proof}
+\begin{enumerate}
+\item[(a)] In the pair identification, $\beta_N=1_N\otimes\beta_M$, because the bond
+pairs $x^{L}_{(i,a)}$ with $x^{L'}_{(i,a)}$ at the same pair $(i,a)$
+(Definition~\ref{def:periodic}); it commutes with $\Phi_N\otimes1$.
+\item[(b)] Let $s(u)=1$ for $u\in\{x_B,y_B\}$ and $s(u)=0$ otherwise. The label $(i,u)$
+with $u\in\{x_B,y_B\}$ names a mode of site $i-1$, and $\operatorname{diag}(\Gamma_\bullet)$
+is site diagonal, so
+$(\Gamma_{\mathrm{in}})_{(i,u)(j,v)}=\Gamma_{uv}\,[\,i-s(u)=j-s(v)\,]$. Hence
+\[
+ (\Phi\Gamma_{\mathrm{in}}\Phi^*)_{(k,u)(l,v)}
+ =\frac{\Gamma_{uv}}N\sum_{i}\chi_k(i)\,\overline{\chi_l(i-s(u)+s(v))}
+ =\delta_{kl}\,\Gamma_{uv}\,\omega_k^{\,s(u)}\,\overline{\omega_k}^{\,s(v)}
+ =\delta_{kl}\,\Gamma^{(k)}_{uv},
+\]
+by $\chi_l(i+m)=\chi_l(i)\chi_l(m)$, $\chi_l(1)=\omega_l$, and orthogonality; the last
+equality is Definition~\ref{def:twist}. \qedhere
+\end{enumerate}
+\end{proof}
+
+\begin{lemma}[Contraction and relabelling]\label{lem:contract-conj}
+Let $\Gamma$ be a matrix on $R\sqcup E$, $\Gamma_p$ a matrix on $E$ with $1-D\Gamma_p$
+invertible, and $Y_R$, $Y_E$ invertible matrices on the retained and on the eliminated
+labels. Then, with the contraction formula taken over $\C$,
+\[
+ \begin{pmatrix}Y_RAY_R^{-1}&Y_RBY_E^{-1}\\Y_ECY_R^{-1}&Y_EDY_E^{-1}\end{pmatrix}\star(Y_E\Gamma_pY_E^{-1})
+ =Y_R\,(\Gamma\star\Gamma_p)\,Y_R^{-1} .
+\]
+If $\Gamma=\bigoplus_k\Gamma_k$ and $\Gamma_p=\bigoplus_k\Gamma_{p,k}$ are block diagonal
+in a common index $k$, then $\det(1-D\Gamma_p)=\prod_k\det(1-D_k\Gamma_{p,k})$, and when
+this is nonzero, $\Gamma\star\Gamma_p=\bigoplus_k\Gamma_k\star\Gamma_{p,k}$.
+\end{lemma}
+\begin{proof}
+$1-Y_EDY_E^{-1}\,Y_E\Gamma_pY_E^{-1}=Y_E(1-D\Gamma_p)Y_E^{-1}$, whose inverse is
+$Y_E(1-D\Gamma_p)^{-1}Y_E^{-1}$; the four products then telescope. For block
+diagonal data, determinants multiply over blocks, the inverse of an invertible block
+diagonal matrix is block diagonal with the inverse blocks, and sums and products are
+blockwise.
+\end{proof}
+
+\begin{theorem}[Determinant factorization]\label{thm:det-factor}
+$\det(1-D\beta_N)=\prod_{k\in\mathbb Z/N}\det(1-D_k\beta_M)$. In particular, if
+$1-D\beta_N$ is invertible then $1-D_k\beta_M$ is invertible for every $k$.
+\end{theorem}
+\begin{proof}
+$\Phi_E(1-D\beta_N)\Phi_E^*=1-\bigoplus_kD_k\beta_M$ by Lemma~\ref{lem:input-blocks};
+$\Phi_E$ is unitary, so the determinants agree, and the block determinant is the product
+(Lemma~\ref{lem:contract-conj}). A nonzero product has nonzero factors.
+\end{proof}
+
+\begin{theorem}[Translation invariance and diagonalization]\label{thm:diagonal}
+Let $1-D\beta_N$ be invertible. Then for all $i,j\in\mathbb Z/N$, $k,l\in\mathbb Z/N$
+and $a,b\in R_0$,
+\[
+ (\Gamma_N)_{(i+1,a)(j+1,b)}=(\Gamma_N)_{(i,a)(j,b)},
+ \qquad
+ \widehat{\Gamma}_N(k,l)=\begin{cases}\Sigma(k)&k=l,\\0&k\neq l.\end{cases}
+\]
+\end{theorem}
+\begin{theorem}[Reconstruction]\label{thm:reconstruct}
+Let $1-D\beta_N$ be invertible. Then for all $i,j\in\mathbb Z/N$ and $a,b\in R_0$,
+\[
+ (\Gamma_N)_{(i,a)(j,b)}=\frac1N\sum_{k\in\mathbb Z/N}\overline{\chi_k(i)}\,\Sigma(k)_{ab}\,\chi_k(j).
+\]
+\end{theorem}
+\begin{proof}[Proof of Theorems~\ref{thm:diagonal} and~\ref{thm:reconstruct}]
+\begin{enumerate}
+\item[(a)] By Lemma~\ref{lem:input-blocks}, Lemma~\ref{lem:contract-conj} with
+$Y=\Phi$ (so $Y^{-1}=\Phi^*$), and Theorem~\ref{thm:det-factor},
+\[
+ \Phi_R\,\Gamma_N\,\Phi_R^*=(\Phi\Gamma_{\mathrm{in}}\Phi^*)\star(\Phi_E\beta_N\Phi_E^*)
+ =\Bigl(\bigoplus_k\Gamma^{(k)}\Bigr)\star\Bigl(\bigoplus_k\beta_M\Bigr)=\bigoplus_k\Sigma(k).
+\]
+\item[(b)] The $((k,a),(l,b))$ entry of the left side is $\widehat{\Gamma}_N(k,l)_{ab}$
+by the definition of $\Phi_R$; this is the second part of Theorem~\ref{thm:diagonal}.
+\item[(c)] Multiplying (a) by $\Phi_R^*$ on the left and $\Phi_R$ on the right gives
+$\Gamma_N=\Phi_R^*\bigl(\bigoplus_k\Sigma(k)\bigr)\Phi_R$, whose $((i,a),(j,b))$ entry is the
+sum of Theorem~\ref{thm:reconstruct}.
+\item[(d)] $\overline{\chi_k(i+1)}\,\chi_k(j+1)=\overline{\chi_k(i)}\,\overline{\omega_k}\,\chi_k(j)\,\omega_k=\overline{\chi_k(i)}\,\chi_k(j)$,
+so replacing $(i,j)$ by $(i+1,j+1)$ leaves the sum in (c) unchanged; this is the first
+part of Theorem~\ref{thm:diagonal}. \qedhere
+\end{enumerate}
+\end{proof}
+\begin{remark}\label{rem:singular}
+The invertibility hypothesis enters translation invariance only through this route; the
+chain construction is shift symmetric, and we make no claim here about the singular case.
+\end{remark}
+
+\subsection{Admissibility in momentum space}
+\begin{theorem}[Symmetries and admissibility of the momentum-space covariance]\label{thm:blocks}
+\begin{enumerate}
+\item[(a)] If $1-D_k\beta_M$ is invertible then $\Sigma(-k)=\overline{\Sigma(k)}$;
+\artefact{the \revs{formalized} statement holds for every $k$, with the inverse of a singular matrix read as $0$.}
+\item[(b)] If $\Gamma^{\T}=-\Gamma$ and $1-D\beta_N$ is invertible, then
+$\Sigma(k)^*=-\Sigma(k)$ for every $k$.
+\item[(c)] If $\Gamma$ is admissible (Definition~\ref{def:admissible}) and $1-D\beta_N$
+is invertible, then $1-\Sigma(k)^*\Sigma(k)\succeq0$ for every $k$, that is,
+$\|\Sigma(k)z\|\leq\|z\|$ for every $z\in\C^{R_0}$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}
+\item[(a)] $\omega_{-k}=\overline{\omega_k}$, so $t_{-k}=\overline{t_k}$ and, $\Gamma$
+being real, $\revs{\Gamma^{(-k)}}=\overline{\Gamma^{(k)}}$; $\beta_M$ is real, and the inverse, read as
+$0$ on singular matrices, commutes with entrywise conjugation, so
+the formula of Definition~\ref{def:symbol} commutes with conjugation.
+\item[(b)] $\Gamma_N^{\T}=-\Gamma_N$ (Theorem~\ref{thm:antisym}, applied to
+$\Gamma_{\mathrm{in}}$, which is antisymmetric with $\Gamma$, and to $\beta_N$), and
+$\Gamma_N$ is real, so $\Gamma_N^*=-\Gamma_N$ and $\Phi_R\Gamma_N\Phi_R^*$ is skew-Hermitian;
+by step (a) of the proof of Theorem~\ref{thm:diagonal} its blocks $\Sigma(k)$ are skew-Hermitian.
+\item[(c)] $\Gamma_N$ is admissible (Theorem~\ref{thm:periodic}), so
+$1-\Gamma_N^{\T}\Gamma_N\succeq0$ over $\R$, hence over $\C$: for $z=a+\ii b$ with $a,b$
+real, $z^*Xz=a^{\T}Xa+b^{\T}Xb$ when $X$ is real symmetric. Conjugating by $\Phi_R$ and
+using step (a) of the proof of Theorem~\ref{thm:diagonal},
+$\Phi_R(1-\Gamma_N^{\T}\Gamma_N)\Phi_R^*=1-\bigoplus_k\Sigma(k)^*\Sigma(k)\succeq0$, and a
+block diagonal matrix is positive semidefinite exactly when each block is (test with
+vectors supported on one block). \qedhere
+\end{enumerate}
+\end{proof}
+\motiv{Part (c) is the momentum-space form of admissibility. For pure $\Gamma$ the chain
+covariance $\Gamma_N$ is pure (Corollary~\ref{cor:chain-pure}, a matrix fact whose proof in these notes
+goes through Fock space), and the argument of (c) with
+$1-\Gamma_N^{\T}\Gamma_N=0$ gives $\Sigma(k)^*\Sigma(k)=1$ for every $k$.}

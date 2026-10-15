@@ -1,0 +1,345 @@
+\section{Wick's theorem and the Gaussian class}
+\label{sec:wick}
+\motiv{A state is \emph{Gaussian} when all its Majorana moments are given by Wick's rule
+from its covariance. The rotated product mixtures $U^*\rho_\lambda U$ of
+Section~\ref{sec:hamiltonian} are Gaussian (Theorem~\ref{thm:mixture-gaussian}), and with
+them the Gibbs and thermal states \vet{and the pure states $U^*|s\rangle\langle s|U$}. Since the Majorana monomials form a basis of the
+operators on $\mathcal F_n$, a Gaussian state is determined by its covariance
+(Theorem~\ref{thm:unique}); hence every Gaussian state is a rotated product mixture, and the
+Gibbs state with a given covariance is unique.}
+
+The conventions of Sections~\ref{sec:hamiltonian} and~\ref{sec:thermal} are in force.
+Vectors $v\in\C^{2n}$ are indexed by the labels $x_1,\ldots,x_n,y_1,\ldots,y_n$; $e_a$ is the
+unit vector of the label $a$, and $v\cdot c=\sum_av_ac_a$. The annihilation operator of mode
+$j$ is $a_j=\tfrac12(c_{x_j}+\ii c_{y_j})$, so that $a_j=u\cdot c$ with
+$u=\tfrac12(e_{x_j}+\ii e_{y_j})$. For a density operator $\rho$,
+$\tr(\rho c_ac_b)=\delta_{ab}-\ii\Gamma(\rho)_{ab}$ (Theorem~\ref{thm:reality} and
+$c_ac_b=\delta_{ab}+\tfrac12[c_a,c_b]$), which motivates the \emph{two-point matrix}
+\[
+ \G(\rho)=1-\ii\,\Gamma(\rho),
+\]
+a complex matrix on the labels with $\G(\rho)_{ab}=\tr(\rho c_ac_b)$.
+
+\subsection{Wick's rule and the Gaussian class}
+\label{sec:gaussian-class}
+
+\begin{definition}[Wick expansion, Gaussian state]\label{def:wick}
+For a complex matrix $\G$ on the labels and vectors $v_1,\ldots,v_m\in\C^{2n}$, the
+\emph{Wick expansion} is defined by $\W_\G()=1$ and, for $m\geq1$,
+\[
+ \W_\G(v_1,\ldots,v_m)=\sum_{j=2}^m(-1)^j\,(v_1^{\T}\G v_j)\,
+ \W_\G(v_2,\ldots,\widehat{v_j},\ldots,v_m),
+\]
+where the hat removes the entry. A density operator $\rho$ is \emph{Gaussian} when
+\[
+ \tr\bigl(\rho\,(v_1\cdot c)(v_2\cdot c)\cdots(v_m\cdot c)\bigr)=\W_{\G(\rho)}(v_1,\ldots,v_m)
+ \qquad\text{for all }m\geq0\text{ and all }v_1,\ldots,v_m\in\C^{2n}.
+\]
+\end{definition}
+For $m=1$ the sum is empty and $\W_\G(v_1)=0$; by induction $\W_\G$ vanishes for every odd
+$m$. For $m=2$, $\W_\G(v_1,v_2)=v_1^{\T}\G v_2$, and for $m=4$,
+\[
+ \W_\G(v_1,v_2,v_3,v_4)=(v_1^{\T}\G v_2)(v_3^{\T}\G v_4)-(v_1^{\T}\G v_3)(v_2^{\T}\G v_4)
+ +(v_1^{\T}\G v_4)(v_2^{\T}\G v_3),
+\]
+the sum over pairings with the sign of the pairing. \revf{For every even $m$, $\W_\G(v_1,\ldots,v_m)$ is the Pfaffian
+of the antisymmetric $m\times m$ matrix whose entries above the diagonal are
+$v_i^{\T}\G v_j$~\cite{bravyi}: the recursion of Definition~\ref{def:wick} is the expansion of
+that Pfaffian along its first row.} With $v_i=e_{a_i}$ the rule reads
+$\tr(\rho\,c_{a_1}\cdots c_{a_m})=\W_{\G(\rho)}(e_{a_1},\ldots,e_{a_m})$, Wick's rule in its usual
+form with the pairing $\tr(\rho c_ac_b)=\delta_{ab}-\ii\Gamma_{ab}$; repeated labels are allowed.
+We state the rule for vectors rather than labels because a Gaussian unitary acts on the
+vectors, $U(v\cdot c)U^*=(O^{\T}v)\cdot c$ (Theorem~\ref{thm:transport}), and because the
+relation that drives Theorem~\ref{thm:mixture-gaussian} involves the combinations
+$c_{x_j}\pm\ii\lambda_jc_{y_j}$; the label form is the special case $v_i=e_{a_i}$.
+
+\begin{lemma}[Multilinearity and the two-point rule]\label{lem:wick-basic}
+\begin{enumerate}
+\item[(a)] $\W_\G(v_1,\ldots,v_m)=0$ for odd $m$, $\W_\G$ is linear in $v_1$, and
+$\W_\G(v,w)=v^{\T}\G w$.
+\item[(b)] For every density operator $\rho$ and all $v,w$,
+$\tr\bigl(\rho\,(v\cdot c)(w\cdot c)\bigr)=v^{\T}\G(\rho)w$; in particular Wick's rule holds
+for $m=0$ and $m=2$ for every density operator.
+\item[(c)] $(u\cdot c)(w\cdot c)+(w\cdot c)(u\cdot c)=2(u^{\T}w)\,1$ for all $u,w\in\C^{2n}$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) We noted odd vanishing above; linearity in $v_1$ is linearity of $v_1^{\T}\G v_j$ in each
+term; $m=2$ is the definition with one term, $j=2$.
+(b) $\tr(\rho(v\cdot c)(w\cdot c))=\sum_{ab}v_aw_b\tr(\rho c_ac_b)=\sum_{ab}v_a\G(\rho)_{ab}w_b$;
+for $m=0$ both sides are $\tr\rho=1$.
+(c) By Theorem~\ref{thm:car},
+$\sum_{ab}u_aw_b(c_ac_b+c_bc_a)=\sum_{ab}u_aw_b\,2\delta_{ab}=2(u^{\T}w)$.
+\end{proof}
+\begin{remark}\label{rem:wick-condition}
+Beyond $m=2$, Wick's rule is a condition. For $n=1$, $\rho=\tfrac12(1+c_{x_1})$ is a
+density operator ($c_{x_1}$ is Hermitian with $c_{x_1}^2=1$) with $\tr(\rho c_{x_1})=1\neq0$. For
+$n=2$, $M=c_{x_1}c_{y_1}c_{x_2}c_{y_2}$ is Hermitian with $M^2=1$, so
+$\rho=\tfrac14(1+M)$ is a density operator; $\Gamma(\rho)=0$ since $c_ac_bM$ is $\pm$ a monomial
+of two labels for $a\neq b$ (Lemma~\ref{lem:monomial-trace}), while
+$\tr(\rho M)=1\neq0=\W_1(e_{x_1},e_{y_1},e_{x_2},e_{y_2})$. Theorem~\ref{thm:mixture-gaussian}
+proves the rule for the product mixtures.
+\end{remark}
+
+\begin{theorem}[Transport by a Gaussian unitary]\label{thm:transport}
+Let the unitary $U$ implement $O$ and let $\rho$ be a density operator. Then
+$U(v\cdot c)U^*=(O^{\T}v)\cdot c$ for every $v$,
+$\W_\G(O^{\T}v_1,\ldots,O^{\T}v_m)=\W_{O\G O^{\T}}(v_1,\ldots,v_m)$ for every $\G$, and
+$\G(U^*\rho U)=O\,\G(\rho)\,O^{\T}$. If $\rho$ is Gaussian, so is $U^*\rho U$.
+\end{theorem}
+\begin{proof}
+$U(v\cdot c)U^*=\sum_av_a\sum_bO_{ab}c_b=\sum_b(O^{\T}v)_bc_b$. The identity for $\W$ follows
+by induction on $m$ from $(O^{\T}v_1)^{\T}\G(O^{\T}v_j)=v_1^{\T}(O\G O^{\T})v_j$. The two-point
+matrix transforms with the covariance, $\Gamma(U^*\rho U)=O\Gamma(\rho)O^{\T}$
+(Theorem~\ref{thm:congruence}), and $O\,1\,O^{\T}=1$. Finally, with $X=\prod_i(v_i\cdot c)$,
+cyclicity of the trace gives
+\begin{align*}
+ \tr(U^*\rho U\,X)&=\tr(\rho\,UXU^*)=\tr\Bigl(\rho\prod_i\bigl((O^{\T}v_i)\cdot c\bigr)\Bigr)\\
+ &=\W_{\G(\rho)}(O^{\T}v_1,\ldots,O^{\T}v_m)=\W_{O\G(\rho)O^{\T}}(v_1,\ldots,v_m),
+\end{align*}
+which is $\W_{\G(U^*\rho U)}(v_1,\ldots,v_m)$.
+\end{proof}
+
+Removing one factor at a time reduces Wick's rule to two identities
+(Lemma~\ref{lem:move}) and a criterion (Lemma~\ref{lem:criterion}).
+
+\begin{lemma}[Moving a factor through a product]\label{lem:move}
+Let $b=u\cdot c$, $X=(w_1\cdot c)\cdots(w_k\cdot c)$, and let $X_{\hat\imath}$ be the product
+with the $i$-th factor removed. Then
+\[
+ bX=\sum_{i=1}^k(-1)^{i-1}\,2(u^{\T}w_i)\,X_{\hat\imath}+(-1)^kXb,\qquad
+ Xb=\sum_{i=1}^k(-1)^{k-i}\,2(u^{\T}w_i)\,X_{\hat\imath}+(-1)^kbX.
+\]
+\end{lemma}
+\begin{proof}
+Induction on $k$; for $k=0$ both identities read $b=b$. Write $X=(w_1\cdot c)X'$ with
+$X'=(w_2\cdot c)\cdots(w_k\cdot c)$, so that $X_{\hat1}=X'$ and
+$X_{\hat\imath}=(w_1\cdot c)X'_{\widehat{i-1}}$ for $i\geq2$. By Lemma~\ref{lem:wick-basic}(c),
+$b(w_1\cdot c)=2(u^{\T}w_1)-(w_1\cdot c)b$, so $bX=2(u^{\T}w_1)X'-(w_1\cdot c)\,bX'$; the
+induction hypothesis $bX'=\sum_{i=2}^k(-1)^{i-2}2(u^{\T}w_i)X'_{\widehat{i-1}}+(-1)^{k-1}X'b$,
+multiplied by $-(w_1\cdot c)$, turns the signs into $(-1)^{i-1}$ and $(-1)^k$ and the products
+into $X_{\hat\imath}$ and $Xb$: the first identity. The second is the first solved for $Xb$:
+multiply the first identity by $(-1)^k$ and use $(-1)^k(-1)^{i-1}=-(-1)^{k-i}$.
+\end{proof}
+
+\begin{lemma}[A recursion criterion]\label{lem:criterion}
+Let $\rho$ be a density operator such that (i) $\tr(\rho X)=0$ for every product $X$ of an odd
+number of factors $w\cdot c$, and (ii) for every label $a$ and every product
+$X=(w_1\cdot c)\cdots(w_k\cdot c)$ with $k$ odd,
+\[
+ \tr(\rho\,c_aX)=\sum_{i=1}^k(-1)^{i-1}\,\bigl(e_a^{\T}\G(\rho)w_i\bigr)\,\tr(\rho X_{\hat\imath}).
+\]
+Then $\rho$ is Gaussian.
+\end{lemma}
+\begin{proof}
+We prove Wick's rule by induction on $m$. For $m$ odd both sides vanish, by (i) and
+Lemma~\ref{lem:wick-basic}(a). For $m$ even and $m\geq2$, write $v_1\cdot c=\sum_av_{1a}c_a$
+and apply (ii) with $X=(v_2\cdot c)\cdots(v_m\cdot c)$, $k=m-1$ odd:
+\[
+ \tr\bigl(\rho\,(v_1\cdot c)X\bigr)=\sum_av_{1a}\sum_{i=1}^{m-1}(-1)^{i-1}(e_a^{\T}\G w_i)
+ \tr(\rho X_{\hat\imath})=\sum_{j=2}^m(-1)^j(v_1^{\T}\G v_j)\,\tr(\rho X_{\widehat{j-1}}),
+\]
+with $w_i=v_{i+1}$, $j=i+1$, $(-1)^{i-1}=(-1)^j$. By the induction hypothesis
+$\tr(\rho X_{\widehat{j-1}})=\W_\G(v_2,\ldots,\widehat{v_j},\ldots,v_m)$, and the right side is
+$\W_\G(v_1,\ldots,v_m)$ by Definition~\ref{def:wick}. For $m=0$ both sides are $1$.
+\end{proof}
+
+\subsection{The product mixtures are Gaussian}
+\label{sec:mixture-gaussian}
+
+\begin{lemma}[Parity]\label{lem:parity}
+Let $\Pi_n=Z_1Z_2\cdots Z_n=\operatorname{diag}\bigl(\prod_j(-1)^{s_j}\bigr)$. Then $\Pi_n^2=1$,
+$\Pi_nc_a\Pi_n=-c_a$ for every label $a$, and $\Pi_n\rho_\lambda\Pi_n=\rho_\lambda$ for every
+$\lambda\in[-1,1]^n$. Consequently $\tr(\rho_\lambda X)=0$ for every product $X$ of an odd number
+of factors $w\cdot c$.
+\end{lemma}
+\begin{proof}
+$\Pi_n$ is diagonal with entries $\pm1$, so $\Pi_n^2=1$ and $\Pi_n$ commutes with the diagonal
+matrix $\rho_\lambda$. Writing $c_a=\operatorname{diag}(f_a)X_j$ with $j$ the mode of $a$
+(equation~\eqref{eq:signed-flip}) and $\pi(s)=\prod_k(-1)^{s_k}$ for the diagonal entry of $\Pi_n$,
+$\Pi_nc_a\Pi_n=\operatorname{diag}(\pi\,f_a)X_j\operatorname{diag}(\pi)=\operatorname{diag}(\pi\,f_a\,(\pi\circ\mathrm{flip}_j))X_j$
+and $\pi(\mathrm{flip}_js)=-\pi(s)$, so $\Pi_nc_a\Pi_n=-c_a$. For $X$ of odd length,
+$\Pi_nX\Pi_n=(-1)^{\text{length}}X=-X$, by induction on the number of factors: $\Pi_n(w\cdot c)X'\Pi_n
+=(\Pi_n(w\cdot c)\Pi_n)(\Pi_nX'\Pi_n)=-(w\cdot c)\,\Pi_nX'\Pi_n$. Hence
+$\tr(\rho_\lambda X)=\tr(\Pi_n\rho_\lambda\Pi_n\,X)=\tr(\rho_\lambda\,\Pi_nX\Pi_n)=-\tr(\rho_\lambda X)$.
+\end{proof}
+
+\begin{lemma}[The mode relation]\label{lem:mode}
+Let $\lambda\in[-1,1]^n$ and fix a mode $j$. Then
+\[
+ (c_{x_j}-\ii\lambda_jc_{y_j})\,\rho_\lambda=\rho_\lambda\,(c_{x_j}+\ii\lambda_jc_{y_j}),\qquad
+ (c_{y_j}+\ii\lambda_jc_{x_j})\,\rho_\lambda=\rho_\lambda\,(c_{y_j}-\ii\lambda_jc_{x_j}).
+\]
+Moreover $\G(\rho_\lambda)=1-\ii\D(\lambda)$ has the rows
+$(\G w)_{x_j}=w_{x_j}-\ii\lambda_jw_{y_j}$ and $(\G w)_{y_j}=w_{y_j}+\ii\lambda_jw_{x_j}$ for every
+vector $w$.
+\end{lemma}
+\begin{proof}
+$\rho_\lambda=\operatorname{diag}(p)$ with $p(s)=\prod_kp_k(s_k)$ and
+$p_j(s_j)=\tfrac12(1-\lambda_j(-1)^{s_j})$ (Definition~\ref{def:mixture}). The factors
+$p_k(s_k)$, $k\neq j$, are common to $p(s)$ and $p(\mathrm{flip}_js)$, so
+\begin{equation}\label{eq:weight-flip}
+ p_j(s_j)\,p(\mathrm{flip}_js)=p_j(1-s_j)\,p(s)\qquad\text{for every }s,
+\end{equation}
+that is, $(1-\lambda_jZ_j)\operatorname{diag}(p\circ\mathrm{flip}_j)=\rho_\lambda(1+\lambda_jZ_j)$,
+since $2p_j(s_j)=1-\lambda_j(-1)^{s_j}$ is the entry of $1-\lambda_jZ_j$ and $2p_j(1-s_j)$ that of
+$1+\lambda_jZ_j$. As $Z_{<j}$ is diagonal and $X_j\operatorname{diag}(p)=\operatorname{diag}(p\circ\mathrm{flip}_j)X_j$
+(Lemma~\ref{lem:pauli}),
+\[
+ (1-\lambda_jZ_j)\,c_{x_j}\rho_\lambda=(1-\lambda_jZ_j)Z_{<j}\operatorname{diag}(p\circ\mathrm{flip}_j)X_j
+ =\rho_\lambda(1+\lambda_jZ_j)Z_{<j}X_j=\rho_\lambda(1+\lambda_jZ_j)\,c_{x_j}.
+\]
+Since $Z_jc_{x_j}=-c_{x_j}Z_j=\ii c_{y_j}$ (Lemma~\ref{lem:pauli} and $c_{y_j}=\ii Z_{<j}X_jZ_j$),
+$(1\mp\lambda_jZ_j)c_{x_j}=c_{x_j}\mp\ii\lambda_jc_{y_j}$, which is the first identity; the
+second is the same computation with $c_{y_j}$ and $Z_jc_{y_j}=-c_{y_j}Z_j=-\ii c_{x_j}$. The
+rows of $\G$: $\Gamma(\rho_\lambda)=\D(\lambda)$ (Theorem~\ref{thm:mixture}) has the only
+nonzero entries $\pm\lambda_j$ at $(x_j,y_j)$ and $(y_j,x_j)$.
+\end{proof}
+\begin{remark}\label{rem:kms-row}
+For $|\lambda_j|<1$, solving the relation for $c_a\rho_\lambda$ gives the KMS-type form
+$c_a\rho_\lambda=\rho_\lambda\sum_b\mathcal K_{ab}c_b$, where on $(x_j,y_j)$
+\[
+ \mathcal K=\begin{pmatrix}\cosh\varepsilon&-\ii\sinh\varepsilon\\ \ii\sinh\varepsilon&\cosh\varepsilon\end{pmatrix},
+\] $\varepsilon=-2\artanh\lambda_j$, the block of $e^{-\ii h}$ for $h=\D(\varepsilon)$;
+for $\lambda_j=-1$ it reads $2a_j\rho_\lambda=2\rho_\lambda a_j^*$, both sides zero because the
+mode is empty, and for $\lambda_j=1$ the same with $a_j^*$. The single identity covers all
+three cases; Theorem~\ref{thm:mixture-gaussian} needs no case distinction.
+\end{remark}
+
+\begin{theorem}[The product mixtures are Gaussian]\label{thm:mixture-gaussian}
+For every $\lambda\in[-1,1]^n$ the product mixture $\rho_\lambda$ is Gaussian:
+$\tr\bigl(\rho_\lambda\prod_i(v_i\cdot c)\bigr)=\W_{1-\ii\D(\lambda)}(v_1,\ldots,v_m)$ for all
+$v_1,\ldots,v_m$.
+\end{theorem}
+\begin{proof}
+We apply Lemma~\ref{lem:criterion} with $\rho=\rho_\lambda$ and $\G=\G(\rho_\lambda)=1-\ii\D(\lambda)$.
+Condition (i) is Lemma~\ref{lem:parity}. For (ii) fix a mode $j$, a list $w_1,\ldots,w_k$ with
+$k$ odd, $X=\prod_i(w_i\cdot c)$, and write $\langle Y\rangle=\tr(\rho_\lambda Y)$,
+$A_a=\langle c_aX\rangle$, $B_a=\langle Xc_a\rangle$ and
+$r_a=2\sum_i(-1)^{i-1}(w_i)_a\langle X_{\hat\imath}\rangle$ for $a\in\{x_j,y_j\}$.
+Lemma~\ref{lem:move} (second identity, $u=e_a$; $k$ odd, so $(-1)^{k-i}=(-1)^{i-1}$) gives
+$B_a=r_a-A_a$. Multiplying the first identity of Lemma~\ref{lem:mode} by $X$ on the right and
+taking the trace, with $\tr(Y\rho_\lambda X)=\tr(\rho_\lambda XY)$,
+\[
+ B_{x_j}-\ii\lambda_jB_{y_j}=A_{x_j}+\ii\lambda_jA_{y_j}.
+\]
+Substituting $B_a=r_a-A_a$ for both labels, the terms $\pm\ii\lambda_jA_{y_j}$ cancel and
+\[
+ 2A_{x_j}=r_{x_j}-\ii\lambda_jr_{y_j}
+ =2\sum_i(-1)^{i-1}\bigl((w_i)_{x_j}-\ii\lambda_j(w_i)_{y_j}\bigr)\langle X_{\hat\imath}\rangle
+ =2\sum_i(-1)^{i-1}(e_{x_j}^{\T}\G w_i)\langle X_{\hat\imath}\rangle
+\]
+by the row of $\G$ in Lemma~\ref{lem:mode}: this is (ii) for $a=x_j$. The second identity of
+Lemma~\ref{lem:mode} gives in the same way $2A_{y_j}=r_{y_j}+\ii\lambda_jr_{x_j}$, which is (ii)
+for $a=y_j$.
+\end{proof}
+
+\begin{corollary}[The Gaussian families]\label{cor:families}
+\begin{enumerate}
+\item[(a)] For $OO^{\T}=1$, $U$ implementing $O$ and $\lambda\in[-1,1]^n$, the state
+$U^*\rho_\lambda U$ \vet{(as in the proof of Theorem~\ref{thm:realization}, which does not use $\det O=1$)} is Gaussian with
+$\G=O(1-\ii\D(\lambda))O^{\T}$.
+\item[(b)] Every Gibbs state $\rho_h$, $h^{\T}=-h$, and every thermal state
+$\rho_{\tau h}$ is Gaussian.
+\item[(c)] Every occupation state $|s\rangle\langle s|$ and every pure state
+$U^*|s\rangle\langle s|U$ with $U$ implementing an orthogonal $O$ is Gaussian.
+\end{enumerate}
+\end{corollary}
+\begin{proof}
+(a) Theorems~\ref{thm:mixture-gaussian} and~\ref{thm:transport}. (b) Theorem~\ref{thm:thermal}:
+$\rho_h=U^*\rho_\lambda U$ with $\lambda_j=-\tanh(\varepsilon_j/2)$ for a normal form
+$h=O\D(\varepsilon)O^{\T}$ and $U$ implementing $O$; apply (a); $\rho_{\tau h}$ is the Gibbs
+state of $\tau h$, and $(\tau h)^{\T}=-\tau h$. (c) $|s\rangle\langle s|=\rho_\lambda$ with $\lambda_j=\pm1$
+(Theorem~\ref{thm:mixture}); apply (a).
+\end{proof}
+
+\subsection{Moments determine the state}
+\label{sec:monomials}
+
+\begin{definition}[Majorana monomials]\label{def:monomial}
+Order the labels $x_1<\cdots<x_n<y_1<\cdots<y_n$. For a set $S$ of labels, $c_S$ is the product
+of the $c_a$, $a\in S$, in increasing order; $c_\emptyset=1$.
+\end{definition}
+
+\begin{lemma}[Traces of monomials]\label{lem:monomial-trace}
+\begin{enumerate}
+\item[(a)] $\tr(c_S)=0$ for $S\neq\emptyset$.
+\item[(b)] $c_S^*c_S=1$ and, for $S\neq T$, $c_S^*c_T=\pm c_{S\triangle T}$ with
+$S\triangle T\neq\emptyset$ the symmetric difference. Hence $\tr(c_S^*c_T)=2^n[S=T]$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(a) If $|S|$ is odd, $\Pi_nc_S\Pi_n=-c_S$ by Lemma~\ref{lem:parity}, so
+$\tr c_S=\tr(\Pi_nc_S\Pi_n)=-\tr c_S$. If $|S|\geq2$ is even, write $c_S=c_ac_{S'}$ with $a\in S$
+and
+$|S'|$ odd; the labels of $S'$ differ from $a$, so $c_{S'}c_a=(-1)^{|S'|}c_ac_{S'}=-c_ac_{S'}$
+and $\tr(c_S)=\tr(c_{S'}c_a)=-\tr(c_S)$.
+(b) Insertion rule: for a set $T$ of labels and a label $a$,
+$c_ac_T=(-1)^{|\{t\in T:t<a\}|}c_{T\cup\{a\}}$ if $a\notin T$ and
+$c_ac_T=(-1)^{|\{t\in T:t<a\}|}c_{T\setminus\{a\}}$ if $a\in T$: move $c_a$ to the right past
+the factors $c_t$ with $t<a$ (one sign each, Theorem~\ref{thm:car}), where it either takes
+its place in the order or meets $c_a$ and cancels by $c_ac_a=1$. Hence, by induction on $|S|$,
+$c_Sc_T=\pm c_{S\triangle T}$ for all $S,T$: for $S=\emptyset$ this is $c_T=c_T$; otherwise
+write $c_S=c_ac_{S'}$ with $a=\min S$, apply the
+hypothesis to $c_{S'}c_T=\pm c_{S'\triangle T}$ and then the insertion rule to
+$c_ac_{S'\triangle T}$, noting $S\triangle T=\{a\}\triangle(S'\triangle T)$. Since
+$c_S^*=\pm c_S$ (reversing $|S|$ distinct anticommuting factors, $c_a^*=c_a$),
+$c_S^*c_T=\pm c_{S\triangle T}$, with $c_S^*c_S=1$ exactly: $c_S^*c_S=c_{a_m}\cdots c_{a_1}c_{a_1}\cdots c_{a_m}$ for
+$S=\{a_1<\cdots<a_m\}$, and the innermost pair $c_{a_1}c_{a_1}=1$ cancels, then the next, and
+so on. The trace then follows from (a), $S\triangle T\neq\emptyset$ for $S\neq T$, and
+$\tr1=2^n$.
+\end{proof}
+
+\begin{theorem}[The monomial basis]\label{thm:basis}
+The $4^n$ monomials $c_S$ are linearly independent, hence a basis of the $4^n$-dimensional
+space of matrices on $\mathcal F_n$, and every matrix $A$ satisfies
+\[
+ A=2^{-n}\sum_S\tr(Ac_S^*)\,c_S .
+\]
+In particular, if $\tr(Ac_S)=\tr(Bc_S)$ for all $S$, then $A=B$.
+\end{theorem}
+\begin{proof}
+If $\sum_S\alpha_Sc_S=0$, multiply by $c_T^*$ on the left and take the trace:
+$2^n\alpha_T=0$ by Lemma~\ref{lem:monomial-trace}(b). There are $2^{2n}=(2^n)^2$ subsets and
+the matrices on the $2^n$-dimensional space $\mathcal F_n$ form a $(2^n)^2$-dimensional space, so the
+independent family is a basis. Writing $A=\sum_S\alpha_Sc_S$ and taking
+$\tr(Ac_T^*)=\sum_S\alpha_S\tr(c_Sc_T^*)=\sum_S\alpha_S\tr(c_T^*c_S)=2^n\alpha_T$ (cyclicity and
+Lemma~\ref{lem:monomial-trace}(b)) gives the formula; the last statement follows since
+$c_S^*=\pm c_S$.
+\end{proof}
+
+\begin{theorem}[A Gaussian state is determined by its covariance]\label{thm:unique}
+If $\rho$ and $\sigma$ are Gaussian and $\Gamma(\rho)=\Gamma(\sigma)$, then $\rho=\sigma$.
+\end{theorem}
+\begin{proof}
+For every $S=\{a_1<\cdots<a_m\}$, $\tr(\rho c_S)=\W_{\G(\rho)}(e_{a_1},\ldots,e_{a_m})$ by
+Wick's rule, and $\G(\rho)=1-\ii\Gamma(\rho)=\G(\sigma)$; so $\tr(\rho c_S)=\tr(\sigma c_S)$ for
+all $S$ and Theorem~\ref{thm:basis} gives $\rho=\sigma$.
+\end{proof}
+For an admissible $\Gamma$ write $\rho[\Gamma]$ for the Gaussian state with covariance
+$\Gamma$, unique by Theorem~\ref{thm:unique}; it exists by Theorem~\ref{thm:realization} and
+Corollary~\ref{cor:families}(a).
+
+\begin{corollary}[Every Gaussian state is a rotated product mixture]\label{cor:converse}
+Let $\rho$ be Gaussian with covariance $\Gamma=O\D(\eta)O^{\T}$, $OO^{\T}=1$, $\det O=1$,
+$|\eta_j|\leq1$ (Theorem~\ref{thm:normal-form}), and let $U$ implement $O$. Then
+\begin{enumerate}
+\item[(a)] $\rho=U^*\rho_\eta U$;
+\item[(b)] if $\Gamma$ is pure, $\rho=U^*|s\rangle\langle s|U$ with $s_j=[\eta_j=1]$, and
+$\rho^2=\rho$;
+\item[(c)] if $\Gamma$ is strictly admissible, $\rho=\rho_h$ for some $h^{\T}=-h$; and for
+$h^{\T}=-h$, $h'^{\T}=-h'$ with $\Gamma(\rho_h)=\Gamma(\rho_{h'})$, $\rho_h=\rho_{h'}$.
+\end{enumerate}
+\end{corollary}
+\begin{proof}
+(a) $U^*\rho_\eta U$ is a density operator with covariance $\Gamma$
+(Theorem~\ref{thm:realization}) and is Gaussian (Corollary~\ref{cor:families}(a)); apply
+Theorem~\ref{thm:unique}. (b) For pure $\Gamma$, $|\eta_j|=1$ for all $j$
+(Theorem~\ref{thm:normal-form}) and $\rho_\eta=|s\rangle\langle s|$ (Theorem~\ref{thm:mixture});
+$\rho^2=U^*|s\rangle\langle s|UU^*|s\rangle\langle s|U=\rho$. (c) By
+Theorem~\ref{thm:exp-realization} there is $h^{\T}=-h$ with $\Gamma(\rho_h)=\Gamma$; $\rho_h$ is
+Gaussian (Corollary~\ref{cor:families}(b)); apply Theorem~\ref{thm:unique}, and likewise for
+$\rho_h,\rho_{h'}$.
+\end{proof}
+\revf{For a pure covariance the Gaussian hypothesis of Theorem~\ref{thm:unique} can be dropped: two
+density operators with the same pure covariance are equal (Corollary~\ref{cor:pure-determines}).}

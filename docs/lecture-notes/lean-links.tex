@@ -1,0 +1,28 @@
+% Navigation only; checked labels are maintained with reviewed correspondence.
+\definecolor{FermionicTagFill}{HTML}{EEEAF8}
+\definecolor{FermionicTagBorder}{HTML}{D6CEEB}
+\definecolor{FermionicTagText}{HTML}{5B477D}
+\newcommand{\FermionicLeanTag}{%
+  \tikz[baseline=(tag.base)]\node[rounded corners=1.5pt,
+    fill=FermionicTagFill,draw=FermionicTagBorder,text=FermionicTagText,
+    line width=0.3pt,inner xsep=3pt,inner ysep=1.5pt] (tag)
+    {\normalfont\scriptsize\sffamily Lean\,\ensuremath{\checkmark}};}
+\definecolor{FermionicArtFill}{HTML}{F2F2F2}
+\definecolor{FermionicArtBorder}{HTML}{BDBDBD}
+\definecolor{FermionicArtText}{HTML}{555555}
+\newcommand{\FermionicArtefactTag}{%
+  \tikz[baseline=(tag.base)]\node[rounded corners=1.5pt,
+    fill=FermionicArtFill,draw=FermionicArtBorder,text=FermionicArtText,dashed,
+    line width=0.3pt,inner xsep=3pt,inner ysep=1.5pt] (tag)
+    {\normalfont\scriptsize\sffamily formalization};}
+\newcommand{\artefact}[1]{#1\nobreak\hspace{0.3em}\FermionicArtefactTag}
+\makeatletter
+\newcommand{\FermionicCheckedLabel}[1]{\expandafter\gdef\csname fermionic@checked@#1\endcsname{}}
+\newcommand{\FermionicEnableLinks}{%
+  \let\FermionicOriginalLabel\label
+  \renewcommand{\label}[1]{%
+    \FermionicOriginalLabel{##1}%
+    \ifcsname fermionic@checked@##1\endcsname
+      \nobreak\hspace{0.4em}\hyperlink{lean:##1}{\FermionicLeanTag}%
+    \fi}}
+\makeatother
