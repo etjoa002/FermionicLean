@@ -218,6 +218,11 @@ draw from the rank bounds; the entanglement count of a block of the Kitaev chain
 for small chains); that a tensor product of Gaussian states is Gaussian; the exponential form of
 the hopping gate.
 
+## Acknowledgement
+
+E.T. acknowledges support from the Alexander von Humboldt Foundation through the Humboldt Research
+Fellowship. This work has been supported by Klaus Tschira Foundation.
+
 ## Citation and licence
 
 Erickson Tjoa, *FermionicLean: fermionic Gaussian states in Lean*, 2026,
